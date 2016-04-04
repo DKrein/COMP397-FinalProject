@@ -18,7 +18,7 @@ module objects {
             
             //console.log(this.x);
             if(this.x >= value) {
-                this._reset(-1200);
+                this._reset(-1219);
             }
         }
         
