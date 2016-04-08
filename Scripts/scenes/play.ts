@@ -1,5 +1,5 @@
 /*
-Author: Christine Cho
+Author: Christine Cho, Douglas Krein, Francis Ofougwuka
 Last Modified by: Christine Cho
 Last Modified: 03/28/2016
 File description: Manages the play scene

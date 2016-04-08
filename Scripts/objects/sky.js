@@ -21,7 +21,7 @@ var objects;
             // is met the top of the scene
             //console.log(this.x);
             if (this.x >= value) {
-                this._reset(-1200);
+                this._reset(-1219);
             }
         };
         // reset the sky offscreen

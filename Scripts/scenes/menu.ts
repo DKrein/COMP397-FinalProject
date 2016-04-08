@@ -1,11 +1,12 @@
 ﻿/*
-Author: Christine Cho
+Author: Christine Cho, Douglas Krein, Francis Ofougwuka
 Last Modified by: Christine Cho
-Last Modified: 03/28/2016
+Last Modified: 04/8/2016
 File description: Manages the Menu scene in the game
 
 Revision:
 1. Added instruction button to the scene
+2. Added exit button to the scene
 */
 
 // MENU SCENE
@@ -16,6 +17,7 @@ module scenes {
         
         private _startButton: objects.Button;
         private _instructionButton: objects.Button;
+        private _exitButton: objects.Button;
         
         // CONSTRUCTOR ++++++++++++++++++++++
         constructor() {
@@ -46,11 +48,21 @@ module scenes {
                 config.Screen.CENTER_Y + 100, true);
             this.addChild(this._instructionButton);
             
+             // add the ExitButton to the MENU scene
+            this._exitButton = new objects.Button(
+                "ExitButton",
+                config.Screen.CENTER_X,
+                config.Screen.CENTER_Y + 165, true);
+            this.addChild(this._exitButton);
+            
             // StartButton event listener
             this._startButton.on("click", this._startButtonClick, this);
             
             // InstructionButton event listener
             this._instructionButton.on("click", this._instructionButtonClick, this);
+            
+            // ExitButton event listener
+            this._exitButton.on("click", this._exitButtonClick, this);
             
             
             // add this scene to the global stage container
@@ -74,9 +86,15 @@ module scenes {
         
         // StartButton click event handler
         private _instructionButtonClick(event: createjs.MouseEvent) {
-            // Switch to the Play Scene
+            // Switch to the INSTRUCTION Scene
             scene = config.Scene.INSTRUCTION;
             changeScene();
+        }
+        
+         // ExitButton click event handler
+        private _exitButtonClick(event: createjs.MouseEvent) {
+            // Switch to the EXIT Scene
+            window.close();
         }
 
     }
