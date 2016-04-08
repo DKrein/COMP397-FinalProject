@@ -1,13 +1,14 @@
 /*
-Author: Christine Cho
+Author: Christine Cho, Douglas Krein, Francis Ofougwuka
 Last Modified by: Christine Cho
-Last Modified: 03/28/2016
+Last Modified: 04/8/2016
 File description: Manages assets and scene changes
 
 Revision:
 1. Added the Instructions and more images
 2. Added Gameover image and hit/collect sounds
 3. Added sounds to the scenes
+4. Added exit button asset
 */
 /// <reference path = "_reference.ts" />
 // global variables
@@ -28,6 +29,7 @@ var assetData = [
     { id: "InstructionButton", src: "../../Assets/images/InstructionButton.png" },
     { id: "RestartButton", src: "../../Assets/images/RestartButton.png" },
     { id: "BackButton", src: "../../Assets/images/BackButton.png" },
+    { id: "ExitButton", src: "../../Assets/images/ExitButton.png" },
     { id: "mountain", src: "../../Assets/images/mountains.png" },
     { id: "dragon", src: "../../Assets/images/dragon.png" },
     { id: "fire", src: "../../Assets/images/fire.png" },
