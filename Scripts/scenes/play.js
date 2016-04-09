@@ -33,29 +33,32 @@ var scenes;
             // Set _fireballCount Count
             this._fireballCount = 1;
             this._dragonXCount = 1;
+            this._eggCount = 2;
             // Instantiate _fireball array
             this._fireball = new Array();
             this._dragonX = new Array();
+            this._eggs = new Array();
             // added _sky to the scene
             this._sky = new objects.Sky("mountain");
             this.addChild(this._sky);
             // added _fire to the scene
-            this._fire = new objects.Fire();
-            //this.addChild(this._fire);
-            this._collectableContainer.addChild(this._fire);
+            // this._fire = new objects.Fire();
+            // this._collectableContainer.addChild(this._fire);
             // added player to the scene
             this._player = new objects.Player();
             this.addChild(this._player);
             //added _fireball to the scene
             for (var ball = 0; ball < this._fireballCount; ball++) {
                 this._fireball[ball] = new objects.Fireball();
-                //this.addChild(this._fireball[ball]);
                 this._enemyContainer.addChild(this._fireball[ball]);
             }
             for (var dragon = 0; dragon < this._dragonXCount; dragon++) {
                 this._dragonX[dragon] = new objects.DragonX();
-                //this.addChild(this._dragonX[dragon]);
                 this._enemyContainer.addChild(this._dragonX[dragon]);
+            }
+            for (var egg = 0; egg < this._eggCount; egg++) {
+                this._eggs[egg] = new objects.Egg();
+                this._collectableContainer.addChild(this._eggs[egg]);
             }
             // added collision manager to the scene
             this._collision = new managers.Collision(this._player);
@@ -83,7 +86,7 @@ var scenes;
         Play.prototype.update = function () {
             var _this = this;
             this._sky.update();
-            this._fire.update();
+            // this._fire.update();
             this._player.update();
             this._fireball.forEach(function (ball) {
                 ball.update();
@@ -93,7 +96,11 @@ var scenes;
                 dragon.update();
                 _this._collision.check(dragon);
             });
-            this._collision.check(this._fire);
+            this._eggs.forEach(function (egg) {
+                egg.update();
+                _this._collision.check(egg);
+            });
+            // this._collision.check(this._fire);
             this.scoreText.text = this.score.toString();
             this._livesText.text = this.lives.toString();
             this._checkLives();
@@ -113,7 +120,6 @@ var scenes;
                 this._enemyContainer.removeAllChildren();
                 this._collectableContainer.removeAllChildren();
                 stage.removeChild(this._enemyContainer, this._collectableContainer);
-                console.log("Call next level");
                 scene = config.Scene.LEVEL2;
                 changeScene();
             }

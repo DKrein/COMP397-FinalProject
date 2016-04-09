@@ -22,9 +22,10 @@ module scenes {
 
         //PRIVATE INSTANCE VARIABLES ++++++++++++
         private _sky: objects.Sky;
-        private _fire: objects.Fire;
         private _fireball: objects.Fireball[];
         private _fireballCount: number;
+        private _eggs: objects.Egg[];
+        private _eggCount: number;
         private _dragonX: objects.DragonX[];
         private _dragonXCount: number;
         private _player: objects.Player;
@@ -54,41 +55,43 @@ module scenes {
             // Set _fireballCount Count
             this._fireballCount = 1;
             this._dragonXCount = 1;
-
+            this._eggCount = 2;
+            
             // Instantiate _fireball array
             this._fireball = new Array<objects.Fireball>();
             this._dragonX = new Array<objects.DragonX>();
-
+            this._eggs = new Array<objects.Egg>();
+                
             // added _sky to the scene
             this._sky = new objects.Sky("mountain");
             this.addChild(this._sky);
-
-            // added _fire to the scene
-            this._fire = new objects.Fire();
-            //this.addChild(this._fire);
-            this._collectableContainer.addChild(this._fire);
 
             // added player to the scene
             this._player = new objects.Player();
             this.addChild(this._player);
 
-            //added _fireball to the scene
+            //added _fireball to the _collectableContainer
             for (var ball: number = 0; ball < this._fireballCount; ball++) {
                 this._fireball[ball] = new objects.Fireball();
-                //this.addChild(this._fireball[ball]);
-                this._enemyContainer.addChild(this._fireball[ball]);
+                this._collectableContainer.addChild(this._fireball[ball]);
             }
-
+            
+            //added _dragon to the _enemyContainer
             for (var dragon: number = 0; dragon < this._dragonXCount; dragon++) {
                 this._dragonX[dragon] = new objects.DragonX();
-                //this.addChild(this._dragonX[dragon]);
                 this._enemyContainer.addChild(this._dragonX[dragon]);
+            }
+            
+            //added _eggs to the _collectableContainer
+            for (var egg: number = 0; egg < this._eggCount; egg++) {
+                this._eggs[egg] = new objects.Egg();
+                this._collectableContainer.addChild(this._eggs[egg]);
             }
 
             // added collision manager to the scene
             this._collision = new managers.Collision(this._player);
 
-            // add this scene to the global stage container
+            // add this, _enemyContainer, _collectableContainer to the global stage container
             stage.addChild(this, this._enemyContainer, this._collectableContainer);
 
             //Add _scoreText to the scene
@@ -129,7 +132,6 @@ module scenes {
         // PLAY Scene updates here
         public update(): void {
             this._sky.update();
-            this._fire.update();
 
             this._player.update();
 
@@ -142,8 +144,12 @@ module scenes {
                 dragon.update();
                 this._collision.check(dragon);
             });
+            
+            this._eggs.forEach(egg => {
+                egg.update();
+                this._collision.check(egg);
+            });
 
-            this._collision.check(this._fire);
             this.scoreText.text = this.score.toString();
             this._livesText.text = this.lives.toString();
             this._checkLives();
