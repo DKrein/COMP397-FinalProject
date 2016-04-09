@@ -14,18 +14,18 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-// PLAY SCENE
+// LEVEL2 SCENE
 var scenes;
 (function (scenes) {
-    var Play = (function (_super) {
-        __extends(Play, _super);
+    var Level2 = (function (_super) {
+        __extends(Level2, _super);
         // CONSTRUCTOR ++++++++++++++++++++++
-        function Play() {
+        function Level2() {
             _super.call(this);
         }
         // PUBLIC METHODS +++++++++++++++++++++
         // Start Method
-        Play.prototype.start = function () {
+        Level2.prototype.start = function () {
             this.score = 0;
             this.lives = 10;
             this._enemyContainer = new createjs.Container;
@@ -33,32 +33,29 @@ var scenes;
             // Set _fireballCount Count
             this._fireballCount = 1;
             this._dragonXCount = 1;
-            this._eggCount = 2;
             // Instantiate _fireball array
             this._fireball = new Array();
             this._dragonX = new Array();
-            this._eggs = new Array();
             // added _sky to the scene
-            this._sky = new objects.Sky("mountain");
+            this._sky = new objects.Sky("cave");
             this.addChild(this._sky);
             // added _fire to the scene
-            // this._fire = new objects.Fire();
-            // this._collectableContainer.addChild(this._fire);
+            this._fire = new objects.Fire();
+            //this.addChild(this._fire);
+            this._collectableContainer.addChild(this._fire);
             // added player to the scene
             this._player = new objects.Player();
             this.addChild(this._player);
             //added _fireball to the scene
             for (var ball = 0; ball < this._fireballCount; ball++) {
                 this._fireball[ball] = new objects.Fireball();
+                //this.addChild(this._fireball[ball]);
                 this._enemyContainer.addChild(this._fireball[ball]);
             }
             for (var dragon = 0; dragon < this._dragonXCount; dragon++) {
                 this._dragonX[dragon] = new objects.DragonX();
+                //this.addChild(this._dragonX[dragon]);
                 this._enemyContainer.addChild(this._dragonX[dragon]);
-            }
-            for (var egg = 0; egg < this._eggCount; egg++) {
-                this._eggs[egg] = new objects.Egg();
-                this._collectableContainer.addChild(this._eggs[egg]);
             }
             // added collision manager to the scene
             this._collision = new managers.Collision(this._player);
@@ -80,13 +77,13 @@ var scenes;
             this.scoreText = new objects.Label("SCORE: " +
                 this.score.toString(), "bold 25px Britannic Bold", "#0434C4", 600, 15, false);
             //this._livesText.textAlign = "right";
-            this.addChild(this.scoreText);
+            //this.addChild(this.scoreText);
         };
         // PLAY Scene updates here
-        Play.prototype.update = function () {
+        Level2.prototype.update = function () {
             var _this = this;
             this._sky.update();
-            // this._fire.update();
+            this._fire.update();
             this._player.update();
             this._fireball.forEach(function (ball) {
                 ball.update();
@@ -96,36 +93,31 @@ var scenes;
                 dragon.update();
                 _this._collision.check(dragon);
             });
-            this._eggs.forEach(function (egg) {
-                egg.update();
-                _this._collision.check(egg);
-            });
-            // this._collision.check(this._fire);
+            this._collision.check(this._fire);
             this.scoreText.text = this.score.toString();
             this._livesText.text = this.lives.toString();
             this._checkLives();
             this._changeGameLevel();
         };
         //PRIVATE METHODS
-        Play.prototype._checkLives = function () {
+        Level2.prototype._checkLives = function () {
             if (this.lives <= 0) {
                 scene = config.Scene.END;
                 changeScene();
             }
         };
-        // Move to Level 2
-        Play.prototype._changeGameLevel = function () {
+        // Move to Level 3
+        Level2.prototype._changeGameLevel = function () {
             if (this._sky.skyResetCount > 5) {
                 //Remove the enemy from
                 this._enemyContainer.removeAllChildren();
                 this._collectableContainer.removeAllChildren();
                 stage.removeChild(this._enemyContainer, this._collectableContainer);
-                scene = config.Scene.LEVEL2;
-                changeScene();
+                console.log("Call next level");
             }
         };
-        return Play;
+        return Level2;
     }(objects.Scene));
-    scenes.Play = Play;
+    scenes.Level2 = Level2;
 })(scenes || (scenes = {}));
-//# sourceMappingURL=play.js.map
+//# sourceMappingURL=level2.js.map

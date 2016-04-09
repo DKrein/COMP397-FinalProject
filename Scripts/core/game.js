@@ -23,6 +23,7 @@ var menu;
 var instruction;
 var play;
 var end;
+var level2;
 var assetData = [
     // Add your Assets here
     { id: "StartButton", src: "../../Assets/images/StartButton.png" },
@@ -43,6 +44,7 @@ var assetData = [
     { id: "background", src: "../../Assets/images/background.png" },
     { id: "gameover", src: "../../Assets/images/gameover.png" },
     { id: "instruction", src: "../../Assets/images/instruction.png" },
+    { id: "cave", src: "../../Assets/images/cave.png" },
     { id: "hit", src: "../../Assets/audio/hit.mp3" },
     { id: "collect", src: "../../Assets/audio/collect.mp3" },
     { id: "gameovermusic", src: "../../Assets/audio/gameover.mp3" },
@@ -121,6 +123,15 @@ function changeScene() {
             createjs.Sound.play("backgroundmusic");
             console.log("Starting PLAY Scene");
             break;
+        case config.Scene.LEVEL2:
+            // show the LEVEL2 scene
+            stage.removeAllChildren();
+            level2 = new scenes.Level2();
+            currentScene = level2;
+            createjs.Sound.stop();
+            createjs.Sound.play("backgroundmusic");
+            console.log("Starting LEVEL2 Scene");
+            break;
         case config.Scene.END:
             // show the END scene
             stage.removeAllChildren();
@@ -134,5 +145,4 @@ function changeScene() {
     console.log(currentScene.numChildren);
 }
 window.onload = preload;
-
 //# sourceMappingURL=game.js.map

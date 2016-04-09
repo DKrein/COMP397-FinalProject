@@ -71,5 +71,4 @@ var scenes;
     }(objects.Scene));
     scenes.Menu = Menu;
 })(scenes || (scenes = {}));
-
 //# sourceMappingURL=menu.js.map
