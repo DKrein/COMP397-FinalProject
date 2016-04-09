@@ -48,7 +48,7 @@ module scenes {
             
             // Set _fireballCount Count
             this._fireballCount = 1;
-            this._dragonXCount = 3;
+            this._dragonXCount = 1;
             
             // Instantiate _fireball array
             this._fireball = new Array<objects.Fireball>();
