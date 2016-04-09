@@ -9,6 +9,7 @@
 /// <reference path="../objects/fire.ts"/>
 /// <reference path="../objects/fireball.ts"/>
 /// <reference path="../objects/player.ts" />
+/// <reference path="../objects/dragonX.ts" />
 /// <reference path="../managers/collision.ts" />
 /// <reference path="../scenes/end.ts" />
 /// <reference path="../scenes/play.ts" />

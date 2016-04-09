@@ -5,10 +5,10 @@ module objects {
         
         // CONSTRUCTOR METHOD +++++++++++++++++++++++++
         constructor() {
-            super("fireball");
+            super("dragonXY");
             
            this._reset(this._leftBounds);
-           this.name = "fireball";
+           this.name = "dragonXY";
         }
         
         // PRIVATE METHODS ++++++++++++++++++++++++++++

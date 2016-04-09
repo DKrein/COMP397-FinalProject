@@ -29,9 +29,11 @@ var scenes;
             this.score = 0;
             this.lives = 10;
             // Set _fireballCount Count
-            this._fireballCount = 8;
+            this._fireballCount = 1;
+            this._dragonXCount = 1;
             // Instantiate _fireball array
             this._fireball = new Array();
+            this._dragonX = new Array();
             // added _sky to the scene
             this._sky = new objects.Sky();
             this.addChild(this._sky);
@@ -45,6 +47,10 @@ var scenes;
             for (var ball = 0; ball < this._fireballCount; ball++) {
                 this._fireball[ball] = new objects.Fireball();
                 this.addChild(this._fireball[ball]);
+            }
+            for (var dragon = 0; dragon < this._dragonXCount; dragon++) {
+                this._dragonX[dragon] = new objects.DragonX();
+                this.addChild(this._dragonX[dragon]);
             }
             // added collision manager to the scene
             this._collision = new managers.Collision(this._player);
@@ -77,6 +83,10 @@ var scenes;
             this._fireball.forEach(function (ball) {
                 ball.update();
                 _this._collision.check(ball);
+            });
+            this._dragonX.forEach(function (dragon) {
+                dragon.update();
+                _this._collision.check(dragon);
             });
             this._collision.check(this._fire);
             this.scoreText.text = this.score.toString();

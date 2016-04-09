@@ -38,7 +38,7 @@ var managers;
                     createjs.Sound.play("hit");
                 }
                 // check if it's a fireball hit
-                if (object.name === "fireball") {
+                if (object.name === "dragonXY" || object.name === "dragonX") {
                     object.reset();
                     play.lives--;
                     createjs.Sound.play("collect");

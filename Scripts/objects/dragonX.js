@@ -6,17 +6,17 @@ var __extends = (this && this.__extends) || function (d, b) {
 var objects;
 (function (objects) {
     // FIREBALL CLASS ++++++++++++++++++++++++++++++++++++
-    var Fireball = (function (_super) {
-        __extends(Fireball, _super);
+    var DragonX = (function (_super) {
+        __extends(DragonX, _super);
         // PRIVATE INSTANCE VARIABLES +++++++++++++++++
         // CONSTRUCTOR METHOD +++++++++++++++++++++++++
-        function Fireball() {
-            _super.call(this, "dragonXY");
+        function DragonX() {
+            _super.call(this, "dragonX");
             this._reset(this._leftBounds);
-            this.name = "dragonXY";
+            this.name = "dragonX";
         }
         // PRIVATE METHODS ++++++++++++++++++++++++++++
-        Fireball.prototype._checkBounds = function (value) {
+        DragonX.prototype._checkBounds = function (value) {
             // check to see if the top of the fireball 
             // is outside the viewport         
             if (this.x >= value) {
@@ -24,22 +24,20 @@ var objects;
             }
         };
         // reset the fireball offscreen
-        Fireball.prototype._reset = function (value) {
+        DragonX.prototype._reset = function (value) {
             this._speed.x = Math.floor(Math.random() * 5 + 1) + 5;
-            this._speed.y = Math.floor(Math.random() * 4 + 1) - 2;
+            //this._speed.y = Math.floor(Math.random() * 4 + 1) - 2;
             this.x = value;
             this.y = Math.floor(Math.random() * this._bottomBounds) + this._topBounds;
         };
         // PUBLIC METHODS ++++++++++++++++++++++++++++++
-        Fireball.prototype.update = function () {
-            // scroll the fireball down the screen
+        DragonX.prototype.update = function () {
             this.x += this._speed.x;
-            this.y += this._speed.y;
             this._checkBounds(this._rightBounds + 100);
         };
-        return Fireball;
+        return DragonX;
     }(objects.GameObject));
-    objects.Fireball = Fireball;
+    objects.DragonX = DragonX;
 })(objects || (objects = {}));
 
-//# sourceMappingURL=fireball.js.map
+//# sourceMappingURL=dragonX.js.map

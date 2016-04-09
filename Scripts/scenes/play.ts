@@ -18,12 +18,15 @@ module scenes {
         public scoreWord: objects.Label;
         public scoreText: objects.Label;
         public lives: number;
+        public resetCount: number;
         
         //PRIVATE INSTANCE VARIABLES ++++++++++++
         private _sky: objects.Sky;
         private _fire: objects.Fire;
         private _fireball: objects.Fireball[];
         private _fireballCount: number;
+        private _dragonX: objects.DragonX[];
+        private _dragonXCount: number;
         private _player: objects.Player;
         private _collision: managers.Collision;
 
@@ -44,10 +47,12 @@ module scenes {
             this.lives = 10;
             
             // Set _fireballCount Count
-            this._fireballCount = 8;
+            this._fireballCount = 1;
+            this._dragonXCount = 1;
             
             // Instantiate _fireball array
             this._fireball = new Array<objects.Fireball>();
+            this._dragonX = new Array<objects.DragonX>();
                 
             // added _sky to the scene
             this._sky = new objects.Sky();
@@ -65,6 +70,11 @@ module scenes {
             for (var ball: number = 0; ball < this._fireballCount; ball++) {
                 this._fireball[ball] = new objects.Fireball();
                 this.addChild(this._fireball[ball]);
+            }
+            
+            for (var dragon: number = 0; dragon < this._dragonXCount; dragon++) {
+                this._dragonX[dragon] = new objects.DragonX();
+                this.addChild(this._dragonX[dragon]);
             }
             
             // added collision manager to the scene
@@ -118,6 +128,11 @@ module scenes {
             this._fireball.forEach(ball => {
                 ball.update();
                 this._collision.check(ball);
+            });
+            
+            this._dragonX.forEach(dragon => {
+                dragon.update();
+                this._collision.check(dragon);
             });
 
             this._collision.check(this._fire);
