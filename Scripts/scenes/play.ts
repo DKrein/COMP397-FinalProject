@@ -25,6 +25,8 @@ module scenes {
         private _fire: objects.Fire;
         private _fireball: objects.Fireball[];
         private _fireballCount: number;
+        private _eggs: objects.Egg[];
+        private _eggCount: number;
         private _dragonX: objects.DragonX[];
         private _dragonXCount: number;
         private _player: objects.Player;
@@ -49,10 +51,12 @@ module scenes {
             // Set _fireballCount Count
             this._fireballCount = 1;
             this._dragonXCount = 1;
+            this._eggCount = 2;
             
             // Instantiate _fireball array
             this._fireball = new Array<objects.Fireball>();
             this._dragonX = new Array<objects.DragonX>();
+            this._eggs = new Array<objects.Egg>();
                 
             // added _sky to the scene
             this._sky = new objects.Sky();
@@ -71,10 +75,15 @@ module scenes {
                 this._fireball[ball] = new objects.Fireball();
                 this.addChild(this._fireball[ball]);
             }
-            
+
             for (var dragon: number = 0; dragon < this._dragonXCount; dragon++) {
                 this._dragonX[dragon] = new objects.DragonX();
                 this.addChild(this._dragonX[dragon]);
+            }
+
+            for (var egg: number = 0; egg < this._eggCount; egg++) {
+                this._eggs[egg] = new objects.Egg();
+                this.addChild(this._eggs[egg]);
             }
             
             // added collision manager to the scene
@@ -129,10 +138,15 @@ module scenes {
                 ball.update();
                 this._collision.check(ball);
             });
-            
+
             this._dragonX.forEach(dragon => {
                 dragon.update();
                 this._collision.check(dragon);
+            });
+            
+            this._eggs.forEach(egg => {
+                egg.update();
+                this._collision.check(egg);
             });
 
             this._collision.check(this._fire);

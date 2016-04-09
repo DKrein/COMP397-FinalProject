@@ -40,7 +40,7 @@ module managers {
             if(this.distance(startPoint, endPoint) < minimumDistance) {
                 
                 // check if it's fire hit
-                if(object.name === "fire") {
+                if(object.name === "eggs") {
                     console.log("fire collected!");
                     object.reset();
                     play.score ++;
