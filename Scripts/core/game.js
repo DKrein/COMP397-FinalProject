@@ -34,6 +34,8 @@ var assetData = [
     { id: "dragon", src: "../../Assets/images/dragon.png" },
     { id: "fire", src: "../../Assets/images/fire.png" },
     { id: "fireball", src: "../../Assets/images/fireball.png" },
+    { id: "dragonX", src: "../../Assets/images/enemy2.png" },
+    { id: "dragonXY", src: "../../Assets/images/enemy4.png" },
     { id: "background", src: "../../Assets/images/background.png" },
     { id: "gameover", src: "../../Assets/images/gameover.png" },
     { id: "instruction", src: "../../Assets/images/instruction.png" },
