@@ -6,6 +6,7 @@
         public static INSTRUCTION: number = 1;
         public static PLAY: number = 2;
         public static END: number = 3;
+        public static LEVEL2: number = 4;
     }
     
     

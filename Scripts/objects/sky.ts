@@ -3,12 +3,17 @@ module objects {
     export class Sky extends objects.GameObject {
         // PRIVATE INSTANCE VARIABLES +++++++++++++++++
         
+        
+        // PUBLIC INSTANCE VARIABLES
+        public skyResetCount:number;
+        
         // CONSTRUCTOR METHOD +++++++++++++++++++++++++
-        constructor() {
-            super("mountain");
+        constructor(background) {
+            super(background);
             
            this._speed.x = 5; //sky speed
            this._reset(0);
+           this.skyResetCount = 0;
         }
         
         // PRIVATE METHODS ++++++++++++++++++++++++++++
@@ -25,6 +30,7 @@ module objects {
         // reset the sky offscreen
         protected _reset(value:number):void {
             this.x = value;
+            this.skyResetCount += 1;
         }
         
         

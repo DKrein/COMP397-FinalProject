@@ -8,12 +8,12 @@ var objects;
     // OCEAN CLASS ++++++++++++++++++++++++++++++++++++
     var Sky = (function (_super) {
         __extends(Sky, _super);
-        // PRIVATE INSTANCE VARIABLES +++++++++++++++++
         // CONSTRUCTOR METHOD +++++++++++++++++++++++++
-        function Sky() {
-            _super.call(this, "mountain");
+        function Sky(background) {
+            _super.call(this, background);
             this._speed.x = 5; //sky speed
             this._reset(0);
+            this.skyResetCount = 0;
         }
         // PRIVATE METHODS ++++++++++++++++++++++++++++
         Sky.prototype._checkBounds = function (value) {
@@ -27,6 +27,7 @@ var objects;
         // reset the sky offscreen
         Sky.prototype._reset = function (value) {
             this.x = value;
+            this.skyResetCount += 1;
         };
         // PUBLIC METHODS ++++++++++++++++++++++++++++++
         Sky.prototype.update = function () {
@@ -38,5 +39,4 @@ var objects;
     }(objects.GameObject));
     objects.Sky = Sky;
 })(objects || (objects = {}));
-
 //# sourceMappingURL=sky.js.map

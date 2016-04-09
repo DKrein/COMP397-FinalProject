@@ -10,9 +10,9 @@ Revision:
 3. Added live checker to transition to gameover
 */
 
-// PLAY SCENE
+// LEVEL2 SCENE
 module scenes {
-    export class Play extends objects.Scene {
+    export class Level2 extends objects.Scene {
 
         public score: number;
         public scoreWord: objects.Label;
@@ -47,7 +47,7 @@ module scenes {
         public start(): void {
             this.score = 0;
             this.lives = 10;
-
+            
             this._enemyContainer = new createjs.Container;
             this._collectableContainer = new createjs.Container;
 
@@ -60,7 +60,7 @@ module scenes {
             this._dragonX = new Array<objects.DragonX>();
 
             // added _sky to the scene
-            this._sky = new objects.Sky("mountain");
+            this._sky = new objects.Sky("cave");
             this.addChild(this._sky);
 
             // added _fire to the scene
@@ -122,7 +122,7 @@ module scenes {
                 "#0434C4",
                 600, 15, false);
             //this._livesText.textAlign = "right";
-            this.addChild(this.scoreText);
+            //this.addChild(this.scoreText);
 
         }
 
@@ -158,8 +158,8 @@ module scenes {
                 changeScene();
             }
         }
-
-        // Move to Level 2
+        
+        // Move to Level 3
         private _changeGameLevel(): void {
 
             if (this._sky.skyResetCount > 5) {
@@ -167,9 +167,7 @@ module scenes {
                 this._enemyContainer.removeAllChildren();
                 this._collectableContainer.removeAllChildren();
                 stage.removeChild(this._enemyContainer, this._collectableContainer);
-                
-                scene = config.Scene.LEVEL2;
-                changeScene();
+                console.log("Call next level");
             }
         }
 

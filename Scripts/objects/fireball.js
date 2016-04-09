@@ -41,5 +41,4 @@ var objects;
     }(objects.GameObject));
     objects.Fireball = Fireball;
 })(objects || (objects = {}));
-
 //# sourceMappingURL=fireball.js.map

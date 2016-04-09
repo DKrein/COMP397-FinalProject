@@ -27,6 +27,7 @@ var menu: scenes.Menu;
 var instruction: scenes.Instruction;
 var play: scenes.Play;
 var end: scenes.End;
+var level2: scenes.Level2;
 
 var assetData: objects.Asset[] = [
     // Add your Assets here
@@ -44,6 +45,7 @@ var assetData: objects.Asset[] = [
     { id: "background", src: "../../Assets/images/background.png" },
     { id: "gameover", src: "../../Assets/images/gameover.png" },
     { id: "instruction", src: "../../Assets/images/instruction.png" },
+    { id: "cave", src: "../../Assets/images/cave.png" },
     { id: "hit", src: "../../Assets/audio/hit.mp3" },
     { id: "collect", src: "../../Assets/audio/collect.mp3" },
     { id: "gameovermusic", src: "../../Assets/audio/gameover.mp3" },
@@ -61,22 +63,22 @@ function preload() {
 function init(): void {
     // create a reference the HTML canvas Element
     canvas = document.getElementById("canvas");
-    
+
     // create our main display list container
     stage = new createjs.Stage(canvas);
-    
+
     // Enable mouse events
     stage.enableMouseOver(20);
-    
+
     // set the framerate to 60 frames per second
     createjs.Ticker.setFPS(config.Game.FPS);
-    
+
     // create an event listener to count off frames
     createjs.Ticker.on("tick", gameLoop, this);
-    
+
     // sets up our stats counting workflow
-    setupStats(); 
-    
+    setupStats();
+
     // set initial scene
     scene = config.Scene.MENU;
     changeScene();
@@ -85,14 +87,14 @@ function init(): void {
 // Main Game Loop function that handles what happens each "tick" or frame
 function gameLoop(event: createjs.Event): void {
     // start collecting stats for this frame
-    stats.begin(); 
-    
+    stats.begin();
+
     // calling State's update method
-    currentScene.update(); 
-    
+    currentScene.update();
+
     // redraw/refresh stage every frame
     stage.update();
-    
+
     // stop collecting stats for this frame
     stats.end();
 }
@@ -109,7 +111,7 @@ function setupStats(): void {
 
 // Finite State Machine used to change Scenes
 function changeScene(): void {
-    
+
     // Launch various scenes
     switch (scene) {
         case config.Scene.MENU:
@@ -137,6 +139,15 @@ function changeScene(): void {
             createjs.Sound.play("backgroundmusic");
             console.log("Starting PLAY Scene");
             break;
+        case config.Scene.LEVEL2:
+            // show the LEVEL2 scene
+            stage.removeAllChildren();
+            level2 = new scenes.Level2();
+            currentScene = level2;
+            createjs.Sound.stop();
+            createjs.Sound.play("backgroundmusic");
+            console.log("Starting LEVEL2 Scene");
+            break;
         case config.Scene.END:
             // show the END scene
             stage.removeAllChildren();
@@ -146,6 +157,7 @@ function changeScene(): void {
             createjs.Sound.play("gameovermusic");
             console.log("Starting END Scene");
             break;
+
     }
 
     console.log(currentScene.numChildren);

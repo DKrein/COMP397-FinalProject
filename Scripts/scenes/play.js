@@ -28,6 +28,8 @@ var scenes;
         Play.prototype.start = function () {
             this.score = 0;
             this.lives = 10;
+            this._enemyContainer = new createjs.Container;
+            this._collectableContainer = new createjs.Container;
             // Set _fireballCount Count
             this._fireballCount = 1;
             this._dragonXCount = 1;
@@ -35,27 +37,30 @@ var scenes;
             this._fireball = new Array();
             this._dragonX = new Array();
             // added _sky to the scene
-            this._sky = new objects.Sky();
+            this._sky = new objects.Sky("mountain");
             this.addChild(this._sky);
             // added _fire to the scene
             this._fire = new objects.Fire();
-            this.addChild(this._fire);
+            //this.addChild(this._fire);
+            this._collectableContainer.addChild(this._fire);
             // added player to the scene
             this._player = new objects.Player();
             this.addChild(this._player);
             //added _fireball to the scene
             for (var ball = 0; ball < this._fireballCount; ball++) {
                 this._fireball[ball] = new objects.Fireball();
-                this.addChild(this._fireball[ball]);
+                //this.addChild(this._fireball[ball]);
+                this._enemyContainer.addChild(this._fireball[ball]);
             }
             for (var dragon = 0; dragon < this._dragonXCount; dragon++) {
                 this._dragonX[dragon] = new objects.DragonX();
-                this.addChild(this._dragonX[dragon]);
+                //this.addChild(this._dragonX[dragon]);
+                this._enemyContainer.addChild(this._dragonX[dragon]);
             }
             // added collision manager to the scene
             this._collision = new managers.Collision(this._player);
             // add this scene to the global stage container
-            stage.addChild(this);
+            stage.addChild(this, this._enemyContainer, this._collectableContainer);
             //Add _scoreText to the scene
             this._livesWord = new objects.Label("LIVES: ", "bold 25px Britannic Bold", "#0434C4", 15, 15, false);
             //this._livesText.textAlign = "right";
@@ -92,6 +97,7 @@ var scenes;
             this.scoreText.text = this.score.toString();
             this._livesText.text = this.lives.toString();
             this._checkLives();
+            this._changeGameLevel();
         };
         //PRIVATE METHODS
         Play.prototype._checkLives = function () {
@@ -100,9 +106,20 @@ var scenes;
                 changeScene();
             }
         };
+        // Move to Level 2
+        Play.prototype._changeGameLevel = function () {
+            if (this._sky.skyResetCount > 5) {
+                //Remove the enemy from
+                this._enemyContainer.removeAllChildren();
+                this._collectableContainer.removeAllChildren();
+                stage.removeChild(this._enemyContainer, this._collectableContainer);
+                console.log("Call next level");
+                scene = config.Scene.LEVEL2;
+                changeScene();
+            }
+        };
         return Play;
     }(objects.Scene));
     scenes.Play = Play;
 })(scenes || (scenes = {}));
-
 //# sourceMappingURL=play.js.map
