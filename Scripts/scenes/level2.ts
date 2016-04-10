@@ -29,6 +29,7 @@ module scenes {
         private _collision: managers.Collision;
         private _enemyContainer: createjs.Container;
         private _collectableContainer: createjs.Container;
+        private _playerFireball: objects.PlayerFireball;
 
         private _livesWord: objects.Label;
         private _livesText: objects.Label;
@@ -81,12 +82,18 @@ module scenes {
                 //this.addChild(this._dragonX[dragon]);
                 this._enemyContainer.addChild(this._dragonX[dragon]);
             }
+            
+            this._playerFireball = new objects.PlayerFireball(this._player);
+            this.addChild(this._playerFireball);
 
             // added collision manager to the scene
             this._collision = new managers.Collision(this._player);
 
             // add this scene to the global stage container
             stage.addChild(this, this._enemyContainer, this._collectableContainer);
+            
+            // add stage click Listener
+            stage.on("stagemousedown", this._stageClickHandler)
 
             //Add _scoreText to the scene
             this._livesWord = new objects.Label("LIVES: ",
@@ -129,6 +136,7 @@ module scenes {
             this._fire.update();
 
             this._player.update();
+            this._playerFireball.update();
 
             this._fireball.forEach(ball => {
                 ball.update();
@@ -169,8 +177,11 @@ module scenes {
         }
 
         //EVENT HANDLERS ++++++++++++++++++++
-
-
+        
+        private _stageClickHandler(event: createjs.MouseEvent){
+            console.log("Stage clicked");
+            this._playerFireball.PostionFireBall();
+        }
 
     }
 }
