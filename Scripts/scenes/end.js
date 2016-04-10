@@ -29,7 +29,7 @@ var scenes;
             this.addChild(this._gameoverImage);
             //add the final score label
             //Add _scoreText to the scene
-            this.scoreWord = new objects.Label("HIGHSCORE: " + play.scoreText.text, "bold 25px Britannic Bold", "#FF0000", config.Screen.CENTER_X, config.Screen.CENTER_Y + 30, true);
+            this.scoreWord = new objects.Label("HIGHSCORE: " + gameController.ScoreValue, "bold 25px Britannic Bold", "#FF0000", config.Screen.CENTER_X, config.Screen.CENTER_Y + 30, true);
             //this._livesText.textAlign = "right";
             this.addChild(this.scoreWord);
             play.scoreText.text;
@@ -47,6 +47,8 @@ var scenes;
         //EVENT HANDLERS ++++++++++++++++++++
         // START_OVER Button click event handler
         End.prototype._restartButtonClick = function (event) {
+            gameController.LivesValue = 10;
+            gameController.ScoreValue = 0;
             // Switch to the INTRO Scene
             scene = config.Scene.MENU;
             changeScene();

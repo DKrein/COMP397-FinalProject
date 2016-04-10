@@ -34,13 +34,15 @@ var managers;
                 if (object.name === "eggs") {
                     console.log("fire collected!");
                     object.reset();
-                    play.score++;
+                    //play.score ++;
+                    gameController.ScoreValue++;
                     createjs.Sound.play("hit");
                 }
                 // check if it's a fireball hit
                 if (object.name === "dragonXY" || object.name === "dragonX") {
                     object.reset();
-                    play.lives--;
+                    //play.lives--;
+                    gameController.LivesValue--;
                     createjs.Sound.play("collect");
                 }
             }

@@ -26,8 +26,6 @@ var scenes;
         // PUBLIC METHODS +++++++++++++++++++++
         // Start Method
         Level2.prototype.start = function () {
-            this.score = 0;
-            this.lives = 10;
             this._enemyContainer = new createjs.Container;
             this._collectableContainer = new createjs.Container;
             // Set _fireballCount Count
@@ -67,7 +65,7 @@ var scenes;
             this.addChild(this._livesWord);
             //Add _livesText to the scene
             this._livesText = new objects.Label("LIVES: " +
-                this.lives.toString(), "bold 25px Britannic Bold", "#0434C4", 100, 15, false);
+                gameController.LivesValue.toString(), "bold 25px Britannic Bold", "#0434C4", 100, 15, false);
             //this._livesText.textAlign = "right";
             this.addChild(this._livesText);
             //Add _scoreText to the scene
@@ -75,9 +73,9 @@ var scenes;
             //this._livesText.textAlign = "right";
             this.addChild(this.scoreWord);
             this.scoreText = new objects.Label("SCORE: " +
-                this.score.toString(), "bold 25px Britannic Bold", "#0434C4", 600, 15, false);
+                gameController.ScoreValue.toString(), "bold 25px Britannic Bold", "#0434C4", 600, 15, false);
             //this._livesText.textAlign = "right";
-            //this.addChild(this.scoreText);
+            this.addChild(this.scoreText);
         };
         // PLAY Scene updates here
         Level2.prototype.update = function () {
@@ -94,14 +92,14 @@ var scenes;
                 _this._collision.check(dragon);
             });
             this._collision.check(this._fire);
-            this.scoreText.text = this.score.toString();
-            this._livesText.text = this.lives.toString();
+            this.scoreText.text = gameController.ScoreValue.toString();
+            this._livesText.text = gameController.LivesValue.toString();
             this._checkLives();
             this._changeGameLevel();
         };
         //PRIVATE METHODS
         Level2.prototype._checkLives = function () {
-            if (this.lives <= 0) {
+            if (gameController.LivesValue <= 0) {
                 scene = config.Scene.END;
                 changeScene();
             }
@@ -113,7 +111,7 @@ var scenes;
                 this._enemyContainer.removeAllChildren();
                 this._collectableContainer.removeAllChildren();
                 stage.removeChild(this._enemyContainer, this._collectableContainer);
-                console.log("Call next level");
+                console.log("Call next level3");
             }
         };
         return Level2;

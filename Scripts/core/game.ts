@@ -29,6 +29,9 @@ var play: scenes.Play;
 var end: scenes.End;
 var level2: scenes.Level2;
 
+//GameController
+var gameController: managers.DragonGameController;
+
 var assetData: objects.Asset[] = [
     // Add your Assets here
     { id: "StartButton", src: "../../Assets/images/StartButton.png" },
@@ -82,6 +85,9 @@ function init(): void {
 
     // sets up our stats counting workflow
     setupStats();
+    
+    // Intialize DragonGameController
+    gameController = new managers.DragonGameController();
 
     // set initial scene
     scene = config.Scene.MENU;
