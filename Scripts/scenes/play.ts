@@ -167,7 +167,7 @@ module scenes {
         // Move to Level 2
         private _changeGameLevel(): void {
 
-            if (this._sky.skyResetCount > 5) {
+            if (this._sky.skyResetCount > 1) {
                 //Remove the enemy from
                 this._enemyContainer.removeAllChildren();
                 this._collectableContainer.removeAllChildren();

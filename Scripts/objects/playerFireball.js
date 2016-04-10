@@ -39,7 +39,7 @@ var objects;
             //this.y -= this._speed.y;
             this._checkBounds(this._leftBounds + 100);
         };
-        PlayerFireball.prototype.PostionFireBall = function () {
+        PlayerFireball.prototype.PositionFireBall = function () {
             console.log("_postionFireBall called");
             this.y = this._player.y;
             this.x = this._player.x;
@@ -48,4 +48,5 @@ var objects;
     }(objects.GameObject));
     objects.PlayerFireball = PlayerFireball;
 })(objects || (objects = {}));
+
 //# sourceMappingURL=playerFireball.js.map

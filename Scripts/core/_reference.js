@@ -12,6 +12,7 @@
 /// <reference path="../objects/player.ts" />
 /// <reference path="../objects/dragonX.ts" />
 /// <reference path="../objects/playerFireball.ts" />
+/// <reference path="../objects/stalactites.ts" />
 /// <reference path="../managers/collision.ts" />
 /// <reference path="../managers/dragonGameController.ts" />
 /// <reference path="../scenes/end.ts" />
@@ -19,4 +20,5 @@
 /// <reference path="../scenes/menu.ts" />
 /// <reference path="../scenes/instruction.ts" />
 /// <reference path="../scenes/level2.ts" /> 
+
 //# sourceMappingURL=_reference.js.map

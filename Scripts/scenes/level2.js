@@ -41,6 +41,9 @@ var scenes;
             this._fire = new objects.Fire();
             //this.addChild(this._fire);
             this._collectableContainer.addChild(this._fire);
+            //added stalactites to the scene
+            this._stalactite = new objects.Stalactite();
+            this._enemyContainer.addChild(this._stalactite);
             // added player to the scene
             this._player = new objects.Player();
             this.addChild(this._player);
@@ -86,6 +89,7 @@ var scenes;
             var _this = this;
             this._sky.update();
             this._fire.update();
+            this._stalactite.update();
             this._player.update();
             this._playerFireball.update();
             this._fireball.forEach(function (ball) {
@@ -122,10 +126,11 @@ var scenes;
         //EVENT HANDLERS ++++++++++++++++++++
         Level2.prototype._stageClickHandler = function (event) {
             console.log("Stage clicked");
-            this._playerFireball.PostionFireBall();
+            this._playerFireball.PositionFireBall();
         };
         return Level2;
     }(objects.Scene));
     scenes.Level2 = Level2;
 })(scenes || (scenes = {}));
+
 //# sourceMappingURL=level2.js.map

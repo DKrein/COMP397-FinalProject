@@ -25,6 +25,7 @@ module scenes {
         private _fireballCount: number;
         private _dragonX: objects.DragonX[];
         private _dragonXCount: number;
+        private _stalactite: objects.Stalactite;
         private _player: objects.Player;
         private _collision: managers.Collision;
         private _enemyContainer: createjs.Container;
@@ -65,6 +66,10 @@ module scenes {
             this._fire = new objects.Fire();
             //this.addChild(this._fire);
             this._collectableContainer.addChild(this._fire);
+            
+            //added stalactites to the scene
+            this._stalactite = new objects.Stalactite();
+            this._enemyContainer.addChild(this._stalactite);
 
             // added player to the scene
             this._player = new objects.Player();
@@ -134,6 +139,7 @@ module scenes {
         public update(): void {
             this._sky.update();
             this._fire.update();
+            this._stalactite.update();
 
             this._player.update();
             this._playerFireball.update();
@@ -180,7 +186,7 @@ module scenes {
         
         private _stageClickHandler(event: createjs.MouseEvent){
             console.log("Stage clicked");
-            this._playerFireball.PostionFireBall();
+            this._playerFireball.PositionFireBall();
         }
 
     }
