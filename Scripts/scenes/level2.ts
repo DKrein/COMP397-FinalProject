@@ -14,10 +14,8 @@ Revision:
 module scenes {
     export class Level2 extends objects.Scene {
 
-        public score: number;
         public scoreWord: objects.Label;
         public scoreText: objects.Label;
-        public lives: number;
         public resetCount: number;
 
         //PRIVATE INSTANCE VARIABLES ++++++++++++
@@ -45,8 +43,7 @@ module scenes {
 
         // Start Method
         public start(): void {
-            this.score = 0;
-            this.lives = 10;
+            
             
             this._enemyContainer = new createjs.Container;
             this._collectableContainer = new createjs.Container;
@@ -101,7 +98,7 @@ module scenes {
 
             //Add _livesText to the scene
             this._livesText = new objects.Label("LIVES: " +
-                this.lives.toString(),
+                gameController.LivesValue.toString(),
                 "bold 25px Britannic Bold",
                 "#0434C4",
                 100, 15, false);
@@ -117,12 +114,12 @@ module scenes {
             this.addChild(this.scoreWord);
 
             this.scoreText = new objects.Label("SCORE: " +
-                this.score.toString(),
+                gameController.ScoreValue.toString(),
                 "bold 25px Britannic Bold",
                 "#0434C4",
                 600, 15, false);
             //this._livesText.textAlign = "right";
-            //this.addChild(this.scoreText);
+            this.addChild(this.scoreText);
 
         }
 
@@ -144,8 +141,8 @@ module scenes {
             });
 
             this._collision.check(this._fire);
-            this.scoreText.text = this.score.toString();
-            this._livesText.text = this.lives.toString();
+            this.scoreText.text = gameController.ScoreValue.toString();
+            this._livesText.text = gameController.LivesValue.toString();
             this._checkLives();
             this._changeGameLevel();
 
@@ -153,7 +150,7 @@ module scenes {
 
         //PRIVATE METHODS
         private _checkLives(): void {
-            if (this.lives <= 0) {
+            if (gameController.LivesValue <= 0) {
                 scene = config.Scene.END;
                 changeScene();
             }
@@ -167,7 +164,7 @@ module scenes {
                 this._enemyContainer.removeAllChildren();
                 this._collectableContainer.removeAllChildren();
                 stage.removeChild(this._enemyContainer, this._collectableContainer);
-                console.log("Call next level");
+                console.log("Call next level3");
             }
         }
 

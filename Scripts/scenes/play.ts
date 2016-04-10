@@ -14,10 +14,9 @@ Revision:
 module scenes {
     export class Play extends objects.Scene {
 
-        public score: number;
+
         public scoreWord: objects.Label;
         public scoreText: objects.Label;
-        public lives: number;
         public resetCount: number;
 
         //PRIVATE INSTANCE VARIABLES ++++++++++++
@@ -35,6 +34,7 @@ module scenes {
 
         private _livesWord: objects.Label;
         private _livesText: objects.Label;
+        
 
         // CONSTRUCTOR ++++++++++++++++++++++
         constructor() {
@@ -46,8 +46,6 @@ module scenes {
 
         // Start Method
         public start(): void {
-            this.score = 0;
-            this.lives = 10;
 
             this._enemyContainer = new createjs.Container;
             this._collectableContainer = new createjs.Container;
@@ -56,12 +54,12 @@ module scenes {
             this._fireballCount = 1;
             this._dragonXCount = 1;
             this._eggCount = 2;
-            
+
             // Instantiate _fireball array
             this._fireball = new Array<objects.Fireball>();
             this._dragonX = new Array<objects.DragonX>();
             this._eggs = new Array<objects.Egg>();
-                
+
             // added _sky to the scene
             this._sky = new objects.Sky("mountain");
             this.addChild(this._sky);
@@ -75,13 +73,13 @@ module scenes {
                 this._fireball[ball] = new objects.Fireball();
                 this._collectableContainer.addChild(this._fireball[ball]);
             }
-            
+
             //added _dragon to the _enemyContainer
             for (var dragon: number = 0; dragon < this._dragonXCount; dragon++) {
                 this._dragonX[dragon] = new objects.DragonX();
                 this._enemyContainer.addChild(this._dragonX[dragon]);
             }
-            
+
             //added _eggs to the _collectableContainer
             for (var egg: number = 0; egg < this._eggCount; egg++) {
                 this._eggs[egg] = new objects.Egg();
@@ -104,7 +102,7 @@ module scenes {
 
             //Add _livesText to the scene
             this._livesText = new objects.Label("LIVES: " +
-                this.lives.toString(),
+                gameController.LivesValue.toString(),
                 "bold 25px Britannic Bold",
                 "#0434C4",
                 100, 15, false);
@@ -120,7 +118,7 @@ module scenes {
             this.addChild(this.scoreWord);
 
             this.scoreText = new objects.Label("SCORE: " +
-                this.score.toString(),
+                gameController.ScoreValue.toString(),
                 "bold 25px Britannic Bold",
                 "#0434C4",
                 600, 15, false);
@@ -144,14 +142,15 @@ module scenes {
                 dragon.update();
                 this._collision.check(dragon);
             });
-            
+
             this._eggs.forEach(egg => {
                 egg.update();
                 this._collision.check(egg);
             });
 
-            this.scoreText.text = this.score.toString();
-            this._livesText.text = this.lives.toString();
+            this.scoreText.text = gameController.ScoreValue.toString();
+            this._livesText.text = gameController.LivesValue.toString();
+
             this._checkLives();
             this._changeGameLevel();
 
@@ -159,7 +158,7 @@ module scenes {
 
         //PRIVATE METHODS
         private _checkLives(): void {
-            if (this.lives <= 0) {
+            if (gameController.LivesValue <= 0) {
                 scene = config.Scene.END;
                 changeScene();
             }
@@ -173,7 +172,7 @@ module scenes {
                 this._enemyContainer.removeAllChildren();
                 this._collectableContainer.removeAllChildren();
                 stage.removeChild(this._enemyContainer, this._collectableContainer);
-                
+
                 scene = config.Scene.LEVEL2;
                 changeScene();
             }

@@ -26,8 +26,6 @@ var scenes;
         // PUBLIC METHODS +++++++++++++++++++++
         // Start Method
         Play.prototype.start = function () {
-            this.score = 0;
-            this.lives = 10;
             this._enemyContainer = new createjs.Container;
             this._collectableContainer = new createjs.Container;
             // Set _fireballCount Count
@@ -41,28 +39,27 @@ var scenes;
             // added _sky to the scene
             this._sky = new objects.Sky("mountain");
             this.addChild(this._sky);
-            // added _fire to the scene
-            // this._fire = new objects.Fire();
-            // this._collectableContainer.addChild(this._fire);
             // added player to the scene
             this._player = new objects.Player();
             this.addChild(this._player);
-            //added _fireball to the scene
+            //added _fireball to the _collectableContainer
             for (var ball = 0; ball < this._fireballCount; ball++) {
                 this._fireball[ball] = new objects.Fireball();
-                this._enemyContainer.addChild(this._fireball[ball]);
+                this._collectableContainer.addChild(this._fireball[ball]);
             }
+            //added _dragon to the _enemyContainer
             for (var dragon = 0; dragon < this._dragonXCount; dragon++) {
                 this._dragonX[dragon] = new objects.DragonX();
                 this._enemyContainer.addChild(this._dragonX[dragon]);
             }
+            //added _eggs to the _collectableContainer
             for (var egg = 0; egg < this._eggCount; egg++) {
                 this._eggs[egg] = new objects.Egg();
                 this._collectableContainer.addChild(this._eggs[egg]);
             }
             // added collision manager to the scene
             this._collision = new managers.Collision(this._player);
-            // add this scene to the global stage container
+            // add this, _enemyContainer, _collectableContainer to the global stage container
             stage.addChild(this, this._enemyContainer, this._collectableContainer);
             //Add _scoreText to the scene
             this._livesWord = new objects.Label("LIVES: ", "bold 25px Britannic Bold", "#0434C4", 15, 15, false);
@@ -70,7 +67,7 @@ var scenes;
             this.addChild(this._livesWord);
             //Add _livesText to the scene
             this._livesText = new objects.Label("LIVES: " +
-                this.lives.toString(), "bold 25px Britannic Bold", "#0434C4", 100, 15, false);
+                gameController.LivesValue.toString(), "bold 25px Britannic Bold", "#0434C4", 100, 15, false);
             //this._livesText.textAlign = "right";
             this.addChild(this._livesText);
             //Add _scoreText to the scene
@@ -78,7 +75,7 @@ var scenes;
             //this._livesText.textAlign = "right";
             this.addChild(this.scoreWord);
             this.scoreText = new objects.Label("SCORE: " +
-                this.score.toString(), "bold 25px Britannic Bold", "#0434C4", 600, 15, false);
+                gameController.ScoreValue.toString(), "bold 25px Britannic Bold", "#0434C4", 600, 15, false);
             //this._livesText.textAlign = "right";
             this.addChild(this.scoreText);
         };
@@ -86,7 +83,6 @@ var scenes;
         Play.prototype.update = function () {
             var _this = this;
             this._sky.update();
-            // this._fire.update();
             this._player.update();
             this._fireball.forEach(function (ball) {
                 ball.update();
@@ -100,15 +96,14 @@ var scenes;
                 egg.update();
                 _this._collision.check(egg);
             });
-            // this._collision.check(this._fire);
-            this.scoreText.text = this.score.toString();
-            this._livesText.text = this.lives.toString();
+            this.scoreText.text = gameController.ScoreValue.toString();
+            this._livesText.text = gameController.LivesValue.toString();
             this._checkLives();
             this._changeGameLevel();
         };
         //PRIVATE METHODS
         Play.prototype._checkLives = function () {
-            if (this.lives <= 0) {
+            if (gameController.LivesValue <= 0) {
                 scene = config.Scene.END;
                 changeScene();
             }

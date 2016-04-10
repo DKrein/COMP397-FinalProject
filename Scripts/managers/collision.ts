@@ -13,6 +13,7 @@ module managers {
     export class Collision {
         // PRIVATE INSTANCE VARIABLES
         private _player: objects.Player;
+        
         constructor(player:objects.Player) {
             this._player = player;
         }
@@ -43,14 +44,16 @@ module managers {
                 if(object.name === "eggs") {
                     console.log("fire collected!");
                     object.reset();
-                    play.score ++;
+                    //play.score ++;
+                    gameController.ScoreValue++;
                     createjs.Sound.play("hit");
                 }
                 
                 // check if it's a fireball hit
                 if(object.name === "dragonXY" || object.name === "dragonX") {
                     object.reset();
-                    play.lives--;
+                    //play.lives--;
+                    gameController.LivesValue--;
                     createjs.Sound.play("collect");
                 }
             }

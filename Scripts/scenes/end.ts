@@ -34,7 +34,7 @@ module scenes {
             
             //add the final score label
             //Add _scoreText to the scene
-            this.scoreWord = new objects.Label("HIGHSCORE: " + play.scoreText.text,
+            this.scoreWord = new objects.Label("HIGHSCORE: " + gameController.ScoreValue,
                 "bold 25px Britannic Bold",
                 "#FF0000",
                 config.Screen.CENTER_X,
@@ -70,6 +70,9 @@ module scenes {
         
         // START_OVER Button click event handler
         private _restartButtonClick(event: createjs.MouseEvent) {
+            
+            gameController.LivesValue =10;
+            gameController.ScoreValue =0;
             // Switch to the INTRO Scene
             scene = config.Scene.MENU;
             changeScene();

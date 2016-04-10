@@ -16,6 +16,7 @@
 /// <reference path="../objects/dragonX.ts" />
 
 /// <reference path="../managers/collision.ts" />
+/// <reference path="../managers/dragonGameController.ts" />
 
 /// <reference path="../scenes/end.ts" />
 /// <reference path="../scenes/play.ts" />
