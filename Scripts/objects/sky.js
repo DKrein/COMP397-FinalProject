@@ -39,4 +39,5 @@ var objects;
     }(objects.GameObject));
     objects.Sky = Sky;
 })(objects || (objects = {}));
+
 //# sourceMappingURL=sky.js.map

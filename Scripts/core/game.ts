@@ -1,7 +1,7 @@
 ﻿/*
 Author: Christine Cho, Douglas Krein, Francis Ofougwuka
 Last Modified by: Christine Cho
-Last Modified: 04/8/2016
+Last Modified: 04/10/2016
 File description: Manages assets and scene changes
 
 Revision:
@@ -9,6 +9,7 @@ Revision:
 2. Added Gameover image and hit/collect sounds
 3. Added sounds to the scenes
 4. Added exit button asset
+5. Added Stalactite asset
 */
 
 /// <reference path = "_reference.ts" />
@@ -49,6 +50,7 @@ var assetData: objects.Asset[] = [
     { id: "egg2", src: "../../Assets/images/egg2.png" },
     { id: "egg3", src: "../../Assets/images/egg3.png" },
     { id: "egg4", src: "../../Assets/images/egg4.png" },
+    { id: "stalactite", src: "../../Assets/images/stalactite.png" },
     { id: "background", src: "../../Assets/images/background.png" },
     { id: "gameover", src: "../../Assets/images/gameover.png" },
     { id: "instruction", src: "../../Assets/images/instruction.png" },

@@ -110,7 +110,7 @@ var scenes;
         };
         // Move to Level 2
         Play.prototype._changeGameLevel = function () {
-            if (this._sky.skyResetCount > 5) {
+            if (this._sky.skyResetCount > 1) {
                 //Remove the enemy from
                 this._enemyContainer.removeAllChildren();
                 this._collectableContainer.removeAllChildren();
@@ -123,4 +123,5 @@ var scenes;
     }(objects.Scene));
     scenes.Play = Play;
 })(scenes || (scenes = {}));
+
 //# sourceMappingURL=play.js.map

@@ -39,4 +39,5 @@ var objects;
     }(objects.GameObject));
     objects.DragonX = DragonX;
 })(objects || (objects = {}));
+
 //# sourceMappingURL=dragonX.js.map

@@ -43,7 +43,7 @@ module objects {
             this._checkBounds(this._leftBounds + 100);
         }
 
-        public PostionFireBall(): void {
+        public PositionFireBall(): void {
 
             console.log("_postionFireBall called");
             this.y = this._player.y;
