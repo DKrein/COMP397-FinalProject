@@ -11,6 +11,7 @@
 /// <reference path="../objects/egg.ts"/>
 /// <reference path="../objects/player.ts" />
 /// <reference path="../objects/dragonX.ts" />
+/// <reference path="../objects/playerFireball.ts" />
 /// <reference path="../managers/collision.ts" />
 /// <reference path="../managers/dragonGameController.ts" />
 /// <reference path="../scenes/end.ts" />

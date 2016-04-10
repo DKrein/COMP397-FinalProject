@@ -55,10 +55,14 @@ var scenes;
                 //this.addChild(this._dragonX[dragon]);
                 this._enemyContainer.addChild(this._dragonX[dragon]);
             }
+            this._playerFireball = new objects.PlayerFireball(this._player);
+            this.addChild(this._playerFireball);
             // added collision manager to the scene
             this._collision = new managers.Collision(this._player);
             // add this scene to the global stage container
             stage.addChild(this, this._enemyContainer, this._collectableContainer);
+            // add stage click Listener
+            stage.on("stagemousedown", this._stageClickHandler);
             //Add _scoreText to the scene
             this._livesWord = new objects.Label("LIVES: ", "bold 25px Britannic Bold", "#0434C4", 15, 15, false);
             //this._livesText.textAlign = "right";
@@ -83,6 +87,7 @@ var scenes;
             this._sky.update();
             this._fire.update();
             this._player.update();
+            this._playerFireball.update();
             this._fireball.forEach(function (ball) {
                 ball.update();
                 _this._collision.check(ball);
@@ -113,6 +118,11 @@ var scenes;
                 stage.removeChild(this._enemyContainer, this._collectableContainer);
                 console.log("Call next level3");
             }
+        };
+        //EVENT HANDLERS ++++++++++++++++++++
+        Level2.prototype._stageClickHandler = function (event) {
+            console.log("Stage clicked");
+            this._playerFireball.PostionFireBall();
         };
         return Level2;
     }(objects.Scene));
