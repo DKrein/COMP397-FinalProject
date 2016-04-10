@@ -1,6 +1,6 @@
 module objects {
     // FIREBALL CLASS ++++++++++++++++++++++++++++++++++++
-    export class Stalactite extends objects.GameObject {
+    export class Stalactites extends objects.GameObject {
         // PRIVATE INSTANCE VARIABLES +++++++++++++++++
         
         // CONSTRUCTOR METHOD +++++++++++++++++++++++++
@@ -25,7 +25,7 @@ module objects {
             this._speed.x = Math.floor(Math.random() * 5 + 1) + 5;
             
             this.x = value;
-            this.y = 1;
+            this.y = 1; 
         }
         
         

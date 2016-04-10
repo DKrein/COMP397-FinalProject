@@ -45,6 +45,13 @@ var managers;
                     gameController.LivesValue--;
                     createjs.Sound.play("collect");
                 }
+                // check if player collided with stalactite
+                if (object.name === "stalactite" || object.name === "stalagmite") {
+                    object.reset();
+                    console.log("BOINK");
+                    gameController.LivesValue -= 2;
+                    createjs.Sound.play("collect");
+                }
             }
         };
         return Collision;
