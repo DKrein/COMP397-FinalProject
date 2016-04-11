@@ -1,3 +1,14 @@
+/*
+Author: Douglas Krein, Christine Cho, Francis Ofougwuka
+Last Modified by: Christine Cho
+Last Modified: 04/9/2016
+File description: 
+- Object for fire collectable
+Revision:
+1. Created class for fire collectable object
+    
+*/
+
 module objects {
     // ISLAND CLASS ++++++++++++++++++++++++++++++++++++
     export class Fire extends objects.GameObject {

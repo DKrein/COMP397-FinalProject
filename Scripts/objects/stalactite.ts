@@ -1,3 +1,14 @@
+/*
+Author: Douglas Krein, Christine Cho, Francis Ofougwuka
+Last Modified by: Christine Cho
+Last Modified: 04/9/2016
+File description:
+- Object for stalactite
+Revision:
+1. Created class for stalactite object
+    
+*/
+
 module objects {
     // FIREBALL CLASS ++++++++++++++++++++++++++++++++++++
     export class Stalactites extends objects.GameObject {
@@ -20,7 +31,7 @@ module objects {
             }
         }
         
-        // reset the fireball offscreen
+        // reset the stalactite offscreen
         protected _reset(value:number):void {
             this._speed.x = Math.floor(Math.random() * 5 + 1) + 5;
             

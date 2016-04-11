@@ -25,21 +25,26 @@ var scenes;
         // Start Method
         End.prototype.start = function () {
             //Add Gameover Image
-            this._gameoverImage = new createjs.Bitmap(assets.getResult("gameover"));
+            this._gameoverImage = new createjs.Bitmap(assets.getResult("gameOverBackground"));
             this.addChild(this._gameoverImage);
             //add the final score label
             //Add _scoreText to the scene
             this.scoreWord = new objects.Label("HIGHSCORE: " + gameController.ScoreValue, "bold 25px Britannic Bold", "#FF0000", config.Screen.CENTER_X, config.Screen.CENTER_Y + 30, true);
             //this._livesText.textAlign = "right";
             this.addChild(this.scoreWord);
-            play.scoreText.text;
+            level1.scoreText.text;
             // add the _restartButton to the MENU scene
             this._restartButton = new objects.Button("RestartButton", config.Screen.CENTER_X, config.Screen.CENTER_Y + 100, true);
             this.addChild(this._restartButton);
             // START_OVER Button event listener
             this._restartButton.on("click", this._restartButtonClick, this);
+            this._playBackgroundSound();
             // add this scene to the global stage container
             stage.addChild(this);
+        };
+        End.prototype._playBackgroundSound = function () {
+            this._bgSound = createjs.Sound.play("gameOverBgMusic", { volume: 0.03 });
+            this._bgSound.on("complete", this._playBackgroundSound, this);
         };
         // PLAY Scene updates here
         End.prototype.update = function () {
@@ -57,4 +62,5 @@ var scenes;
     }(objects.Scene));
     scenes.End = End;
 })(scenes || (scenes = {}));
+
 //# sourceMappingURL=end.js.map

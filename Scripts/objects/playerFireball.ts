@@ -1,3 +1,14 @@
+/*
+Author: Douglas Krein, Christine Cho, Francis Ofougwuka
+Last Modified by: Christine Cho
+Last Modified: 04/9/2016
+File description: 
+- Object for player's fireball
+Revision:
+1. Created class for player's fireball object
+    
+*/
+
 module objects {
     // FIREBALL CLASS ++++++++++++++++++++++++++++++++++++
     export class PlayerFireball extends objects.GameObject {

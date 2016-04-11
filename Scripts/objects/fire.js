@@ -1,3 +1,13 @@
+/*
+Author: Douglas Krein, Christine Cho, Francis Ofougwuka
+Last Modified by: Christine Cho
+Last Modified: 04/9/2016
+File description:
+- Object for fire collectable
+Revision:
+1. Created class for fire collectable object
+    
+*/
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -39,4 +49,5 @@ var objects;
     }(objects.GameObject));
     objects.Fire = Fire;
 })(objects || (objects = {}));
+
 //# sourceMappingURL=fire.js.map

@@ -1,7 +1,7 @@
 {
-    "name": "comp397-assignment3",
+    "name": "comp397-finalProject",
     "version": "1.0.0",
-    "description": "COMP397-Assignment 3 SideScroller",
+    "description": "COMP397-FinalProject-DragonStory",
     "main": "game.js",
     "dependencies": {
         "typescript": "^1.8.7"
@@ -22,12 +22,16 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/EphermeralCC/COMP397_AssignmentTHREE.git"
+        "url": "git+https://github.com/DKrein/COMP397-FinalProject.git"
     },
-    "author": "Tom Tsiliopoulos",
+    "authors": [
+        "Christine Cho <christine.cho.94@gmail.com>",
+        "Douglas Krein <douglaskrein@gmail.com>",
+        "Francis Ofougwuka <francid81@gmail.com>"
+    ],
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/EphermeralCC/COMP397_AssignmentTHREE/issues"
+        "url": "https://github.com/DKrein/COMP397-FinalProject/issues"
     },
-    "homepage": "https://github.com/EphermeralCC/COMP397_AssignmentTHREE#readme"
+    "homepage": "https://github.com/DKrein/COMP397-FinalProject#readme"
 }

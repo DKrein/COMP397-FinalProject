@@ -8,12 +8,15 @@
 /// <reference path="../objects/scene.ts" />
 
 /// <reference path="../objects/gameobject.ts" />
-/// <reference path="../objects/sky.ts" />
-/// <reference path="../objects/fire.ts"/>
-/// <reference path="../objects/fireball.ts"/>
-/// <reference path="../objects/egg.ts"/>
+/// <reference path="../objects/backgroundScroll.ts" />
 /// <reference path="../objects/player.ts" />
-/// <reference path="../objects/dragonX.ts" />
+
+/// <reference path="../objects/fire.ts"/>
+/// <reference path="../objects/egg.ts"/>
+
+/// <reference path="../objects/dragonEnemy1.ts"/>
+/// <reference path="../objects/dragonEnemy2.ts" />
+
 /// <reference path="../objects/playerFireball.ts" />
 /// <reference path="../objects/stalactite.ts" />
 /// <reference path="../objects/stalagmite.ts" />
@@ -22,7 +25,8 @@
 /// <reference path="../managers/dragonGameController.ts" />
 
 /// <reference path="../scenes/end.ts" />
-/// <reference path="../scenes/play.ts" />
 /// <reference path="../scenes/menu.ts" />
 /// <reference path="../scenes/instruction.ts" />
+/// <reference path="../scenes/level1.ts" />
 /// <reference path="../scenes/level2.ts" />
+/// <reference path="../scenes/level3.ts" />

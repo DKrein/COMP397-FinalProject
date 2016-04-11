@@ -30,27 +30,26 @@ var managers;
             /* check if the distance between the player and
               the other object is less than the minimum distance */
             if (this.distance(startPoint, endPoint) < minimumDistance) {
-                // check if it's fire hit
-                if (object.name === "eggs") {
-                    console.log("fire collected!");
+                // check if it's egg
+                if (object.name.indexOf('egg') >= 0) {
+                    console.log("egg collected!");
                     object.reset();
-                    //play.score ++;
-                    gameController.ScoreValue++;
-                    createjs.Sound.play("hit");
+                    var score = parseInt(object.name.replace("egg", ""));
+                    gameController.ScoreValue += score;
+                    createjs.Sound.play("hit", { volume: 0.01 });
                 }
                 // check if it's a fireball hit
-                if (object.name === "dragonXY" || object.name === "dragonX") {
+                if (object.name === "dragonEnemy1" || object.name === "dragonEnemy2") {
                     object.reset();
-                    //play.lives--;
                     gameController.LivesValue--;
-                    createjs.Sound.play("collect");
+                    createjs.Sound.play("collect", { volume: 0.01 });
                 }
                 // check if player collided with stalactite
                 if (object.name === "stalactite" || object.name === "stalagmite") {
                     object.reset();
                     console.log("BOINK");
                     gameController.LivesValue -= 2;
-                    createjs.Sound.play("collect");
+                    createjs.Sound.play("collect", { volume: 0.01 });
                 }
             }
         };
@@ -58,4 +57,5 @@ var managers;
     }());
     managers.Collision = Collision;
 })(managers || (managers = {}));
+
 //# sourceMappingURL=collision.js.map

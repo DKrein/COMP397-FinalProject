@@ -18,14 +18,15 @@ var objects;
     var Player = (function (_super) {
         __extends(Player, _super);
         function Player() {
-            _super.call(this, assets.getResult("dragon"));
+            _super.call(this, assets.getResult("playerBaby"));
             this.width = this.getBounds().width;
             this.height = this.getBounds().height;
             this.regX = this.width * 0.5;
             this.regY = this.height * 0.5;
             this._topBounds = this.height * 0.5;
             this._bottomBounds = config.Screen.HEIGHT - (this.height * 0.5);
-            this.x = 600;
+            this._rightBounds = config.Screen.WIDTH - (this.width);
+            this.x = this._rightBounds;
         }
         // PRIVATE METHODS
         Player.prototype._checkBounds = function () {
@@ -45,4 +46,5 @@ var objects;
     }(createjs.Bitmap));
     objects.Player = Player;
 })(objects || (objects = {}));
+
 //# sourceMappingURL=player.js.map

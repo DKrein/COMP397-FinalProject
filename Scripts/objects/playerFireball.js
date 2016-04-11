@@ -1,3 +1,13 @@
+/*
+Author: Douglas Krein, Christine Cho, Francis Ofougwuka
+Last Modified by: Christine Cho
+Last Modified: 04/9/2016
+File description:
+- Object for player's fireball
+Revision:
+1. Created class for player's fireball object
+    
+*/
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -48,4 +58,5 @@ var objects;
     }(objects.GameObject));
     objects.PlayerFireball = PlayerFireball;
 })(objects || (objects = {}));
+
 //# sourceMappingURL=playerFireball.js.map

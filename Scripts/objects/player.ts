@@ -22,7 +22,7 @@ module objects {
         public width: number;
         public height: number;
         constructor() {
-            super(assets.getResult("dragon"));
+            super(assets.getResult("playerBaby"));
 
             this.width = this.getBounds().width;
             this.height = this.getBounds().height;
@@ -32,8 +32,9 @@ module objects {
             
             this._topBounds = this.height * 0.5;
             this._bottomBounds = config.Screen.HEIGHT - (this.height * 0.5);
+            this._rightBounds = config.Screen.WIDTH - (this.width);
 
-            this.x = 600;
+            this.x = this._rightBounds;
         }
 
         // PRIVATE METHODS
