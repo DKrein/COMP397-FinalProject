@@ -39,7 +39,7 @@ var objects;
             this._speed.x = Math.floor(Math.random() * 5 + 1) + 5;
             this._speed.y = Math.floor(Math.random() * 4 + 1) - 2;
             this.x = value;
-            this.y = Math.floor(Math.random() * this._bottomBounds) + this._topBounds;
+            this.y = (Math.floor(Math.random() * this._bottomBounds) + this._topBounds) - (this.height);
         };
         // PUBLIC METHODS ++++++++++++++++++++++++++++++
         DragonEnemy1.prototype.update = function () {

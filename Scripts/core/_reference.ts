@@ -21,7 +21,8 @@
 /// <reference path="../objects/stalactite.ts" />
 /// <reference path="../objects/stalagmite.ts" />
 
-/// <reference path="../managers/collision.ts" />
+/// <reference path="../managers/fireBallCollision.ts" />
+/// <reference path="../managers/playerCollision.ts" />
 /// <reference path="../managers/dragonGameController.ts" />
 
 /// <reference path="../scenes/end.ts" />

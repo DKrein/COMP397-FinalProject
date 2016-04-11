@@ -54,6 +54,7 @@ var assetData: objects.Asset[] = [
     //player
     { id: "playerBaby", src: "../../Assets/images/playerBaby.png" },
     { id: "player", src: "../../Assets/images/player.png" },
+    { id: "playerFireball", src: "../../Assets/images/playerFireball.png" },
     
     //Enemies and Hazards
     { id: "dragonEnemy1", src: "../../Assets/images/dragonEnemy1.png" },
@@ -65,7 +66,6 @@ var assetData: objects.Asset[] = [
     
     //Collectbles 
     { id: "fire", src: "../../Assets/images/fire.png" },
-    { id: "fireball", src: "../../Assets/images/fireball.png" },
     { id: "egg1", src: "../../Assets/images/egg1.png" },
     { id: "egg2", src: "../../Assets/images/egg2.png" },
     { id: "egg3", src: "../../Assets/images/egg3.png" },
@@ -159,7 +159,7 @@ function changeScene(): void {
             currentScene = instruction;
             console.log("Starting INSTRUCTION Scene");
             break;
-        case config.Scene.PLAY:
+        case config.Scene.LEVEL1:
             // show the LEVEL1 scene
             stage.removeAllChildren();
             level1 = new scenes.Level1();

@@ -2,15 +2,18 @@
 Author: Christine Cho
 Last Modified by: Christine Cho
 Last Modified: 03/28/2016
-File description: Manages collisions in the game
+File description: Manages collisions in the player object
 
 Revision:
 1. Changed collision to add score
+2. Fixed some names
+3. Fixed to eggs give different scores
+4. Changed the name of class, this one will take care about player only
 */
 
 module managers {
     // COLLISION MANAGER CLASS
-    export class Collision {
+    export class PlayerCollision {
         // PRIVATE INSTANCE VARIABLES
         private _player: objects.Player;
         
@@ -50,6 +53,12 @@ module managers {
                     createjs.Sound.play("hit", {volume: 0.01});
                 } 
                 
+                if( object.name === "fire") {
+                    console.log("fire collected!");
+                    object.reset();
+                    //DO SOMETHING HERE IN THE FUTURE
+                } 
+                
                 // check if it's a fireball hit
                 if(object.name === "dragonEnemy1" || object.name === "dragonEnemy2") {
                     object.reset();
@@ -60,7 +69,6 @@ module managers {
                 // check if player collided with stalactite
                 if(object.name === "stalactite" || object.name === "stalagmite") {
                     object.reset(); 
-                    console.log("BOINK");
                     gameController.LivesValue-= 2;
                     createjs.Sound.play("collect", {volume: 0.01});
                 }

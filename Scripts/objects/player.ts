@@ -6,6 +6,7 @@ File description: Manages the player location
 
 Revision:
 1. Changed the location to of the player to the right of the screen
+2. Adjusted rightBounds to use screen.width
 */
 
 module objects {
@@ -21,8 +22,8 @@ module objects {
         // PUBLIC INSTANCE VARIABLES
         public width: number;
         public height: number;
-        constructor() {
-            super(assets.getResult("playerBaby"));
+        constructor(imgToLoad) {
+            super(assets.getResult(imgToLoad));
 
             this.width = this.getBounds().width;
             this.height = this.getBounds().height;
@@ -32,7 +33,7 @@ module objects {
             
             this._topBounds = this.height * 0.5;
             this._bottomBounds = config.Screen.HEIGHT - (this.height * 0.5);
-            this._rightBounds = config.Screen.WIDTH - (this.width);
+            this._rightBounds = config.Screen.WIDTH - (this.width*0.5);
 
             this.x = this._rightBounds;
         }
@@ -53,5 +54,6 @@ module objects {
             this.y = stage.mouseY;
             this._checkBounds();
         }
+        
     }
 }

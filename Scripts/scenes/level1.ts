@@ -32,7 +32,7 @@ module scenes {
         private _dragonEnemy2Count: number;        
         
         private _player: objects.Player;
-        private _collision: managers.Collision;
+        private _playerCollision: managers.PlayerCollision;
         private _enemyContainer: createjs.Container;
         private _collectableContainer: createjs.Container;
 
@@ -74,7 +74,7 @@ module scenes {
             
 
             // added player to the scene
-            this._player = new objects.Player();
+            this._player = new objects.Player("playerBaby");
             this.addChild(this._player);
 
             //added _fireball to the _collectableContainer
@@ -96,7 +96,7 @@ module scenes {
             }
 
             // added collision manager to the scene
-            this._collision = new managers.Collision(this._player);
+            this._playerCollision = new managers.PlayerCollision(this._player); 
 
             // add this, _enemyContainer, _collectableContainer to the global stage container
             stage.addChild(this, this._enemyContainer, this._collectableContainer);
@@ -153,17 +153,17 @@ module scenes {
 
             this._dragonEnemy1.forEach(dragon => {
                 dragon.update();
-                this._collision.check(dragon);
+                this._playerCollision.check(dragon);
             });
 
             this._dragonEnemy2.forEach(dragon => {
                 dragon.update();
-                this._collision.check(dragon);
+                this._playerCollision.check(dragon);
             });
 
             this._eggs.forEach(egg => {
                 egg.update();
-                this._collision.check(egg);
+                this._playerCollision.check(egg);
             });
 
             this.scoreText.text = gameController.ScoreValue.toString();
@@ -185,7 +185,7 @@ module scenes {
         // Move to Level 2
         private _changeGameLevel(): void {
 
-            if (this._backGround.backgroundResetCount > 50) {
+            if (this._backGround.backgroundResetCount > 1) {
                 //Remove the enemy from
                 this._enemyContainer.removeAllChildren();
                 this._collectableContainer.removeAllChildren();

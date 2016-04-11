@@ -36,9 +36,11 @@ var scenes;
             // Set _fireballCount Count
             this._dragonEnemy1Count = 1;
             this._dragonEnemy2Count = 1;
+            this._playerFireballCount = 3;
             // Instantiate _fireball array
             this._dragonEnemy1 = new Array();
             this._dragonEnemy2 = new Array();
+            this._playerFireball = new Array();
             // added _fire to the scene
             this._fire = new objects.Fire();
             //this.addChild(this._fire);
@@ -50,7 +52,7 @@ var scenes;
             this._stalagmite = new objects.Stalagmites();
             this._enemyContainer.addChild(this._stalagmite);
             // added player to the scene
-            this._player = new objects.Player();
+            this._player = new objects.Player("player");
             this.addChild(this._player);
             //added _fireball to the scene
             for (var count = 0; count < this._dragonEnemy1Count; count++) {
@@ -61,14 +63,16 @@ var scenes;
                 this._dragonEnemy2[count] = new objects.DragonEnemy2();
                 this._enemyContainer.addChild(this._dragonEnemy2[count]);
             }
-            this._playerFireball = new objects.PlayerFireball(this._player);
-            this.addChild(this._playerFireball);
+            for (var count = 0; count < this._playerFireballCount; count++) {
+                this._playerFireball[count] = new objects.PlayerFireball(this._player);
+                this.addChild(this._playerFireball[count]);
+            }
             // added collision manager to the scene
-            this._collision = new managers.Collision(this._player);
+            this._playerCollision = new managers.PlayerCollision(this._player);
             // add this scene to the global stage container
             stage.addChild(this, this._enemyContainer, this._collectableContainer);
             // add stage click Listener
-            stage.on("stagemousedown", this._stageClickHandler);
+            stage.on("click", this._playerFire, this);
             //Add _scoreText to the scene
             this._livesWord = new objects.Label("LIVES: ", "bold 25px Britannic Bold", "#0434C4", 15, 15, false);
             //this._livesText.textAlign = "right";
@@ -98,20 +102,23 @@ var scenes;
             this._backGround.update();
             this._fire.update();
             this._stalactite.update();
-            this._collision.check(this._stalactite);
+            this._playerCollision.check(this._stalactite);
             this._stalagmite.update();
-            this._collision.check(this._stalagmite);
+            this._playerCollision.check(this._stalagmite);
             this._player.update();
-            this._playerFireball.update();
+            this._playerFireball.forEach(function (fireball) {
+                fireball.update();
+                _this._playerCollision.check(fireball);
+            });
             this._dragonEnemy1.forEach(function (dragon) {
                 dragon.update();
-                _this._collision.check(dragon);
+                _this._playerCollision.check(dragon);
             });
             this._dragonEnemy2.forEach(function (dragon) {
                 dragon.update();
-                _this._collision.check(dragon);
+                _this._playerCollision.check(dragon);
             });
-            this._collision.check(this._fire);
+            this._playerCollision.check(this._fire);
             this.scoreText.text = gameController.ScoreValue.toString();
             this._livesText.text = gameController.LivesValue.toString();
             this._checkLives();
@@ -126,18 +133,24 @@ var scenes;
         };
         // Move to Level 3
         Level2.prototype._changeGameLevel = function () {
-            if (this._backGround.backgroundResetCount > 5) {
+            if (this._backGround.backgroundResetCount > 2) {
                 //Remove the enemy from
                 this._enemyContainer.removeAllChildren();
                 this._collectableContainer.removeAllChildren();
                 stage.removeChild(this._enemyContainer, this._collectableContainer);
-                console.log("Call next level3");
+                //Should be level 3
+                scene = config.Scene.LEVEL1;
+                changeScene();
             }
         };
         //EVENT HANDLERS ++++++++++++++++++++
-        Level2.prototype._stageClickHandler = function (event) {
-            console.log("Stage clicked");
-            this._playerFireball.PositionFireBall();
+        Level2.prototype._playerFire = function (event) {
+            for (var count = 0; count < this._playerFireballCount; count++) {
+                if (this._playerFireball[count].isAvailable) {
+                    this._playerFireball[count].reset();
+                    break;
+                }
+            }
         };
         return Level2;
     }(objects.Scene));

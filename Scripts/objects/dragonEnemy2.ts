@@ -38,7 +38,7 @@ module objects {
             //this._speed.y = Math.floor(Math.random() * 4 + 1) - 2;
             
             this.x = value;
-            this.y = Math.floor(Math.random() * this._bottomBounds) + this._topBounds;
+            this.y = (Math.floor(Math.random() * this._bottomBounds) + this._topBounds) - (this.height);
         }
         
         
