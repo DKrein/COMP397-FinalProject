@@ -10,6 +10,7 @@ Revision:
 3. Added sounds to the scenes
 4. Added exit button asset
 5. Added Stalactite asset
+6. Removed sounds from here, changed for scenes
 */
 /// <reference path = "_reference.ts" />
 // global variables
@@ -22,39 +23,50 @@ var scene;
 // Game Scenes
 var menu;
 var instruction;
-var play;
 var end;
+var level1;
 var level2;
+var level3;
 //GameController
 var gameController;
 var assetData = [
     // Add your Assets here
+    //Buttons
     { id: "StartButton", src: "../../Assets/images/StartButton.png" },
     { id: "InstructionButton", src: "../../Assets/images/InstructionButton.png" },
     { id: "RestartButton", src: "../../Assets/images/RestartButton.png" },
     { id: "BackButton", src: "../../Assets/images/BackButton.png" },
     { id: "ExitButton", src: "../../Assets/images/ExitButton.png" },
-    { id: "mountain", src: "../../Assets/images/mountains.png" },
-    { id: "dragon", src: "../../Assets/images/dragon.png" },
+    //backgrounds
+    { id: "menuBackground", src: "../../Assets/images/menuBackground.png" },
+    { id: "instructionBackground", src: "../../Assets/images/instructionBackground.png" },
+    { id: "gameOverBackground", src: "../../Assets/images/gameOverBackground.png" },
+    { id: "level1Background", src: "../../Assets/images/level1Background.png" },
+    { id: "level2Background", src: "../../Assets/images/level2Background.png" },
+    //player
+    { id: "playerBaby", src: "../../Assets/images/playerBaby.png" },
+    { id: "player", src: "../../Assets/images/player.png" },
+    { id: "playerFireball", src: "../../Assets/images/playerFireball.png" },
+    //Enemies and Hazards
+    { id: "dragonEnemy1", src: "../../Assets/images/dragonEnemy1.png" },
+    { id: "dragonEnemy2", src: "../../Assets/images/dragonEnemy2.png" },
+    { id: "dragonEnemy3", src: "../../Assets/images/dragonEnemy3.png" },
+    { id: "dragonEnemy4", src: "../../Assets/images/dragonEnemy4.png" },
+    { id: "stalactite", src: "../../Assets/images/stalactite.png" },
+    { id: "stalagmite", src: "../../Assets/images/stalagmite.png" },
+    //Collectbles 
     { id: "fire", src: "../../Assets/images/fire.png" },
-    { id: "fireball", src: "../../Assets/images/fireball.png" },
-    { id: "dragonX", src: "../../Assets/images/enemy2.png" },
-    { id: "dragonXY", src: "../../Assets/images/enemy4.png" },
     { id: "egg1", src: "../../Assets/images/egg1.png" },
     { id: "egg2", src: "../../Assets/images/egg2.png" },
     { id: "egg3", src: "../../Assets/images/egg3.png" },
     { id: "egg4", src: "../../Assets/images/egg4.png" },
-    { id: "stalactite", src: "../../Assets/images/stalactite.png" },
-    { id: "stalagmite", src: "../../Assets/images/stalagmite.png" },
-    { id: "background", src: "../../Assets/images/background.png" },
-    { id: "gameover", src: "../../Assets/images/gameover.png" },
-    { id: "instruction", src: "../../Assets/images/instruction.png" },
-    { id: "cave", src: "../../Assets/images/cave.png" },
+    //collision musics
     { id: "hit", src: "../../Assets/audio/hit.mp3" },
     { id: "collect", src: "../../Assets/audio/collect.mp3" },
-    { id: "gameovermusic", src: "../../Assets/audio/gameover.mp3" },
-    { id: "menumusic", src: "../../Assets/audio/opening.mp3" },
-    { id: "backgroundmusic", src: "../../Assets/audio/background.mp3" }
+    //background musics
+    { id: "gameOverBgMusic", src: "../../Assets/audio/gameover.mp3" },
+    { id: "menuBgMusic", src: "../../Assets/audio/opening.mp3" },
+    { id: "gameBgMusic", src: "../../Assets/audio/background.mp3" }
 ];
 function preload() {
     assets = new createjs.LoadQueue();
@@ -110,8 +122,6 @@ function changeScene() {
             stage.removeAllChildren();
             menu = new scenes.Menu();
             currentScene = menu;
-            createjs.Sound.stop();
-            createjs.Sound.play("menumusic");
             console.log("Starting MENU Scene");
             break;
         case config.Scene.INSTRUCTION:
@@ -121,35 +131,36 @@ function changeScene() {
             currentScene = instruction;
             console.log("Starting INSTRUCTION Scene");
             break;
-        case config.Scene.PLAY:
-            // show the PLAY scene
+        case config.Scene.LEVEL1:
+            // show the LEVEL1 scene
             stage.removeAllChildren();
-            play = new scenes.Play();
-            currentScene = play;
-            createjs.Sound.stop();
-            createjs.Sound.play("backgroundmusic");
-            console.log("Starting PLAY Scene");
+            level1 = new scenes.Level1();
+            currentScene = level1;
+            console.log("Starting LEVEL1 Scene");
             break;
         case config.Scene.LEVEL2:
             // show the LEVEL2 scene
             stage.removeAllChildren();
             level2 = new scenes.Level2();
             currentScene = level2;
-            createjs.Sound.stop();
-            createjs.Sound.play("backgroundmusic");
             console.log("Starting LEVEL2 Scene");
+            break;
+        case config.Scene.LEVEL3:
+            // show the LEVEL3 scene
+            stage.removeAllChildren();
+            level3 = new scenes.Level3();
+            currentScene = level3;
+            console.log("Starting LEVEL3 Scene");
             break;
         case config.Scene.END:
             // show the END scene
             stage.removeAllChildren();
             end = new scenes.End();
             currentScene = end;
-            createjs.Sound.stop();
-            createjs.Sound.play("gameovermusic");
             console.log("Starting END Scene");
             break;
     }
-    console.log(currentScene.numChildren);
 }
 window.onload = preload;
+
 //# sourceMappingURL=game.js.map

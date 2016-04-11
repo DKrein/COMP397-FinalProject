@@ -6,6 +6,7 @@ File description: Manages the player location
 
 Revision:
 1. Changed the location to of the player to the right of the screen
+2. Adjusted rightBounds to use screen.width
 */
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -17,15 +18,16 @@ var objects;
     // PLAYER CLASS ++++++++++++++++++++++++++++++
     var Player = (function (_super) {
         __extends(Player, _super);
-        function Player() {
-            _super.call(this, assets.getResult("dragon"));
+        function Player(imgToLoad) {
+            _super.call(this, assets.getResult(imgToLoad));
             this.width = this.getBounds().width;
             this.height = this.getBounds().height;
             this.regX = this.width * 0.5;
             this.regY = this.height * 0.5;
             this._topBounds = this.height * 0.5;
             this._bottomBounds = config.Screen.HEIGHT - (this.height * 0.5);
-            this.x = 600;
+            this._rightBounds = config.Screen.WIDTH - (this.width * 0.5);
+            this.x = this._rightBounds;
         }
         // PRIVATE METHODS
         Player.prototype._checkBounds = function () {
@@ -45,4 +47,5 @@ var objects;
     }(createjs.Bitmap));
     objects.Player = Player;
 })(objects || (objects = {}));
+
 //# sourceMappingURL=player.js.map

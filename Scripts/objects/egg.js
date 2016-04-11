@@ -5,7 +5,7 @@ Last Modified: 04/9/2016
 File description:
 - Object for egg
 Revision:
-
+1. Created class for egg object
     
 */
 var __extends = (this && this.__extends) || function (d, b) {
@@ -21,9 +21,10 @@ var objects;
         // PRIVATE INSTANCE VARIABLES +++++++++++++++++
         // CONSTRUCTOR METHOD +++++++++++++++++++++++++
         function Egg() {
-            _super.call(this, "egg" + (Math.floor(Math.random() * 4) + 1));
+            var rand = (Math.floor(Math.random() * 4) + 1);
+            _super.call(this, "egg" + rand);
             this._reset(this._leftBounds);
-            this.name = "eggs";
+            this.name = "egg" + rand;
         }
         // PRIVATE METHODS ++++++++++++++++++++++++++++
         Egg.prototype._checkBounds = function (value) {
@@ -51,4 +52,5 @@ var objects;
     }(objects.GameObject));
     objects.Egg = Egg;
 })(objects || (objects = {}));
+
 //# sourceMappingURL=egg.js.map

@@ -28,15 +28,15 @@ module scenes {
         public start(): void {
             
             //Add Background Image
-            this._instructionImage = new createjs.Bitmap(assets.getResult("instruction"));
+            this._instructionImage = new createjs.Bitmap(assets.getResult("instructionBackground"));
             this.addChild(this._instructionImage);
             
             
             // add the BackButton to the MENU scene
             this._backButton = new objects.Button(
                 "BackButton",
-                config.Screen.CENTER_X + 230,
-                config.Screen.CENTER_Y + 200, true);
+                config.Screen.CENTER_X + 350,
+                config.Screen.CENTER_Y + 260, true);
             this.addChild(this._backButton);         
             
             // StartButton event listener

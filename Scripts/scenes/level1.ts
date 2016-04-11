@@ -2,17 +2,19 @@
 Author: Christine Cho, Douglas Krein, Francis Ofougwuka
 Last Modified by: Christine Cho
 Last Modified: 03/28/2016
-File description: Manages the play scene
+File description: Manages the Level1 scene
 
 Revision:
 1. Added score and lives label
 2. Added score counter based on collision
 3. Added live checker to transition to gameover
+4. Renamed the class sky for background, added sounds in the right place
+5. fixed some names
 */
 
-// PLAY SCENE
+// Level1 SCENE
 module scenes {
-    export class Play extends objects.Scene {
+    export class Level1 extends objects.Scene {
 
 
         public scoreWord: objects.Label;
@@ -20,21 +22,23 @@ module scenes {
         public resetCount: number;
 
         //PRIVATE INSTANCE VARIABLES ++++++++++++
-        private _sky: objects.Sky;
-        private _fireball: objects.Fireball[];
-        private _fireballCount: number;
-        private _eggs: objects.Egg[];
+        private _backGround: objects.BackgroundScroll;
+         private _eggs: objects.Egg[];
         private _eggCount: number;
-        private _dragonX: objects.DragonX[];
-        private _dragonXCount: number;
+        
+        private _dragonEnemy1: objects.DragonEnemy1[];
+        private _dragonEnemy1Count: number;
+        private _dragonEnemy2: objects.DragonEnemy2[];
+        private _dragonEnemy2Count: number;        
+        
         private _player: objects.Player;
-        private _collision: managers.Collision;
+        private _playerCollision: managers.PlayerCollision;
         private _enemyContainer: createjs.Container;
         private _collectableContainer: createjs.Container;
 
         private _livesWord: objects.Label;
         private _livesText: objects.Label;
-
+        private _bgSound: any;
 
         // CONSTRUCTOR ++++++++++++++++++++++
         constructor() {
@@ -46,38 +50,42 @@ module scenes {
 
         // Start Method
         public start(): void {
-
+            createjs.Sound.stop();
+            
             this._enemyContainer = new createjs.Container;
             this._collectableContainer = new createjs.Container;
+            
+            // added _sky to the scene
+            this._backGround = new objects.BackgroundScroll("level1Background");
+            this.addChild(this._backGround);
+            
 
             // Set _fireballCount Count
-            this._fireballCount = 1;
-            this._dragonXCount = 1;
-            this._eggCount = 2;
+            this._dragonEnemy1Count = 1;
+            this._dragonEnemy2Count = 1;
+            this._eggCount = 3;
 
             // Instantiate _fireball array
-            this._fireball = new Array<objects.Fireball>();
-            this._dragonX = new Array<objects.DragonX>();
+            this._dragonEnemy1 = new Array<objects.DragonEnemy1>();
+            this._dragonEnemy2 = new Array<objects.DragonEnemy2>();
             this._eggs = new Array<objects.Egg>();
 
-            // added _sky to the scene
-            this._sky = new objects.Sky("mountain");
-            this.addChild(this._sky);
+            
 
             // added player to the scene
-            this._player = new objects.Player();
+            this._player = new objects.Player("playerBaby");
             this.addChild(this._player);
 
             //added _fireball to the _collectableContainer
-            for (var ball: number = 0; ball < this._fireballCount; ball++) {
-                this._fireball[ball] = new objects.Fireball();
-                this._collectableContainer.addChild(this._fireball[ball]);
+            for (var count: number = 0; count < this._dragonEnemy1Count; count++) {
+                this._dragonEnemy1[count] = new objects.DragonEnemy1();
+                this._collectableContainer.addChild(this._dragonEnemy1[count]);
             }
 
             //added _dragon to the _enemyContainer
-            for (var dragon: number = 0; dragon < this._dragonXCount; dragon++) {
-                this._dragonX[dragon] = new objects.DragonX();
-                this._enemyContainer.addChild(this._dragonX[dragon]);
+            for (var count: number = 0; count < this._dragonEnemy2Count; count++) {
+                this._dragonEnemy2[count] = new objects.DragonEnemy2();
+                this._enemyContainer.addChild(this._dragonEnemy2[count]);
             }
 
             //added _eggs to the _collectableContainer
@@ -87,7 +95,7 @@ module scenes {
             }
 
             // added collision manager to the scene
-            this._collision = new managers.Collision(this._player);
+            this._playerCollision = new managers.PlayerCollision(this._player); 
 
             
 
@@ -121,6 +129,9 @@ module scenes {
                 "bold 25px Britannic Bold",
                 "#0434C4",
                 600, 15, false);
+                
+            //this._playBackgroundSound();
+            
             //this._livesText.textAlign = "right";
             this.addChild(this.scoreText);
             
@@ -128,26 +139,32 @@ module scenes {
             stage.addChild(this, this._enemyContainer, this._collectableContainer);
 
         }
+        
+        private _playBackgroundSound(): void{
+            this._bgSound = createjs.Sound.play("gameBgMusic", {volume: 0.03});
+            this._bgSound.on("complete",this._playBackgroundSound,this);
+        }
+
 
         // PLAY Scene updates here
         public update(): void {
-            this._sky.update();
+            this._backGround.update();
 
             this._player.update();
 
-            this._fireball.forEach(ball => {
-                ball.update();
-                this._collision.check(ball);
+            this._dragonEnemy1.forEach(dragon => {
+                dragon.update();
+                this._playerCollision.check(dragon);
             });
 
-            this._dragonX.forEach(dragon => {
+            this._dragonEnemy2.forEach(dragon => {
                 dragon.update();
-                this._collision.check(dragon);
+                this._playerCollision.check(dragon);
             });
 
             this._eggs.forEach(egg => {
                 egg.update();
-                this._collision.check(egg);
+                this._playerCollision.check(egg);
             });
 
             this.scoreText.text = gameController.ScoreValue.toString();
@@ -169,7 +186,7 @@ module scenes {
         // Move to Level 2
         private _changeGameLevel(): void {
 
-            if (this._sky.skyResetCount > 1) {
+            if (this._backGround.backgroundResetCount > 1) {
                 //Remove the enemy from
                 this._enemyContainer.removeAllChildren();
                 this._collectableContainer.removeAllChildren();

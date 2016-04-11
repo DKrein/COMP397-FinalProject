@@ -25,8 +25,9 @@ var scenes;
         // PUBLIC METHODS +++++++++++++++++++++
         // Start Method
         Menu.prototype.start = function () {
+            createjs.Sound.stop();
             //Add Background Image
-            this._backgroundImage = new createjs.Bitmap(assets.getResult("background"));
+            this._backgroundImage = new createjs.Bitmap(assets.getResult("menuBackground"));
             this.addChild(this._backgroundImage);
             // add the StartButton to the MENU scene
             this._startButton = new objects.Button("StartButton", config.Screen.CENTER_X, config.Screen.CENTER_Y + 35, true);
@@ -43,8 +44,13 @@ var scenes;
             this._instructionButton.on("click", this._instructionButtonClick, this);
             // ExitButton event listener
             this._exitButton.on("click", this._exitButtonClick, this);
+            //this._playBackgroundSound();
             // add this scene to the global stage container
             stage.addChild(this);
+        };
+        Menu.prototype._playBackgroundSound = function () {
+            this._bgSound = createjs.Sound.play("menuBgMusic", { volume: 0.03 });
+            this._bgSound.on("complete", this._playBackgroundSound, this);
         };
         // INTRO Scene updates here
         Menu.prototype.update = function () {
@@ -53,7 +59,7 @@ var scenes;
         // StartButton click event handler
         Menu.prototype._startButtonClick = function (event) {
             // Switch to the Play Scene
-            scene = config.Scene.PLAY;
+            scene = config.Scene.LEVEL1;
             changeScene();
         };
         // StartButton click event handler
@@ -71,4 +77,5 @@ var scenes;
     }(objects.Scene));
     scenes.Menu = Menu;
 })(scenes || (scenes = {}));
+
 //# sourceMappingURL=menu.js.map

@@ -18,6 +18,8 @@ module scenes {
         public scoreWord: objects.Label;
         public scoreText: objects.Label;
         
+        private _bgSound: any;
+        
         // CONSTRUCTOR ++++++++++++++++++++++
         constructor() {
             super();
@@ -29,7 +31,7 @@ module scenes {
         // Start Method
         public start(): void {
             //Add Gameover Image
-            this._gameoverImage = new createjs.Bitmap(assets.getResult("gameover"));
+            this._gameoverImage = new createjs.Bitmap(assets.getResult("gameOverBackground"));
             this.addChild(this._gameoverImage);
             
             //add the final score label
@@ -42,7 +44,7 @@ module scenes {
             //this._livesText.textAlign = "right";
             this.addChild(this.scoreWord);
 
-            play.scoreText.text;
+            level1.scoreText.text;
             
             
             // add the _restartButton to the MENU scene
@@ -55,9 +57,15 @@ module scenes {
             // START_OVER Button event listener
             this._restartButton.on("click", this._restartButtonClick, this);
 
-
+            this._playBackgroundSound();
+            
             // add this scene to the global stage container
             stage.addChild(this);
+        }
+        
+        private _playBackgroundSound(): void{
+            this._bgSound = createjs.Sound.play("gameOverBgMusic", {volume: 0.03});
+            this._bgSound.on("complete",this._playBackgroundSound,this);
         }
 
         // PLAY Scene updates here

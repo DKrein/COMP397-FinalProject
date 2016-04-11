@@ -18,6 +18,7 @@ module scenes {
         private _startButton: objects.Button;
         private _instructionButton: objects.Button;
         private _exitButton: objects.Button;
+        private _bgSound: any;
         
         // CONSTRUCTOR ++++++++++++++++++++++
         constructor() {
@@ -28,9 +29,10 @@ module scenes {
         
         // Start Method
         public start(): void {
+            createjs.Sound.stop();
             
             //Add Background Image
-            this._backgroundImage = new createjs.Bitmap(assets.getResult("background"));
+            this._backgroundImage = new createjs.Bitmap(assets.getResult("menuBackground"));
             this.addChild(this._backgroundImage);
             
             
@@ -65,8 +67,15 @@ module scenes {
             this._exitButton.on("click", this._exitButtonClick, this);
             
             
+            //this._playBackgroundSound();
+            
             // add this scene to the global stage container
             stage.addChild(this);
+        }
+        
+        private _playBackgroundSound(): void{
+            this._bgSound = createjs.Sound.play("menuBgMusic", {volume: 0.03});
+            this._bgSound.on("complete",this._playBackgroundSound,this);
         }
 
         // INTRO Scene updates here
@@ -80,7 +89,7 @@ module scenes {
         // StartButton click event handler
         private _startButtonClick(event: createjs.MouseEvent) {
             // Switch to the Play Scene
-            scene = config.Scene.PLAY;
+            scene = config.Scene.LEVEL1;
             changeScene();
         }
         

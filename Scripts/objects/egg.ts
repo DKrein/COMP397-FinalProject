@@ -5,7 +5,7 @@ Last Modified: 04/9/2016
 File description: 
 - Object for egg
 Revision:
-
+1. Created class for egg object
     
 */
 
@@ -16,10 +16,11 @@ module objects {
         
         // CONSTRUCTOR METHOD +++++++++++++++++++++++++
         constructor() {
-           super("egg"+(Math.floor(Math.random() * 4)+1));        
+           var rand = (Math.floor(Math.random() * 4)+1);
+           super("egg"+rand);        
            
            this._reset(this._leftBounds);
-           this.name = "eggs";
+           this.name = "egg"+rand;
         }
         
         // PRIVATE METHODS ++++++++++++++++++++++++++++

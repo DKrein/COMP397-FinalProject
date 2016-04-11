@@ -2,22 +2,25 @@
 Author: Christine Cho
 Last Modified by: Christine Cho
 Last Modified: 03/28/2016
-File description: Manages collisions in the game
+File description: Manages collisions in the player object
 
 Revision:
 1. Changed collision to add score
+2. Fixed some names
+3. Fixed to eggs give different scores
+4. Changed the name of class, this one will take care about player only
 */
 var managers;
 (function (managers) {
     // COLLISION MANAGER CLASS
-    var Collision = (function () {
-        function Collision(player) {
+    var PlayerCollision = (function () {
+        function PlayerCollision(player) {
             this._player = player;
         }
-        Collision.prototype.distance = function (startPoint, endPoint) {
+        PlayerCollision.prototype.distance = function (startPoint, endPoint) {
             return Math.sqrt(Math.pow((endPoint.x - startPoint.x), 2) + Math.pow(endPoint.y - startPoint.y, 2));
         };
-        Collision.prototype.check = function (object) {
+        PlayerCollision.prototype.check = function (object) {
             var startPoint = new createjs.Point();
             var endPoint = new createjs.Point();
             var playerHalfWidth = this._player.width * 0.5;
@@ -30,32 +33,35 @@ var managers;
             /* check if the distance between the player and
               the other object is less than the minimum distance */
             if (this.distance(startPoint, endPoint) < minimumDistance) {
-                // check if it's fire hit
-                if (object.name === "eggs") {
+                // check if it's egg
+                if (object.name.indexOf('egg') >= 0) {
+                    console.log("egg collected!");
+                    object.reset();
+                    var score = parseInt(object.name.replace("egg", ""));
+                    gameController.ScoreValue += score;
+                    createjs.Sound.play("hit", { volume: 0.01 });
+                }
+                if (object.name === "fire") {
                     console.log("fire collected!");
                     object.reset();
-                    //play.score ++;
-                    gameController.ScoreValue++;
-                    createjs.Sound.play("hit");
                 }
                 // check if it's a fireball hit
-                if (object.name === "dragonXY" || object.name === "dragonX") {
+                if (object.name === "dragonEnemy1" || object.name === "dragonEnemy2") {
                     object.reset();
-                    //play.lives--;
                     gameController.LivesValue--;
-                    createjs.Sound.play("collect");
+                    createjs.Sound.play("collect", { volume: 0.01 });
                 }
                 // check if player collided with stalactite
                 if (object.name === "stalactite" || object.name === "stalagmite") {
                     object.reset();
-                    console.log("BOINK");
                     gameController.LivesValue -= 2;
-                    createjs.Sound.play("collect");
+                    createjs.Sound.play("collect", { volume: 0.01 });
                 }
             }
         };
-        return Collision;
+        return PlayerCollision;
     }());
-    managers.Collision = Collision;
+    managers.PlayerCollision = PlayerCollision;
 })(managers || (managers = {}));
-//# sourceMappingURL=collision.js.map
+
+//# sourceMappingURL=playerCollision.js.map
