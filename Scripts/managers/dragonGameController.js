@@ -39,5 +39,4 @@ var managers;
     }());
     managers.DragonGameController = DragonGameController;
 })(managers || (managers = {}));
-
 //# sourceMappingURL=dragonGameController.js.map

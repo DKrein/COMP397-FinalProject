@@ -32,14 +32,14 @@ module managers {
               the other object is less than the minimum distance */
             if (this.distance(startPoint, endPoint) < minimumDistance) {
                 //Check which object it collides
-                if (object.name === "dragonXY") {
+                if (object.name === "dragonEnemy1") {
                     object.reset();
                     this._playerFireball.reset();
                     gameController.ScoreValue++;
                     //createjs.Sound.play("collect");
                 }
                 
-                if (object.name === "dragonX") {
+                if (object.name === "dragonEnemy2") {
                     object.reset();
                     this._playerFireball.reset();
                     gameController.ScoreValue++;

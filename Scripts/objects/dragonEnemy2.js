@@ -50,5 +50,4 @@ var objects;
     }(objects.GameObject));
     objects.DragonEnemy2 = DragonEnemy2;
 })(objects || (objects = {}));
-
 //# sourceMappingURL=dragonEnemy2.js.map

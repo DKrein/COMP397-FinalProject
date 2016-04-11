@@ -21,15 +21,17 @@ var managers;
               the other object is less than the minimum distance */
             if (this.distance(startPoint, endPoint) < minimumDistance) {
                 //Check which object it collides
-                if (object.name === "dragonXY") {
+                if (object.name === "dragonEnemy1") {
                     object.reset();
                     this._playerFireball.reset();
                     gameController.ScoreValue++;
+                    console.log("collides with dragonEnemy1");
                 }
-                if (object.name === "dragonX") {
+                if (object.name === "dragonEnemy2") {
                     object.reset();
                     this._playerFireball.reset();
                     gameController.ScoreValue++;
+                    console.log("Collides with dragonEnemy2");
                 }
             } //End MinimumDistance check
         };
