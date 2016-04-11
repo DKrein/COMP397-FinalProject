@@ -144,8 +144,12 @@ module scenes {
         public update(): void {
             this._sky.update();
             this._fire.update();
+            
             this._stalactite.update();
+            this._collision.check(this._stalactite);
+            
             this._stalagmite.update();
+            this._collision.check(this._stalagmite);
 
             this._player.update();
             this._playerFireball.update();
