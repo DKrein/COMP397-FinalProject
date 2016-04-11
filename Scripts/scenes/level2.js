@@ -42,8 +42,11 @@ var scenes;
             //this.addChild(this._fire);
             this._collectableContainer.addChild(this._fire);
             //added stalactites to the scene
-            this._stalactite = new objects.Stalactite();
+            this._stalactite = new objects.Stalactites();
             this._enemyContainer.addChild(this._stalactite);
+            //added stalactites to the scene
+            this._stalagmite = new objects.Stalagmites();
+            this._enemyContainer.addChild(this._stalagmite);
             // added player to the scene
             this._player = new objects.Player();
             this.addChild(this._player);
@@ -91,6 +94,8 @@ var scenes;
             this._fire.update();
             this._stalactite.update();
             this._collision.check(this._stalactite);
+            this._stalagmite.update();
+            this._collision.check(this._stalagmite);
             this._player.update();
             this._playerFireball.update();
             this._fireball.forEach(function (ball) {

@@ -57,10 +57,12 @@ module managers {
                     createjs.Sound.play("collect");
                 }
                 
-                // Collision with stalactite
-                if(object.name === "stalactite"){
-                    object.reset();
-                    gameController.LivesValue--;
+                // check if player collided with stalactite
+                if(object.name === "stalactite" || object.name === "stalagmite") {
+                    object.reset(); 
+                    console.log("BOINK");
+                    gameController.LivesValue-= 2;
+                    createjs.Sound.play("collect");
                 }
             }
         }

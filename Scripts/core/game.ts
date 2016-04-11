@@ -51,6 +51,7 @@ var assetData: objects.Asset[] = [
     { id: "egg3", src: "../../Assets/images/egg3.png" },
     { id: "egg4", src: "../../Assets/images/egg4.png" },
     { id: "stalactite", src: "../../Assets/images/stalactite.png" },
+    { id: "stalagmite", src: "../../Assets/images/stalagmite.png" },
     { id: "background", src: "../../Assets/images/background.png" },
     { id: "gameover", src: "../../Assets/images/gameover.png" },
     { id: "instruction", src: "../../Assets/images/instruction.png" },
