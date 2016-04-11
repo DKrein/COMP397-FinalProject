@@ -90,6 +90,7 @@ var scenes;
             this._sky.update();
             this._fire.update();
             this._stalactite.update();
+            this._collision.check(this._stalactite);
             this._player.update();
             this._playerFireball.update();
             this._fireball.forEach(function (ball) {
@@ -132,5 +133,4 @@ var scenes;
     }(objects.Scene));
     scenes.Level2 = Level2;
 })(scenes || (scenes = {}));
-
 //# sourceMappingURL=level2.js.map

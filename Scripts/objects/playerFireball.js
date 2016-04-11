@@ -48,5 +48,4 @@ var objects;
     }(objects.GameObject));
     objects.PlayerFireball = PlayerFireball;
 })(objects || (objects = {}));
-
 //# sourceMappingURL=playerFireball.js.map

@@ -45,11 +45,15 @@ var managers;
                     gameController.LivesValue--;
                     createjs.Sound.play("collect");
                 }
+                // Collision with stalactite
+                if (object.name === "stalactite") {
+                    object.reset();
+                    gameController.LivesValue--;
+                }
             }
         };
         return Collision;
     }());
     managers.Collision = Collision;
 })(managers || (managers = {}));
-
 //# sourceMappingURL=collision.js.map

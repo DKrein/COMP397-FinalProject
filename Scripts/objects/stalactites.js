@@ -38,5 +38,4 @@ var objects;
     }(objects.GameObject));
     objects.Stalactite = Stalactite;
 })(objects || (objects = {}));
-
 //# sourceMappingURL=stalactites.js.map

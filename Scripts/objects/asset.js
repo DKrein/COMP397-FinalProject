@@ -11,5 +11,4 @@ var objects;
     }());
     objects.Asset = Asset;
 })(objects || (objects = {}));
-
 //# sourceMappingURL=asset.js.map

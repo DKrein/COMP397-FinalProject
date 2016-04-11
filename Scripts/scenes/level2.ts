@@ -140,6 +140,7 @@ module scenes {
             this._sky.update();
             this._fire.update();
             this._stalactite.update();
+            this._collision.check(this._stalactite);
 
             this._player.update();
             this._playerFireball.update();
