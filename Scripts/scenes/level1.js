@@ -118,7 +118,7 @@ var scenes;
         };
         // Move to Level 2
         Level1.prototype._changeGameLevel = function () {
-            if (this._backGround.backgroundResetCount > 50) {
+            if (this._backGround.backgroundResetCount > 1) {
                 //Remove the enemy from
                 this._enemyContainer.removeAllChildren();
                 this._collectableContainer.removeAllChildren();
