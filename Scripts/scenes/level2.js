@@ -67,12 +67,14 @@ var scenes;
                 this._playerFireball[count] = new objects.PlayerFireball(this._player);
                 this.addChild(this._playerFireball[count]);
             }
-            // added collision manager to the scene
+            this._playerFireballCollision = new managers.PlayerFireballCollision(this._playerFireball[0]);
+            this._playerFireballCollision1 = new managers.PlayerFireballCollision(this._playerFireball[1]);
+            this._playerFireballCollision2 = new managers.PlayerFireballCollision(this._playerFireball[2]);
             this._playerCollision = new managers.PlayerCollision(this._player);
             // add this scene to the global stage container
             stage.addChild(this, this._enemyContainer, this._collectableContainer);
             // add stage click Listener
-            stage.on("click", this._playerFire, this);
+            this._backGround.on("click", this._playerFireClickHandler, this);
             //Add _scoreText to the scene
             this._livesWord = new objects.Label("LIVES: ", "bold 25px Britannic Bold", "#0434C4", 15, 15, false);
             //this._livesText.textAlign = "right";
@@ -108,14 +110,20 @@ var scenes;
             this._player.update();
             this._playerFireball.forEach(function (fireball) {
                 fireball.update();
-                _this._playerCollision.check(fireball);
+                //this._playerCollision.check(fireball);
             });
             this._dragonEnemy1.forEach(function (dragon) {
                 dragon.update();
+                _this._playerFireballCollision.CheckPlayerFire(dragon);
+                _this._playerFireballCollision1.CheckPlayerFire(dragon);
+                _this._playerFireballCollision2.CheckPlayerFire(dragon);
                 _this._playerCollision.check(dragon);
             });
             this._dragonEnemy2.forEach(function (dragon) {
                 dragon.update();
+                _this._playerFireballCollision.CheckPlayerFire(dragon);
+                _this._playerFireballCollision1.CheckPlayerFire(dragon);
+                _this._playerFireballCollision2.CheckPlayerFire(dragon);
                 _this._playerCollision.check(dragon);
             });
             this._playerCollision.check(this._fire);
@@ -144,10 +152,11 @@ var scenes;
             }
         };
         //EVENT HANDLERS ++++++++++++++++++++
-        Level2.prototype._playerFire = function (event) {
+        Level2.prototype._playerFireClickHandler = function (event) {
             for (var count = 0; count < this._playerFireballCount; count++) {
                 if (this._playerFireball[count].isAvailable) {
-                    this._playerFireball[count].reset();
+                    //this._playerFireball[count].reset();
+                    this._playerFireball[count].PositionFireBall();
                     break;
                 }
             }
@@ -156,5 +165,4 @@ var scenes;
     }(objects.Scene));
     scenes.Level2 = Level2;
 })(scenes || (scenes = {}));
-
 //# sourceMappingURL=level2.js.map

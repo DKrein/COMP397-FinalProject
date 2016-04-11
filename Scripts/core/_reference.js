@@ -17,11 +17,11 @@
 /// <reference path="../managers/fireBallCollision.ts" />
 /// <reference path="../managers/playerCollision.ts" />
 /// <reference path="../managers/dragonGameController.ts" />
+/// <reference path="../managers/playerFireballCollision.ts" />
 /// <reference path="../scenes/end.ts" />
 /// <reference path="../scenes/menu.ts" />
 /// <reference path="../scenes/instruction.ts" />
 /// <reference path="../scenes/level1.ts" />
 /// <reference path="../scenes/level2.ts" />
 /// <reference path="../scenes/level3.ts" /> 
-
 //# sourceMappingURL=_reference.js.map

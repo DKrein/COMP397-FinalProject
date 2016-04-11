@@ -61,5 +61,4 @@ var managers;
     }());
     managers.FireBallCollision = FireBallCollision;
 })(managers || (managers = {}));
-
 //# sourceMappingURL=fireBallCollision.js.map

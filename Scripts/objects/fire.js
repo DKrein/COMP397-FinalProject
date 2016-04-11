@@ -49,5 +49,4 @@ var objects;
     }(objects.GameObject));
     objects.Fire = Fire;
 })(objects || (objects = {}));
-
 //# sourceMappingURL=fire.js.map

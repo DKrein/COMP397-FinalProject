@@ -48,5 +48,4 @@ var objects;
     }(objects.GameObject));
     objects.Stalagmites = Stalagmites;
 })(objects || (objects = {}));
-
 //# sourceMappingURL=stalagmite.js.map

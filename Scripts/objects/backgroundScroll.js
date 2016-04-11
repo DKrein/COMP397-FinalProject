@@ -48,5 +48,4 @@ var objects;
     }(objects.GameObject));
     objects.BackgroundScroll = BackgroundScroll;
 })(objects || (objects = {}));
-
 //# sourceMappingURL=backgroundScroll.js.map

@@ -39,7 +39,6 @@ module scenes {
         private _livesWord: objects.Label;
         private _livesText: objects.Label;
         private _bgSound: any;
-        
 
         // CONSTRUCTOR ++++++++++++++++++++++
         constructor() {
@@ -98,8 +97,7 @@ module scenes {
             // added collision manager to the scene
             this._playerCollision = new managers.PlayerCollision(this._player); 
 
-            // add this, _enemyContainer, _collectableContainer to the global stage container
-            stage.addChild(this, this._enemyContainer, this._collectableContainer);
+            
 
             //Add _scoreText to the scene
             this._livesWord = new objects.Label("LIVES: ",
@@ -136,6 +134,9 @@ module scenes {
             
             //this._livesText.textAlign = "right";
             this.addChild(this.scoreText);
+            
+            // add this, _enemyContainer, _collectableContainer to the global stage container
+            stage.addChild(this, this._enemyContainer, this._collectableContainer);
 
         }
         
@@ -197,8 +198,8 @@ module scenes {
         }
 
         //EVENT HANDLERS ++++++++++++++++++++
-
-
+        
+        
 
     }
 }

@@ -62,8 +62,6 @@ var scenes;
             }
             // added collision manager to the scene
             this._playerCollision = new managers.PlayerCollision(this._player);
-            // add this, _enemyContainer, _collectableContainer to the global stage container
-            stage.addChild(this, this._enemyContainer, this._collectableContainer);
             //Add _scoreText to the scene
             this._livesWord = new objects.Label("LIVES: ", "bold 25px Britannic Bold", "#0434C4", 15, 15, false);
             //this._livesText.textAlign = "right";
@@ -82,6 +80,8 @@ var scenes;
             //this._playBackgroundSound();
             //this._livesText.textAlign = "right";
             this.addChild(this.scoreText);
+            // add this, _enemyContainer, _collectableContainer to the global stage container
+            stage.addChild(this, this._enemyContainer, this._collectableContainer);
         };
         Level1.prototype._playBackgroundSound = function () {
             this._bgSound = createjs.Sound.play("gameBgMusic", { volume: 0.03 });
@@ -131,5 +131,4 @@ var scenes;
     }(objects.Scene));
     scenes.Level1 = Level1;
 })(scenes || (scenes = {}));
-
 //# sourceMappingURL=level1.js.map
