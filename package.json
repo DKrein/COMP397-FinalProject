@@ -1,0 +1,37 @@
+{
+    "name": "comp397-finalProject",
+    "version": "1.0.0",
+    "description": "COMP397-FinalProject-DragonStory",
+    "main": "game.js",
+    "dependencies": {
+        "typescript": "^1.8.7"
+    },
+    "engines": {
+        "node": "5.4.0",
+        "npm": "3.5.3"
+    },
+    "devDependencies": {
+        "gulp": "^3.9.1",
+        "gulp-connect": "^2.3.1",
+        "gulp-debug": "^2.1.2",
+        "gulp-inject": "^3.0.0",
+        "gulp-open": "^1.0.0",
+        "gulp-sourcemaps": "^1.6.0",
+        "gulp-typescript": "^2.10.0",
+        "gulp-util": "^3.0.7"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/DKrein/COMP397-FinalProject.git"
+    },
+    "authors": [
+        "Christine Cho <christine.cho.94@gmail.com>",
+        "Douglas Krein <douglaskrein@gmail.com>",
+        "Francis Ofougwuka <francid81@gmail.com>"
+    ],
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/DKrein/COMP397-FinalProject/issues"
+    },
+    "homepage": "https://github.com/DKrein/COMP397-FinalProject#readme"
+}
