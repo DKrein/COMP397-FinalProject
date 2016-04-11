@@ -23,4 +23,4 @@
     export class Game {
         public static FPS: number = 60;
     }
-}
+} 
