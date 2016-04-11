@@ -59,8 +59,6 @@ var scenes;
             }
             // added collision manager to the scene
             this._collision = new managers.Collision(this._player);
-            // add this, _enemyContainer, _collectableContainer to the global stage container
-            stage.addChild(this, this._enemyContainer, this._collectableContainer);
             //Add _scoreText to the scene
             this._livesWord = new objects.Label("LIVES: ", "bold 25px Britannic Bold", "#0434C4", 15, 15, false);
             //this._livesText.textAlign = "right";
@@ -78,6 +76,8 @@ var scenes;
                 gameController.ScoreValue.toString(), "bold 25px Britannic Bold", "#0434C4", 600, 15, false);
             //this._livesText.textAlign = "right";
             this.addChild(this.scoreText);
+            // add this, _enemyContainer, _collectableContainer to the global stage container
+            stage.addChild(this, this._enemyContainer, this._collectableContainer);
         };
         // PLAY Scene updates here
         Play.prototype.update = function () {

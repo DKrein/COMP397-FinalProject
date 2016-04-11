@@ -65,10 +65,12 @@ var scenes;
             this.addChild(this._playerFireball);
             // added collision manager to the scene
             this._collision = new managers.Collision(this._player);
+            //add playerFireball collision to the scene
+            this._playerFireballCollision = new managers.PlayerFireballCollision(this._playerFireball);
             // add this scene to the global stage container
             stage.addChild(this, this._enemyContainer, this._collectableContainer);
             // add stage click Listener
-            stage.on("stagemousedown", this._stageClickHandler);
+            this._sky.on("click", this._stageClickHandler, this);
             //Add _scoreText to the scene
             this._livesWord = new objects.Label("LIVES: ", "bold 25px Britannic Bold", "#0434C4", 15, 15, false);
             //this._livesText.textAlign = "right";
@@ -105,6 +107,7 @@ var scenes;
             this._dragonX.forEach(function (dragon) {
                 dragon.update();
                 _this._collision.check(dragon);
+                _this._playerFireballCollision.CheckPlayerFire(dragon);
             });
             this._collision.check(this._fire);
             this.scoreText.text = gameController.ScoreValue.toString();
@@ -131,7 +134,6 @@ var scenes;
         };
         //EVENT HANDLERS ++++++++++++++++++++
         Level2.prototype._stageClickHandler = function (event) {
-            console.log("Stage clicked");
             this._playerFireball.PositionFireBall();
         };
         return Level2;

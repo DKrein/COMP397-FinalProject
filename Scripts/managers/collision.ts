@@ -13,58 +13,59 @@ module managers {
     export class Collision {
         // PRIVATE INSTANCE VARIABLES
         private _player: objects.Player;
-        
-        constructor(player:objects.Player) {
+
+        constructor(player: objects.Player) {
             this._player = player;
         }
-        
-        public distance(startPoint:createjs.Point, endPoint:createjs.Point):number {
-            return Math.sqrt(Math.pow((endPoint.x - startPoint.x),2) + Math.pow(endPoint.y - startPoint.y,2))
+
+        public distance(startPoint: createjs.Point, endPoint: createjs.Point): number {
+            return Math.sqrt(Math.pow((endPoint.x - startPoint.x), 2) + Math.pow(endPoint.y - startPoint.y, 2))
         }
-        
-        public check(object:objects.GameObject) {
-            var startPoint:createjs.Point = new createjs.Point();
-            var endPoint:createjs.Point = new createjs.Point();
-            var playerHalfWidth:number = this._player.width * 0.5;
-            var objectHalfWidth:number = object.width * 0.5;
-            var minimumDistance:number = playerHalfWidth + objectHalfWidth;
-            
+
+        public check(object: objects.GameObject) {
+            var startPoint: createjs.Point = new createjs.Point();
+            var endPoint: createjs.Point = new createjs.Point();
+            var playerHalfWidth: number = this._player.width * 0.5;
+            var objectHalfWidth: number = object.width * 0.5;
+            var minimumDistance: number = playerHalfWidth + objectHalfWidth;
+
             startPoint.x = this._player.x;
             startPoint.y = this._player.y;
-            
+
             endPoint.x = object.centerX + object.x;
             endPoint.y = object.centerY + object.y;
-            
-            
+
+
             /* check if the distance between the player and 
               the other object is less than the minimum distance */
-            if(this.distance(startPoint, endPoint) < minimumDistance) {
-                
+            if (this.distance(startPoint, endPoint) < minimumDistance) {
+
                 // check if it's fire hit
-                if(object.name === "eggs") {
+                if (object.name === "eggs") {
                     console.log("fire collected!");
                     object.reset();
                     //play.score ++;
                     gameController.ScoreValue++;
                     createjs.Sound.play("hit");
                 }
-                
+
                 // check if it's a fireball hit
-                if(object.name === "dragonXY" || object.name === "dragonX") {
+                if (object.name === "dragonXY" || object.name === "dragonX") {
                     object.reset();
                     //play.lives--;
                     gameController.LivesValue--;
                     createjs.Sound.play("collect");
                 }
-                
+
                 // check if player collided with stalactite
-                if(object.name === "stalactite" || object.name === "stalagmite") {
-                    object.reset(); 
+                if (object.name === "stalactite" || object.name === "stalagmite") {
+                    object.reset();
                     console.log("BOINK");
-                    gameController.LivesValue-= 2;
+                    gameController.LivesValue -= 2;
                     createjs.Sound.play("collect");
                 }
             }
+
         }
     }
 }

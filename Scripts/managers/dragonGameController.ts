@@ -13,7 +13,7 @@ module managers {
         //PRIVATE INSTANCE VARIABLE
         private _livesValue: number;
         private _scoreValue: number;
-
+        
         constructor() {
 
             this._livesValue = 10;

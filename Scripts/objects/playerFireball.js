@@ -27,22 +27,18 @@ var objects;
         };
         // reset the fireball offscreen
         PlayerFireball.prototype._reset = function (value) {
-            //this._speed.x = Math.floor(Math.random() * 5 + 1) + 5;
-            //this._speed.y = Math.floor(Math.random() * 4 + 1) - 2;
             this.x = this._rightBounds;
             this.y = this._bottomBounds + 100;
         };
         // PUBLIC METHODS ++++++++++++++++++++++++++++++
         PlayerFireball.prototype.update = function () {
-            // scroll the fireball down the screen
+            // scroll the fireball left the screen
             this.x -= this._speed.x;
-            //this.y -= this._speed.y;
-            this._checkBounds(this._leftBounds + 100);
+            this._checkBounds(this._leftBounds);
         };
         PlayerFireball.prototype.PositionFireBall = function () {
-            console.log("_postionFireBall called");
-            this.y = this._player.y;
-            this.x = this._player.x;
+            this.y = this._player.y - 30;
+            this.x = this._player.x - 80;
         };
         return PlayerFireball;
     }(objects.GameObject));
