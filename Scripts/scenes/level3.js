@@ -33,7 +33,7 @@ var scenes;
             this._enemyContainer = new createjs.Container;
             this._collectableContainer = new createjs.Container;
             // added _sky to the scene
-            this._backGround = new objects.BackgroundScroll("level2Background");
+            this._backGround = new objects.BackgroundScroll("level3Background");
             this.addChild(this._backGround);
             // Set _fireballCount Count
             this._dragonEnemy1Count = 1;

@@ -44,6 +44,7 @@ var assetData = [
     { id: "gameOverBackground", src: "../../Assets/images/gameOverBackground.png" },
     { id: "level1Background", src: "../../Assets/images/level1Background.png" },
     { id: "level2Background", src: "../../Assets/images/level2Background.png" },
+    { id: "level3Background", src: "../../Assets/images/level3Background.png" },
     //player
     { id: "playerBaby", src: "../../Assets/images/playerBaby.png" },
     { id: "player", src: "../../Assets/images/player.png" },
