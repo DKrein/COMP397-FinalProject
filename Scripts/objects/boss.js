@@ -35,8 +35,8 @@ var objects;
         };
         // reset the fireball offscreen
         Boss.prototype._reset = function (value) {
-            this._speed.x = 5;
-            this._speed.y = 1;
+            this._speed.x = 2;
+            this._speed.y = 5;
             // this.x = value;
             // this.y = (Math.floor(Math.random() * this._bottomBounds) + this._topBounds) - (this.height);
             //this.x = this._rightBounds / 2 - this.width;
@@ -46,13 +46,19 @@ var objects;
         // PUBLIC METHODS ++++++++++++++++++++++++++++++
         Boss.prototype.update = function () {
             // scroll the fireball down the screen
+            // this.y = this.y + this._speed.y;
             if (this.x < this._rightBounds / 2 - this.width) {
                 this.x += this._speed.x;
             }
             else {
                 this.x = this._rightBounds / 2 - this.width;
-                console.log(this.y);
-                this.y = this._player.y + this._speed.y;
+                this.y = this.y + this._speed.y;
+                if (this.y < this._topBounds + this.height) {
+                    this._speed.y = -this._speed.y;
+                }
+                if (this.y > this._bottomBounds - (this.height * 2)) {
+                    this._speed.y = -this._speed.y;
+                }
             }
             // this.y += this._speed.y;
             this._checkBounds(this._rightBounds + 100);

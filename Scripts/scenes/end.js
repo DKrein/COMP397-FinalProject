@@ -32,7 +32,7 @@ var scenes;
             this.scoreWord = new objects.Label("HIGHSCORE: " + gameController.ScoreValue, "bold 25px Britannic Bold", "#FF0000", config.Screen.CENTER_X, config.Screen.CENTER_Y + 30, true);
             //this._livesText.textAlign = "right";
             this.addChild(this.scoreWord);
-            level1.scoreText.text;
+            level3.scoreText.text;
             // add the _restartButton to the MENU scene
             this._restartButton = new objects.Button("RestartButton", config.Screen.CENTER_X, config.Screen.CENTER_Y + 100, true);
             this.addChild(this._restartButton);

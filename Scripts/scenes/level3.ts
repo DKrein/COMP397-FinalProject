@@ -10,6 +10,7 @@ Revision:
 3. Added live checker to transition to gameover
 4. Renamed the class sky for background, added sounds in the right place
 5. fixed some names
+6. Added boss and boss label
 */
 
 // LEVEL2 SCENE
@@ -18,6 +19,9 @@ module scenes {
 
         public scoreWord: objects.Label;
         public scoreText: objects.Label;
+        public bossWord: objects.Label;
+        public bossText: objects.Label;
+        //public 
         public resetCount: number;
 
         //PRIVATE INSTANCE VARIABLES ++++++++++++
@@ -31,6 +35,8 @@ module scenes {
         private _boss: objects.Boss;
         private _playerFireball: objects.PlayerFireball[];
         private _playerFireballCount: number;
+        private _enemyFireball: objects.EnemyFireball[];
+        private _enemyFireballCount: number;
 
         private _stalactite: objects.Stalactites;
         private _stalagmite: objects.Stalagmites;
@@ -38,6 +44,14 @@ module scenes {
         private _playerCollision: managers.PlayerCollision;
         private _enemyContainer: createjs.Container;
         private _collectableContainer: createjs.Container;
+
+        private _playerFireballCollision: managers.PlayerFireballCollision;
+        private _playerFireballCollision1: managers.PlayerFireballCollision;
+        private _playerFireballCollision2: managers.PlayerFireballCollision;
+
+        private _enemyFireballCollision: managers.EnemyFireballCollision;
+        private _enemyFireballCollision1: managers.EnemyFireballCollision;
+        private _enemyFireballCollision2: managers.EnemyFireballCollision;
 
 
         private _livesWord: objects.Label;
@@ -64,19 +78,17 @@ module scenes {
             this._backGround = new objects.BackgroundScroll("level2Background");
             this.addChild(this._backGround);
             
-
             // Set _fireballCount Count
             this._dragonEnemy1Count = 1;
             this._dragonEnemy2Count = 1;
             this._playerFireballCount = 3;
+            this._enemyFireballCount = 1;
 
             // Instantiate _fireball array
             this._dragonEnemy1 = new Array<objects.DragonEnemy1>();
             this._dragonEnemy2 = new Array<objects.DragonEnemy2>();
-            this._playerFireball = new Array<objects.PlayerFireball>();  
-            
-            //added _boss to the scene
-            this._boss = new objects.Boss(this._player);             
+            this._playerFireball = new Array<objects.PlayerFireball>();
+            this._enemyFireball = new Array<objects.EnemyFireball>();             
 
             // added _fire to the scene
             this._fire = new objects.Fire();
@@ -94,6 +106,9 @@ module scenes {
             // added player to the scene
             this._player = new objects.Player("player");
             this.addChild(this._player);
+            
+            //added _boss to the scene
+            this._boss = new objects.Boss(this._player);  
 
             //added _fireball to the scene
             for (var count: number = 0; count < this._dragonEnemy1Count; count++) {
@@ -111,14 +126,28 @@ module scenes {
                 this.addChild(this._playerFireball[count]);
             }
 
+            for (var count: number = 0; count < this._enemyFireballCount; count++) {
+                this._enemyFireball[count] = new objects.EnemyFireball(this._boss);
+                this.addChild(this._enemyFireball[count]);
+            }
+            
+
             // added collision manager to the scene
+            this._playerFireballCollision = new managers.PlayerFireballCollision(this._playerFireball[0]);
+            this._playerFireballCollision1 = new managers.PlayerFireballCollision(this._playerFireball[1]);
+            this._playerFireballCollision2 = new managers.PlayerFireballCollision(this._playerFireball[2]);
             this._playerCollision = new managers.PlayerCollision(this._player);
+
+            this._enemyFireballCollision = new managers.EnemyFireballCollision(this._enemyFireball[0]);
+            // this._enemyFireballCollision1 = new managers.EnemyFireballCollision(this._enemyFireball[1]);
+            // this._enemyFireballCollision2 = new managers.EnemyFireballCollision(this._enemyFireball[2]);
 
             // add this scene to the global stage container
             stage.addChild(this, this._enemyContainer, this._collectableContainer);
             
             // add stage click Listener
-            stage.on("click", this._playerFire, this)
+            this._backGround.on("click", this._playerFire, this);
+            //this._backGround.on("click", this._enemyFire, this);
 
             //Add _scoreText to the scene
             this._livesWord = new objects.Label("LIVES: ",
@@ -141,7 +170,7 @@ module scenes {
             this.scoreWord = new objects.Label("SCORE: ",
                 "bold 25px Britannic Bold",
                 "#0434C4",
-                500, 15, false);
+                900, 15, false);
             //this._livesText.textAlign = "right";
             this.addChild(this.scoreWord);
 
@@ -149,7 +178,7 @@ module scenes {
                 gameController.ScoreValue.toString(),
                 "bold 25px Britannic Bold",
                 "#0434C4",
-                600, 15, false);
+                1000, 15, false);
             //this._livesText.textAlign = "right";
             
             
@@ -157,6 +186,18 @@ module scenes {
             
             
             this.addChild(this.scoreText);
+
+            this.bossWord = new objects.Label("BOSS: ",
+                "bold 40px Britannic Bold",
+                "#FF0000",
+                490, 15, false);
+            //this._livesText.textAlign = "right";
+
+            this.bossText = new objects.Label(
+                gameController.BossValue.toString(),
+                "bold 40px Britannic Bold",
+                "#FF0000",
+                525, 55, false);
 
         }
 
@@ -181,26 +222,45 @@ module scenes {
 
             this._playerFireball.forEach(fireball => {
                 fireball.update();
-                this._playerCollision.check(fireball);
             });
 
+            this._enemyFireball.forEach(fireball => {
+                fireball.update();
+            });
+            
+            //this._enemyFire();
             this._dragonEnemy1.forEach(dragon => {
                 dragon.update();
+                this._playerFireballCollision.CheckPlayerFire(dragon);
+                this._playerFireballCollision1.CheckPlayerFire(dragon);
+                this._playerFireballCollision2.CheckPlayerFire(dragon);
                 this._playerCollision.check(dragon);
             });
 
             this._dragonEnemy2.forEach(dragon => {
                 dragon.update();
+                this._playerFireballCollision.CheckPlayerFire(dragon);
+                this._playerFireballCollision1.CheckPlayerFire(dragon);
+                this._playerFireballCollision2.CheckPlayerFire(dragon);
                 this._playerCollision.check(dragon);
             });
+            this._enemyFire();
+            this._boss.update();
+            this._playerFireballCollision.CheckPlayerFire(this._boss);
+            this._playerFireballCollision1.CheckPlayerFire(this._boss);
+            this._playerFireballCollision2.CheckPlayerFire(this._boss);
+            this._playerCollision.check(this._enemyFireball[0]);
+            // this._playerCollision.check(this._enemyFireball[1]);
+            // this._playerCollision.check(this._enemyFireball[2]);
+            this._playerCollision.check(this._boss);
 
             this._playerCollision.check(this._fire);
             this.scoreText.text = gameController.ScoreValue.toString();
             this._livesText.text = gameController.LivesValue.toString();
+            this.bossText.text = gameController.BossValue.toString();
+            this._summonBoss();
             this._checkLives();
             this._changeGameLevel();
-            this._summonBoss();
-
         }
 
         //PRIVATE METHODS
@@ -214,7 +274,7 @@ module scenes {
         // Move to End
         private _changeGameLevel(): void {
 
-            if (this._backGround.backgroundResetCount > 2) {
+            if (gameController.BossValue == 0) {
                 //Remove the enemy from
                 this._enemyContainer.removeAllChildren();
                 this._collectableContainer.removeAllChildren();
@@ -229,9 +289,12 @@ module scenes {
         //Add boss to scene
         private _summonBoss(): void {
 
-            //if (this._backGround.backgroundResetCount = 1) {
-                this._enemyContainer.addChild(this._boss);
-                console.log("Boss");
+            //if (this._backGround.backgroundResetCount > 1) {
+            this._enemyContainer.addChild(this._boss);
+            this.addChild(this.bossWord);
+            this.addChild(this.bossText);
+
+            console.log("Boss");
             //}
         }
 
@@ -239,10 +302,22 @@ module scenes {
         
         private _playerFire(event: createjs.MouseEvent) {
             for (var count: number = 0; count < this._playerFireballCount; count++) {
-
+                console.log("CLICKER CLICK");
                 if (this._playerFireball[count].isAvailable) {
-                    this._playerFireball[count].reset();
+                    this._playerFireball[count].PositionFireBall();
                     break;
+                }
+            }
+        }
+
+        private _enemyFire(): void {
+
+            if (gameController.BossValue != 0) {
+                for (var count: number = 0; count < this._enemyFireballCount; count++) {
+                    if (this._enemyFireball[count].isAvailable) {
+                        this._enemyFireball[count].PositionFireBall();
+                        break;
+                    }
                 }
             }
         }

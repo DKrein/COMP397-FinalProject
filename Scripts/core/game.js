@@ -55,6 +55,7 @@ var assetData = [
     { id: "stalactite", src: "../../Assets/images/stalactite.png" },
     { id: "stalagmite", src: "../../Assets/images/stalagmite.png" },
     { id: "boss", src: "../../Assets/images/boss.png" },
+    { id: "enemyFireball", src: "../../Assets/images/enemyFireball.png" },
     //Collectbles 
     { id: "fire", src: "../../Assets/images/fire.png" },
     { id: "egg1", src: "../../Assets/images/egg1.png" },
