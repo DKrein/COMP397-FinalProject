@@ -19,6 +19,7 @@
 /// <reference path="../objects/boss.ts" />
 
 /// <reference path="../objects/playerFireball.ts" />
+/// <reference path="../objects/enemyFireball.ts" />
 /// <reference path="../objects/stalactite.ts" />
 /// <reference path="../objects/stalagmite.ts" />
 
@@ -26,6 +27,7 @@
 /// <reference path="../managers/playerCollision.ts" />
 /// <reference path="../managers/dragonGameController.ts" />
 /// <reference path="../managers/playerFireballCollision.ts" />
+/// <reference path="../managers/enemyFireballCollision.ts" />
 
 /// <reference path="../scenes/end.ts" />
 /// <reference path="../scenes/menu.ts" />
