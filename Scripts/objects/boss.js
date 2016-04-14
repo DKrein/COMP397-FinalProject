@@ -18,10 +18,10 @@ var objects;
     // FIREBALL CLASS ++++++++++++++++++++++++++++++++++++
     var Boss = (function (_super) {
         __extends(Boss, _super);
-        // PRIVATE INSTANCE VARIABLES +++++++++++++++++
         // CONSTRUCTOR METHOD +++++++++++++++++++++++++
-        function Boss() {
+        function Boss(player) {
             _super.call(this, "boss");
+            this._player = player;
             this._reset(this._leftBounds);
             this.name = "boss";
         }
@@ -35,16 +35,26 @@ var objects;
         };
         // reset the fireball offscreen
         Boss.prototype._reset = function (value) {
-            this._speed.x = Math.floor(Math.random() * 5 + 1) + 5;
-            this._speed.y = Math.floor(Math.random() * 4 + 1) - 2;
-            this.x = value;
-            this.y = (Math.floor(Math.random() * this._bottomBounds) + this._topBounds) - (this.height);
+            this._speed.x = 5;
+            this._speed.y = 1;
+            // this.x = value;
+            // this.y = (Math.floor(Math.random() * this._bottomBounds) + this._topBounds) - (this.height);
+            //this.x = this._rightBounds / 2 - this.width;
+            this.x = -50;
+            this.y = (this._topBounds + this.height + this._bottomBounds) / 4;
         };
         // PUBLIC METHODS ++++++++++++++++++++++++++++++
         Boss.prototype.update = function () {
             // scroll the fireball down the screen
-            this.x += this._speed.x;
-            this.y += this._speed.y;
+            if (this.x < this._rightBounds / 2 - this.width) {
+                this.x += this._speed.x;
+            }
+            else {
+                this.x = this._rightBounds / 2 - this.width;
+                console.log(this.y);
+                this.y = this._player.y + this._speed.y;
+            }
+            // this.y += this._speed.y;
             this._checkBounds(this._rightBounds + 100);
         };
         return Boss;

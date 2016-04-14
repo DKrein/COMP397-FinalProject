@@ -76,7 +76,7 @@ module scenes {
             this._playerFireball = new Array<objects.PlayerFireball>();  
             
             //added _boss to the scene
-            this._boss = new objects.Boss();             
+            this._boss = new objects.Boss(this._player);             
 
             // added _fire to the scene
             this._fire = new objects.Fire();
@@ -225,13 +225,14 @@ module scenes {
                 changeScene();
             }
         }
-
+        
+        //Add boss to scene
         private _summonBoss(): void {
 
-            if (this._backGround.backgroundResetCount > 1) {
+            //if (this._backGround.backgroundResetCount = 1) {
                 this._enemyContainer.addChild(this._boss);
                 console.log("Boss");
-            }
+            //}
         }
 
         //EVENT HANDLERS ++++++++++++++++++++

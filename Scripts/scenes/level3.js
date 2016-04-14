@@ -42,7 +42,7 @@ var scenes;
             this._dragonEnemy2 = new Array();
             this._playerFireball = new Array();
             //added _boss to the scene
-            this._boss = new objects.Boss();
+            this._boss = new objects.Boss(this._player);
             // added _fire to the scene
             this._fire = new objects.Fire();
             //this.addChild(this._fire);
@@ -147,11 +147,12 @@ var scenes;
                 changeScene();
             }
         };
+        //Add boss to scene
         Level3.prototype._summonBoss = function () {
-            if (this._backGround.backgroundResetCount > 1) {
-                this._enemyContainer.addChild(this._boss);
-                console.log("Boss");
-            }
+            //if (this._backGround.backgroundResetCount = 1) {
+            this._enemyContainer.addChild(this._boss);
+            console.log("Boss");
+            //}
         };
         //EVENT HANDLERS ++++++++++++++++++++
         Level3.prototype._playerFire = function (event) {
