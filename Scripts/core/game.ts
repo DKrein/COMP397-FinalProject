@@ -11,6 +11,7 @@ Revision:
 4. Added exit button asset
 5. Added Stalactite asset
 6. Removed sounds from here, changed for scenes
+7. Sound effects changed
 */
 
 /// <reference path = "_reference.ts" />
@@ -75,7 +76,11 @@ var assetData: objects.Asset[] = [
     
     //collision musics
     { id: "hit", src: "../../Assets/audio/hit.mp3" },
-    { id: "collect", src: "../../Assets/audio/collect.mp3" },
+    { id: "collect", src: "../../Assets/audio/collect.mp3" },    
+    { id: "dragonHit", src: "../../Assets/audio/dragonHit.mp3" },
+    { id: "shotFireball", src: "../../Assets/audio/shotFireball.mp3" },
+    { id: "rockHit", src: "../../Assets/audio/rockHit.mp3" },    
+    { id: "eggHit", src: "../../Assets/audio/eggHit.mp3" },    
     
     //background musics
     { id: "gameOverBgMusic", src: "../../Assets/audio/gameover.mp3" },

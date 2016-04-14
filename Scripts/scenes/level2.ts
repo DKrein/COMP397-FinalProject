@@ -10,6 +10,7 @@ Revision:
 3. Added live checker to transition to gameover
 4. Renamed the class sky for background, added sounds in the right place
 5. fixed some names
+6. changed 3 playerFireballColision variables for an array
 */
 
 // LEVEL2 SCENE
@@ -30,6 +31,7 @@ module scenes {
         private _dragonEnemy2Count: number;
         private _playerFireball: objects.PlayerFireball[];
         private _playerFireballCount: number;
+        private _playerFireballCollision: managers.PlayerFireballCollision[];
 
         private _stalactite: objects.Stalactites;
         private _stalagmite: objects.Stalagmites;
@@ -37,11 +39,7 @@ module scenes {
         private _playerCollision: managers.PlayerCollision;
         private _enemyContainer: createjs.Container;
         private _collectableContainer: createjs.Container;
-        private _playerFireballCollision: managers.PlayerFireballCollision;
-        private _playerFireballCollision1: managers.PlayerFireballCollision;
-        private _playerFireballCollision2: managers.PlayerFireballCollision;
 
-        private _livesWord: objects.Label;
         private _livesText: objects.Label;
 
         private _bgSound: any;
@@ -56,7 +54,6 @@ module scenes {
 
         // Start Method
         public start(): void {
-
 
             this._enemyContainer = new createjs.Container;
             this._collectableContainer = new createjs.Container;
@@ -75,10 +72,10 @@ module scenes {
             this._dragonEnemy1 = new Array<objects.DragonEnemy1>();
             this._dragonEnemy2 = new Array<objects.DragonEnemy2>();
             this._playerFireball = new Array<objects.PlayerFireball>();
+            this._playerFireballCollision = new Array<managers.PlayerFireballCollision>();
 
             // added _fire to the scene
             this._fire = new objects.Fire();
-            //this.addChild(this._fire);
             this._collectableContainer.addChild(this._fire);
 
             //added stalactites to the scene
@@ -107,11 +104,9 @@ module scenes {
             for (var count: number = 0; count < this._playerFireballCount; count++) {
                 this._playerFireball[count] = new objects.PlayerFireball(this._player);
                 this.addChild(this._playerFireball[count]);
+                this._playerFireballCollision[count] = new managers.PlayerFireballCollision(this._playerFireball[count]);
             }
 
-            this._playerFireballCollision = new managers.PlayerFireballCollision(this._playerFireball[0]);
-            this._playerFireballCollision1 = new managers.PlayerFireballCollision(this._playerFireball[1]);
-            this._playerFireballCollision2 = new managers.PlayerFireballCollision(this._playerFireball[2]);
             this._playerCollision = new managers.PlayerCollision(this._player);
 
             // add this scene to the global stage container
@@ -125,7 +120,6 @@ module scenes {
                 "bold 25px Britannic Bold",
                 "#0434C4",
                 15, 15, false);
-            //this._livesText.textAlign = "right";
             this.addChild(this._livesWord);
 
             //Add _livesText to the scene
@@ -134,7 +128,6 @@ module scenes {
                 "bold 25px Britannic Bold",
                 "#0434C4",
                 100, 15, false);
-            //this._livesText.textAlign = "right";
             this.addChild(this._livesText);
 
             //Add _scoreText to the scene
@@ -142,7 +135,6 @@ module scenes {
                 "bold 25px Britannic Bold",
                 "#0434C4",
                 500, 15, false);
-            //this._livesText.textAlign = "right";
             this.addChild(this.scoreWord);
 
             this.scoreText = new objects.Label("SCORE: " +
@@ -150,13 +142,11 @@ module scenes {
                 "bold 25px Britannic Bold",
                 "#0434C4",
                 600, 15, false);
-            //this._livesText.textAlign = "right";
-
+            this.addChild(this.scoreText);
 
             //this._playBackgroundSound();
 
-
-            this.addChild(this.scoreText);
+            
 
         }
 
@@ -181,21 +171,21 @@ module scenes {
             this._playerFireball.forEach(fireball => {
                 fireball.update();
             });
-
+            
+            var countDrag = 1;
             this._dragonEnemy1.forEach(dragon => {
                 dragon.update();
-                this._playerFireballCollision.CheckPlayerFire(dragon);
-                this._playerFireballCollision1.CheckPlayerFire(dragon);
-                this._playerFireballCollision2.CheckPlayerFire(dragon);
+                this._playerFireballCollision[countDrag].check(dragon);
                 this._playerCollision.check(dragon);
+                countDrag++;
             });
-
+            
+            countDrag=1;
             this._dragonEnemy2.forEach(dragon => {
                 dragon.update();
-                this._playerFireballCollision.CheckPlayerFire(dragon);
-                this._playerFireballCollision1.CheckPlayerFire(dragon);
-                this._playerFireballCollision2.CheckPlayerFire(dragon);
+                this._playerFireballCollision[countDrag].check(dragon);
                 this._playerCollision.check(dragon);
+                countDrag++;
             });
 
             this._playerCollision.check(this._fire);
@@ -236,6 +226,7 @@ module scenes {
 
                 if (this._playerFireball[count].isAvailable) {
                     this._playerFireball[count].PositionFireBall();
+                    createjs.Sound.play("shotFireball", {volume: 0.02});
                     break;
                 }
             }
