@@ -10,6 +10,7 @@ Revision:
 3. Added live checker to transition to gameover
 4. Renamed the class sky for background, added sounds in the right place
 5. fixed some names
+6. Added boss and boss label
 */
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -70,11 +71,14 @@ var scenes;
                 this.addChild(this._playerFireball[count]);
             }
             // added collision manager to the scene
+            this._playerFireballCollision = new managers.PlayerFireballCollision(this._playerFireball[0]);
+            this._playerFireballCollision1 = new managers.PlayerFireballCollision(this._playerFireball[1]);
+            this._playerFireballCollision2 = new managers.PlayerFireballCollision(this._playerFireball[2]);
             this._playerCollision = new managers.PlayerCollision(this._player);
             // add this scene to the global stage container
             stage.addChild(this, this._enemyContainer, this._collectableContainer);
             // add stage click Listener
-            stage.on("click", this._playerFire, this);
+            this._backGround.on("click", this._playerFire, this);
             //Add _scoreText to the scene
             this._livesWord = new objects.Label("LIVES: ", "bold 25px Britannic Bold", "#0434C4", 15, 15, false);
             //this._livesText.textAlign = "right";
@@ -114,19 +118,30 @@ var scenes;
             this._player.update();
             this._playerFireball.forEach(function (fireball) {
                 fireball.update();
-                _this._playerCollision.check(fireball);
             });
             this._dragonEnemy1.forEach(function (dragon) {
                 dragon.update();
+                _this._playerFireballCollision.CheckPlayerFire(dragon);
+                _this._playerFireballCollision1.CheckPlayerFire(dragon);
+                _this._playerFireballCollision2.CheckPlayerFire(dragon);
                 _this._playerCollision.check(dragon);
             });
             this._dragonEnemy2.forEach(function (dragon) {
                 dragon.update();
+                _this._playerFireballCollision.CheckPlayerFire(dragon);
+                _this._playerFireballCollision1.CheckPlayerFire(dragon);
+                _this._playerFireballCollision2.CheckPlayerFire(dragon);
                 _this._playerCollision.check(dragon);
             });
+            this._boss.update();
+            this._playerFireballCollision.CheckPlayerFire(this._boss);
+            this._playerFireballCollision1.CheckPlayerFire(this._boss);
+            this._playerFireballCollision2.CheckPlayerFire(this._boss);
+            this._playerCollision.check(this._boss);
             this._playerCollision.check(this._fire);
             this.scoreText.text = gameController.ScoreValue.toString();
             this._livesText.text = gameController.LivesValue.toString();
+            this.bossText.text = gameController.BossValue.toString();
             this._summonBoss();
             this._checkLives();
             this._changeGameLevel();
@@ -140,7 +155,7 @@ var scenes;
         };
         // Move to End
         Level3.prototype._changeGameLevel = function () {
-            if (this._backGround.backgroundResetCount > 2) {
+            if (gameController.BossValue == 0) {
                 //Remove the enemy from
                 this._enemyContainer.removeAllChildren();
                 this._collectableContainer.removeAllChildren();
@@ -162,8 +177,9 @@ var scenes;
         //EVENT HANDLERS ++++++++++++++++++++
         Level3.prototype._playerFire = function (event) {
             for (var count = 0; count < this._playerFireballCount; count++) {
+                console.log("CLICKER CLICK");
                 if (this._playerFireball[count].isAvailable) {
-                    this._playerFireball[count].reset();
+                    this._playerFireball[count].PositionFireBall();
                     break;
                 }
             }

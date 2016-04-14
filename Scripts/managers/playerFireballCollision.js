@@ -31,6 +31,12 @@ var managers;
                     this._playerFireball.reset();
                     gameController.ScoreValue++;
                 }
+                if (object.name === "boss") {
+                    //object.reset();
+                    this._playerFireball.reset();
+                    gameController.BossValue = gameController.BossValue - 1;
+                    console.log("Boss has been hit!");
+                }
             } //End MinimumDistance check
         };
         return PlayerFireballCollision;

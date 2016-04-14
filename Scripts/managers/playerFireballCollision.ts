@@ -46,6 +46,14 @@ module managers {
                     //createjs.Sound.play("collect");
                 }
                 
+                if (object.name === "boss") {
+                    //object.reset();
+                    this._playerFireball.reset();
+                    gameController.BossValue = gameController.BossValue - 1;
+                    console.log("Boss has been hit!");
+                    //createjs.Sound.play("collect");
+                }
+                
             }//End MinimumDistance check
             
         }
