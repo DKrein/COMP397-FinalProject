@@ -73,10 +73,7 @@ module scenes {
             // Instantiate _fireball array
             this._dragonEnemy1 = new Array<objects.DragonEnemy1>();
             this._dragonEnemy2 = new Array<objects.DragonEnemy2>();
-            this._playerFireball = new Array<objects.PlayerFireball>();  
-            
-            //added _boss to the scene
-            this._boss = new objects.Boss(this._player);             
+            this._playerFireball = new Array<objects.PlayerFireball>();             
 
             // added _fire to the scene
             this._fire = new objects.Fire();
@@ -94,6 +91,9 @@ module scenes {
             // added player to the scene
             this._player = new objects.Player("player");
             this.addChild(this._player);
+            
+            //added _boss to the scene
+            this._boss = new objects.Boss(this._player);  
 
             //added _fireball to the scene
             for (var count: number = 0; count < this._dragonEnemy1Count; count++) {
@@ -229,10 +229,10 @@ module scenes {
         //Add boss to scene
         private _summonBoss(): void {
 
-            //if (this._backGround.backgroundResetCount = 1) {
-                this._enemyContainer.addChild(this._boss);
-                console.log("Boss");
-            //}
+            if (this._backGround.backgroundResetCount = 1) {
+            this._enemyContainer.addChild(this._boss);
+            console.log("Boss");
+            }
         }
 
         //EVENT HANDLERS ++++++++++++++++++++
