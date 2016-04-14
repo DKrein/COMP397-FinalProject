@@ -3,24 +3,23 @@ Author: Douglas Krein, Christine Cho, Francis Ofougwuka
 Last Modified by: Christine Cho
 Last Modified: 04/9/2016
 File description: 
-- Object for egg
+- Object for Boss
 Revision:
-1. Created class for egg object
+1. Created class for Boss object
     
 */
 
-module objects { 
-    // ISLAND CLASS ++++++++++++++++++++++++++++++++++++
-    export class Egg extends objects.GameObject {
+module objects {
+    // FIREBALL CLASS ++++++++++++++++++++++++++++++++++++
+    export class Boss extends objects.GameObject {
         // PRIVATE INSTANCE VARIABLES +++++++++++++++++
         
         // CONSTRUCTOR METHOD +++++++++++++++++++++++++
         constructor() {
-           var rand = (Math.floor(Math.random() * 4)+1);
-           super("egg"+rand);        
-           
+            super("boss");
+            
            this._reset(this._leftBounds);
-           this.name = "egg"+rand;
+           this.name = "boss";
         }
         
         // PRIVATE METHODS ++++++++++++++++++++++++++++
@@ -38,7 +37,7 @@ module objects {
             this._speed.y = Math.floor(Math.random() * 4 + 1) - 2;
             
             this.x = value;
-            this.y = Math.floor(Math.random() * this._bottomBounds) + this._topBounds;
+            this.y = (Math.floor(Math.random() * this._bottomBounds) + this._topBounds) - (this.height);
         }
         
         

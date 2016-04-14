@@ -11,6 +11,7 @@
 /// <reference path="../objects/egg.ts"/>
 /// <reference path="../objects/dragonEnemy1.ts"/>
 /// <reference path="../objects/dragonEnemy2.ts" />
+/// <reference path="../objects/boss.ts" />
 /// <reference path="../objects/playerFireball.ts" />
 /// <reference path="../objects/stalactite.ts" />
 /// <reference path="../objects/stalagmite.ts" />
@@ -24,4 +25,5 @@
 /// <reference path="../scenes/level1.ts" />
 /// <reference path="../scenes/level2.ts" />
 /// <reference path="../scenes/level3.ts" /> 
+
 //# sourceMappingURL=_reference.js.map

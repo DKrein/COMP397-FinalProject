@@ -44,7 +44,6 @@ var objects;
         };
         // PUBLIC METHODS ++++++++++++++++++++++++++++++
         PlayerFireball.prototype.update = function () {
-            // <<<<<<< HEAD
             // scroll the fireball left the screen
             this.x -= this._speed.x;
             this._checkBounds(this._leftBounds);
@@ -53,17 +52,10 @@ var objects;
             this.isAvailable = false;
             this.y = this._player.y - 30;
             this.x = this._player.x - 80;
-            // =======
-            //             // scroll the fireball down the screen
-            //             if (this.x >= this._leftBounds-100) {
-            //                 this.x -= this._speed.x;
-            //             } else {
-            //                 this.isAvailable = true;
-            //             }
-            // >>>>>>> upstream/master
         };
         return PlayerFireball;
     }(objects.GameObject));
     objects.PlayerFireball = PlayerFireball;
 })(objects || (objects = {}));
+
 //# sourceMappingURL=playerFireball.js.map

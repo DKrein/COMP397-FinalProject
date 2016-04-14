@@ -131,4 +131,5 @@ var scenes;
     }(objects.Scene));
     scenes.Level1 = Level1;
 })(scenes || (scenes = {}));
+
 //# sourceMappingURL=level1.js.map

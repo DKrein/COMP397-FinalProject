@@ -110,7 +110,6 @@ var scenes;
             this._player.update();
             this._playerFireball.forEach(function (fireball) {
                 fireball.update();
-                //this._playerCollision.check(fireball);
             });
             this._dragonEnemy1.forEach(function (dragon) {
                 dragon.update();
@@ -155,7 +154,6 @@ var scenes;
         Level2.prototype._playerFireClickHandler = function (event) {
             for (var count = 0; count < this._playerFireballCount; count++) {
                 if (this._playerFireball[count].isAvailable) {
-                    //this._playerFireball[count].reset();
                     this._playerFireball[count].PositionFireBall();
                     break;
                 }
@@ -165,4 +163,5 @@ var scenes;
     }(objects.Scene));
     scenes.Level2 = Level2;
 })(scenes || (scenes = {}));
+
 //# sourceMappingURL=level2.js.map

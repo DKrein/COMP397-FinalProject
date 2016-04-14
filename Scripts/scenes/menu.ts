@@ -89,7 +89,7 @@ module scenes {
         // StartButton click event handler
         private _startButtonClick(event: createjs.MouseEvent) {
             // Switch to the Play Scene
-            scene = config.Scene.LEVEL1;
+            scene = config.Scene.LEVEL3;
             changeScene();
         }
         

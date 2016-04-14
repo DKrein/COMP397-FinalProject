@@ -3,10 +3,9 @@ Author: Douglas Krein, Christine Cho, Francis Ofougwuka
 Last Modified by: Christine Cho
 Last Modified: 04/9/2016
 File description:
-- Object for dragon enemy 1
+- Object for Boss
 Revision:
-1. Created class for dragonEnemy1 object
-2. fixed the name of the class
+1. Created class for Boss object
     
 */
 var __extends = (this && this.__extends) || function (d, b) {
@@ -17,17 +16,17 @@ var __extends = (this && this.__extends) || function (d, b) {
 var objects;
 (function (objects) {
     // FIREBALL CLASS ++++++++++++++++++++++++++++++++++++
-    var DragonEnemy1 = (function (_super) {
-        __extends(DragonEnemy1, _super);
+    var Boss = (function (_super) {
+        __extends(Boss, _super);
         // PRIVATE INSTANCE VARIABLES +++++++++++++++++
         // CONSTRUCTOR METHOD +++++++++++++++++++++++++
-        function DragonEnemy1() {
-            _super.call(this, "dragonEnemy1");
+        function Boss() {
+            _super.call(this, "boss");
             this._reset(this._leftBounds);
-            this.name = "dragonEnemy1";
+            this.name = "boss";
         }
         // PRIVATE METHODS ++++++++++++++++++++++++++++
-        DragonEnemy1.prototype._checkBounds = function (value) {
+        Boss.prototype._checkBounds = function (value) {
             // check to see if the top of the fireball 
             // is outside the viewport         
             if (this.x >= value) {
@@ -35,22 +34,22 @@ var objects;
             }
         };
         // reset the fireball offscreen
-        DragonEnemy1.prototype._reset = function (value) {
+        Boss.prototype._reset = function (value) {
             this._speed.x = Math.floor(Math.random() * 5 + 1) + 5;
             this._speed.y = Math.floor(Math.random() * 4 + 1) - 2;
             this.x = value;
             this.y = (Math.floor(Math.random() * this._bottomBounds) + this._topBounds) - (this.height);
         };
         // PUBLIC METHODS ++++++++++++++++++++++++++++++
-        DragonEnemy1.prototype.update = function () {
+        Boss.prototype.update = function () {
             // scroll the fireball down the screen
             this.x += this._speed.x;
             this.y += this._speed.y;
             this._checkBounds(this._rightBounds + 100);
         };
-        return DragonEnemy1;
+        return Boss;
     }(objects.GameObject));
-    objects.DragonEnemy1 = DragonEnemy1;
+    objects.Boss = Boss;
 })(objects || (objects = {}));
 
-//# sourceMappingURL=dragonEnemy1.js.map
+//# sourceMappingURL=boss.js.map

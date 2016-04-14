@@ -41,6 +41,8 @@ var scenes;
             this._dragonEnemy1 = new Array();
             this._dragonEnemy2 = new Array();
             this._playerFireball = new Array();
+            //added _boss to the scene
+            this._boss = new objects.Boss();
             // added _fire to the scene
             this._fire = new objects.Fire();
             //this.addChild(this._fire);
@@ -101,6 +103,7 @@ var scenes;
             var _this = this;
             this._backGround.update();
             this._fire.update();
+            this._boss.update();
             this._stalactite.update();
             this._playerCollision.check(this._stalactite);
             this._stalagmite.update();
@@ -123,6 +126,7 @@ var scenes;
             this._livesText.text = gameController.LivesValue.toString();
             this._checkLives();
             this._changeGameLevel();
+            this._summonBoss();
         };
         //PRIVATE METHODS
         Level3.prototype._checkLives = function () {
@@ -143,6 +147,12 @@ var scenes;
                 changeScene();
             }
         };
+        Level3.prototype._summonBoss = function () {
+            if (this._backGround.backgroundResetCount > 1) {
+                this._enemyContainer.addChild(this._boss);
+                console.log("Boss");
+            }
+        };
         //EVENT HANDLERS ++++++++++++++++++++
         Level3.prototype._playerFire = function (event) {
             for (var count = 0; count < this._playerFireballCount; count++) {
@@ -156,4 +166,5 @@ var scenes;
     }(objects.Scene));
     scenes.Level3 = Level3;
 })(scenes || (scenes = {}));
+
 //# sourceMappingURL=level3.js.map
