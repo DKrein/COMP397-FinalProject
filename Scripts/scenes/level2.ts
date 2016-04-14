@@ -41,6 +41,7 @@ module scenes {
         private _collectableContainer: createjs.Container;
 
         private _livesText: objects.Label;
+        private _livesWord: objects.Label;
 
         private _bgSound: any;
 
@@ -172,7 +173,7 @@ module scenes {
                 fireball.update();
             });
             
-            var countDrag = 1;
+            var countDrag = 0;
             this._dragonEnemy1.forEach(dragon => {
                 dragon.update();
                 this._playerFireballCollision[countDrag].check(dragon);
@@ -180,7 +181,7 @@ module scenes {
                 countDrag++;
             });
             
-            countDrag=1;
+            countDrag=0;
             this._dragonEnemy2.forEach(dragon => {
                 dragon.update();
                 this._playerFireballCollision[countDrag].check(dragon);

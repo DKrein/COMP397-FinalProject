@@ -106,14 +106,14 @@ var scenes;
             this._playerFireball.forEach(function (fireball) {
                 fireball.update();
             });
-            var countDrag = 1;
+            var countDrag = 0;
             this._dragonEnemy1.forEach(function (dragon) {
                 dragon.update();
                 _this._playerFireballCollision[countDrag].check(dragon);
                 _this._playerCollision.check(dragon);
                 countDrag++;
             });
-            countDrag = 1;
+            countDrag = 0;
             this._dragonEnemy2.forEach(function (dragon) {
                 dragon.update();
                 _this._playerFireballCollision[countDrag].check(dragon);

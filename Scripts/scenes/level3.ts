@@ -11,6 +11,7 @@ Revision:
 4. Renamed the class sky for background, added sounds in the right place
 5. fixed some names
 6. Added boss and boss label
+6. changed 3 playerFireballColision variables for an array
 */
 
 // LEVEL2 SCENE
@@ -37,6 +38,7 @@ module scenes {
         private _playerFireballCount: number;
         private _enemyFireball: objects.EnemyFireball[];
         private _enemyFireballCount: number;
+        private _playerFireballCollision: managers.PlayerFireballCollision[];
 
         private _stalactite: objects.Stalactites;
         private _stalagmite: objects.Stalagmites;
@@ -45,9 +47,6 @@ module scenes {
         private _enemyContainer: createjs.Container;
         private _collectableContainer: createjs.Container;
 
-        private _playerFireballCollision: managers.PlayerFireballCollision;
-        private _playerFireballCollision1: managers.PlayerFireballCollision;
-        private _playerFireballCollision2: managers.PlayerFireballCollision;
 
         private _enemyFireballCollision: managers.EnemyFireballCollision;
         private _enemyFireballCollision1: managers.EnemyFireballCollision;
@@ -88,7 +87,8 @@ module scenes {
             this._dragonEnemy1 = new Array<objects.DragonEnemy1>();
             this._dragonEnemy2 = new Array<objects.DragonEnemy2>();
             this._playerFireball = new Array<objects.PlayerFireball>();
-            this._enemyFireball = new Array<objects.EnemyFireball>();             
+            this._enemyFireball = new Array<objects.EnemyFireball>(); 
+            this._playerFireballCollision = new Array<managers.PlayerFireballCollision>();            
 
             // added _fire to the scene
             this._fire = new objects.Fire();
@@ -133,10 +133,13 @@ module scenes {
             
 
             // added collision manager to the scene
-            this._playerFireballCollision = new managers.PlayerFireballCollision(this._playerFireball[0]);
-            this._playerFireballCollision1 = new managers.PlayerFireballCollision(this._playerFireball[1]);
-            this._playerFireballCollision2 = new managers.PlayerFireballCollision(this._playerFireball[2]);
             this._playerCollision = new managers.PlayerCollision(this._player);
+            
+            for (var count: number = 0; count < this._playerFireballCount; count++) {
+                this._playerFireball[count] = new objects.PlayerFireball(this._player);
+                this.addChild(this._playerFireball[count]);
+                this._playerFireballCollision[count] = new managers.PlayerFireballCollision(this._playerFireball[count]);
+            }
 
             this._enemyFireballCollision = new managers.EnemyFireballCollision(this._enemyFireball[0]);
             // this._enemyFireballCollision1 = new managers.EnemyFireballCollision(this._enemyFireball[1]);
@@ -228,27 +231,30 @@ module scenes {
                 fireball.update();
             });
             
+            var countDrag = 0;
             //this._enemyFire();
             this._dragonEnemy1.forEach(dragon => {
                 dragon.update();
-                this._playerFireballCollision.CheckPlayerFire(dragon);
-                this._playerFireballCollision1.CheckPlayerFire(dragon);
-                this._playerFireballCollision2.CheckPlayerFire(dragon);
+                this._playerFireballCollision[countDrag].check(dragon);
                 this._playerCollision.check(dragon);
+                countDrag++;
             });
-
+            
+            countDrag=0;
             this._dragonEnemy2.forEach(dragon => {
                 dragon.update();
-                this._playerFireballCollision.CheckPlayerFire(dragon);
-                this._playerFireballCollision1.CheckPlayerFire(dragon);
-                this._playerFireballCollision2.CheckPlayerFire(dragon);
+                this._playerFireballCollision[countDrag].check(dragon);
                 this._playerCollision.check(dragon);
+                countDrag++;
             });
+            
             this._enemyFire();
-            this._boss.update();
-            this._playerFireballCollision.CheckPlayerFire(this._boss);
-            this._playerFireballCollision1.CheckPlayerFire(this._boss);
-            this._playerFireballCollision2.CheckPlayerFire(this._boss);
+            this._boss.update();    
+            
+            this._playerFireballCollision.forEach(playerFireballCollision => {
+                playerFireballCollision.check(this._boss);
+            });       
+            
             this._playerCollision.check(this._enemyFireball[0]);
             // this._playerCollision.check(this._enemyFireball[1]);
             // this._playerCollision.check(this._enemyFireball[2]);

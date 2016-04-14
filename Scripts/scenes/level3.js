@@ -11,6 +11,7 @@ Revision:
 4. Renamed the class sky for background, added sounds in the right place
 5. fixed some names
 6. Added boss and boss label
+6. changed 3 playerFireballColision variables for an array
 */
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -44,6 +45,7 @@ var scenes;
             this._dragonEnemy2 = new Array();
             this._playerFireball = new Array();
             this._enemyFireball = new Array();
+            this._playerFireballCollision = new Array();
             // added _fire to the scene
             this._fire = new objects.Fire();
             //this.addChild(this._fire);
@@ -77,10 +79,12 @@ var scenes;
                 this.addChild(this._enemyFireball[count]);
             }
             // added collision manager to the scene
-            this._playerFireballCollision = new managers.PlayerFireballCollision(this._playerFireball[0]);
-            this._playerFireballCollision1 = new managers.PlayerFireballCollision(this._playerFireball[1]);
-            this._playerFireballCollision2 = new managers.PlayerFireballCollision(this._playerFireball[2]);
             this._playerCollision = new managers.PlayerCollision(this._player);
+            for (var count = 0; count < this._playerFireballCount; count++) {
+                this._playerFireball[count] = new objects.PlayerFireball(this._player);
+                this.addChild(this._playerFireball[count]);
+                this._playerFireballCollision[count] = new managers.PlayerFireballCollision(this._playerFireball[count]);
+            }
             this._enemyFireballCollision = new managers.EnemyFireballCollision(this._enemyFireball[0]);
             // this._enemyFireballCollision1 = new managers.EnemyFireballCollision(this._enemyFireball[1]);
             // this._enemyFireballCollision2 = new managers.EnemyFireballCollision(this._enemyFireball[2]);
@@ -132,26 +136,26 @@ var scenes;
             this._enemyFireball.forEach(function (fireball) {
                 fireball.update();
             });
+            var countDrag = 0;
             //this._enemyFire();
             this._dragonEnemy1.forEach(function (dragon) {
                 dragon.update();
-                _this._playerFireballCollision.CheckPlayerFire(dragon);
-                _this._playerFireballCollision1.CheckPlayerFire(dragon);
-                _this._playerFireballCollision2.CheckPlayerFire(dragon);
+                _this._playerFireballCollision[countDrag].check(dragon);
                 _this._playerCollision.check(dragon);
+                countDrag++;
             });
+            countDrag = 0;
             this._dragonEnemy2.forEach(function (dragon) {
                 dragon.update();
-                _this._playerFireballCollision.CheckPlayerFire(dragon);
-                _this._playerFireballCollision1.CheckPlayerFire(dragon);
-                _this._playerFireballCollision2.CheckPlayerFire(dragon);
+                _this._playerFireballCollision[countDrag].check(dragon);
                 _this._playerCollision.check(dragon);
+                countDrag++;
             });
             this._enemyFire();
             this._boss.update();
-            this._playerFireballCollision.CheckPlayerFire(this._boss);
-            this._playerFireballCollision1.CheckPlayerFire(this._boss);
-            this._playerFireballCollision2.CheckPlayerFire(this._boss);
+            this._playerFireballCollision.forEach(function (playerFireballCollision) {
+                playerFireballCollision.check(_this._boss);
+            });
             this._playerCollision.check(this._enemyFireball[0]);
             // this._playerCollision.check(this._enemyFireball[1]);
             // this._playerCollision.check(this._enemyFireball[2]);

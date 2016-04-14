@@ -24,24 +24,16 @@ var managers;
                 if (object.name === "dragonEnemy1") {
                     object.reset();
                     this._playerFireball.reset();
-<<<<<<< 40f3aebea4764dcfa1d0b82ef2d3d797507bc62f
-                    gameController.ScoreValue++;
-=======
->>>>>>> Changed some sounds
                 }
                 if (object.name === "dragonEnemy2") {
                     object.reset();
                     this._playerFireball.reset();
-<<<<<<< 40f3aebea4764dcfa1d0b82ef2d3d797507bc62f
-                    gameController.ScoreValue++;
                 }
                 if (object.name === "boss") {
                     //object.reset();
                     this._playerFireball.reset();
                     gameController.BossValue = gameController.BossValue - 1;
                     console.log("Boss has been hit!");
-=======
->>>>>>> Changed some sounds
                 }
             } //End MinimumDistance check
         };

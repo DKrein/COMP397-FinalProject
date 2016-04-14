@@ -7,6 +7,7 @@ File description: Manages the Menu scene in the game
 Revision:
 1. Added instruction button to the scene
 2. Added exit button to the scene
+3. Reseting lives and score whenever starting a game
 */
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -44,6 +45,10 @@ var scenes;
             this._instructionButton.on("click", this._instructionButtonClick, this);
             // ExitButton event listener
             this._exitButton.on("click", this._exitButtonClick, this);
+            //reset the gamecontroller
+            gameController.BossValue = 10;
+            gameController.LivesValue = 10;
+            gameController.ScoreValue = 0;
             //this._playBackgroundSound();
             // add this scene to the global stage container
             stage.addChild(this);
