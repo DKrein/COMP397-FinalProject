@@ -63,7 +63,16 @@ module objects {
                 if (this.y > this._bottomBounds - (this.height * 2)) {
                     this._speed.y = -this._speed.y;
                 }
-
+                
+                // if((this.y) < this._player.y){
+                //     this.y = this._player.y + 4;
+                // }
+                // else if((this.y) > this._player.y){
+                //     this.y = this._player.y - 4;
+                //}
+                
+                // console.log(this.y);
+                // this.y = this._player.y * this._speed.y;
             }
             
             

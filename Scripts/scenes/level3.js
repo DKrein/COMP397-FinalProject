@@ -85,14 +85,17 @@ var scenes;
             //this._livesText.textAlign = "right";
             this.addChild(this._livesText);
             //Add _scoreText to the scene
-            this.scoreWord = new objects.Label("SCORE: ", "bold 25px Britannic Bold", "#0434C4", 500, 15, false);
+            this.scoreWord = new objects.Label("SCORE: ", "bold 25px Britannic Bold", "#0434C4", 900, 15, false);
             //this._livesText.textAlign = "right";
             this.addChild(this.scoreWord);
             this.scoreText = new objects.Label("SCORE: " +
-                gameController.ScoreValue.toString(), "bold 25px Britannic Bold", "#0434C4", 600, 15, false);
+                gameController.ScoreValue.toString(), "bold 25px Britannic Bold", "#0434C4", 1000, 15, false);
             //this._livesText.textAlign = "right";
             //this._playBackgroundSound();
             this.addChild(this.scoreText);
+            this.bossWord = new objects.Label("BOSS: ", "bold 40px Britannic Bold", "#FF0000", 490, 15, false);
+            //this._livesText.textAlign = "right";
+            this.bossText = new objects.Label(gameController.BossValue.toString(), "bold 40px Britannic Bold", "#FF0000", 525, 55, false);
         };
         Level3.prototype._playBackgroundSound = function () {
             this._bgSound = createjs.Sound.play("gameBgMusic", { volume: 0.03 });
@@ -124,9 +127,9 @@ var scenes;
             this._playerCollision.check(this._fire);
             this.scoreText.text = gameController.ScoreValue.toString();
             this._livesText.text = gameController.LivesValue.toString();
+            this._summonBoss();
             this._checkLives();
             this._changeGameLevel();
-            this._summonBoss();
         };
         //PRIVATE METHODS
         Level3.prototype._checkLives = function () {
@@ -149,10 +152,12 @@ var scenes;
         };
         //Add boss to scene
         Level3.prototype._summonBoss = function () {
-            if (this._backGround.backgroundResetCount = 1) {
-                this._enemyContainer.addChild(this._boss);
-                console.log("Boss");
-            }
+            //if (this._backGround.backgroundResetCount > 1) {
+            this._enemyContainer.addChild(this._boss);
+            this.addChild(this.bossWord);
+            this.addChild(this.bossText);
+            console.log("Boss");
+            //}
         };
         //EVENT HANDLERS ++++++++++++++++++++
         Level3.prototype._playerFire = function (event) {

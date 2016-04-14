@@ -18,6 +18,9 @@ module scenes {
 
         public scoreWord: objects.Label;
         public scoreText: objects.Label;
+        public bossWord: objects.Label;
+        public bossText: objects.Label;
+        //public 
         public resetCount: number;
 
         //PRIVATE INSTANCE VARIABLES ++++++++++++
@@ -64,7 +67,6 @@ module scenes {
             this._backGround = new objects.BackgroundScroll("level2Background");
             this.addChild(this._backGround);
             
-
             // Set _fireballCount Count
             this._dragonEnemy1Count = 1;
             this._dragonEnemy2Count = 1;
@@ -141,7 +143,7 @@ module scenes {
             this.scoreWord = new objects.Label("SCORE: ",
                 "bold 25px Britannic Bold",
                 "#0434C4",
-                500, 15, false);
+                900, 15, false);
             //this._livesText.textAlign = "right";
             this.addChild(this.scoreWord);
 
@@ -149,7 +151,7 @@ module scenes {
                 gameController.ScoreValue.toString(),
                 "bold 25px Britannic Bold",
                 "#0434C4",
-                600, 15, false);
+                1000, 15, false);
             //this._livesText.textAlign = "right";
             
             
@@ -157,6 +159,18 @@ module scenes {
             
             
             this.addChild(this.scoreText);
+
+            this.bossWord = new objects.Label("BOSS: ",
+                "bold 40px Britannic Bold",
+                "#FF0000",
+                490, 15, false);
+            //this._livesText.textAlign = "right";
+
+            this.bossText = new objects.Label(
+                gameController.BossValue.toString(),
+                "bold 40px Britannic Bold",
+                "#FF0000",
+                525, 55, false);
 
         }
 
@@ -197,10 +211,9 @@ module scenes {
             this._playerCollision.check(this._fire);
             this.scoreText.text = gameController.ScoreValue.toString();
             this._livesText.text = gameController.LivesValue.toString();
+            this._summonBoss();
             this._checkLives();
             this._changeGameLevel();
-            this._summonBoss();
-
         }
 
         //PRIVATE METHODS
@@ -229,10 +242,13 @@ module scenes {
         //Add boss to scene
         private _summonBoss(): void {
 
-            if (this._backGround.backgroundResetCount = 1) {
-            this._enemyContainer.addChild(this._boss);
-            console.log("Boss");
-            }
+            //if (this._backGround.backgroundResetCount > 1) {
+                this._enemyContainer.addChild(this._boss);
+                this.addChild(this.bossWord);
+                this.addChild(this.bossText);
+
+                console.log("Boss");
+            //}
         }
 
         //EVENT HANDLERS ++++++++++++++++++++
