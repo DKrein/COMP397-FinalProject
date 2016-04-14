@@ -9,7 +9,7 @@ module managers {
         }
 
         public distance(startPoint: createjs.Point, endPoint: createjs.Point): number {
-            return Math.sqrt(Math.pow((endPoint.x - startPoint.x), 2) + Math.pow(endPoint.y - startPoint.y, 2))
+            return Math.sqrt(Math.pow((endPoint.x - startPoint.x), 2) + Math.pow(endPoint.y - startPoint.y, 2));
         }
 
         public CheckPlayerFire(object: objects.GameObject) {

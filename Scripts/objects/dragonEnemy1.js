@@ -52,4 +52,5 @@ var objects;
     }(objects.GameObject));
     objects.DragonEnemy1 = DragonEnemy1;
 })(objects || (objects = {}));
+
 //# sourceMappingURL=dragonEnemy1.js.map

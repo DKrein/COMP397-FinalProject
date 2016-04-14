@@ -23,25 +23,26 @@ module scenes {
         //PRIVATE INSTANCE VARIABLES ++++++++++++
         private _backGround: objects.BackgroundScroll;
         private _fire: objects.Fire;
-        
+
         private _dragonEnemy1: objects.DragonEnemy1[];
         private _dragonEnemy1Count: number;
         private _dragonEnemy2: objects.DragonEnemy2[];
-        private _dragonEnemy2Count: number;   
+        private _dragonEnemy2Count: number;
+        private _boss: objects.Boss;
         private _playerFireball: objects.PlayerFireball[];
-        private _playerFireballCount: number;               
-        
+        private _playerFireballCount: number;
+
         private _stalactite: objects.Stalactites;
         private _stalagmite: objects.Stalagmites;
         private _player: objects.Player;
         private _playerCollision: managers.PlayerCollision;
         private _enemyContainer: createjs.Container;
         private _collectableContainer: createjs.Container;
-       
+
 
         private _livesWord: objects.Label;
         private _livesText: objects.Label;
-        
+
         private _bgSound: any;
 
         // CONSTRUCTOR ++++++++++++++++++++++
@@ -54,8 +55,8 @@ module scenes {
 
         // Start Method
         public start(): void {
-            
-            
+
+
             this._enemyContainer = new createjs.Container;
             this._collectableContainer = new createjs.Container;
             
@@ -72,7 +73,10 @@ module scenes {
             // Instantiate _fireball array
             this._dragonEnemy1 = new Array<objects.DragonEnemy1>();
             this._dragonEnemy2 = new Array<objects.DragonEnemy2>();
-            this._playerFireball = new Array<objects.PlayerFireball>();               
+            this._playerFireball = new Array<objects.PlayerFireball>();  
+            
+            //added _boss to the scene
+            this._boss = new objects.Boss(this._player);             
 
             // added _fire to the scene
             this._fire = new objects.Fire();
@@ -101,7 +105,7 @@ module scenes {
                 this._dragonEnemy2[count] = new objects.DragonEnemy2();
                 this._enemyContainer.addChild(this._dragonEnemy2[count]);
             }
-            
+
             for (var count: number = 0; count < this._playerFireballCount; count++) {
                 this._playerFireball[count] = new objects.PlayerFireball(this._player);
                 this.addChild(this._playerFireball[count]);
@@ -149,31 +153,32 @@ module scenes {
             //this._livesText.textAlign = "right";
             
             
-             //this._playBackgroundSound();
+            //this._playBackgroundSound();
             
             
             this.addChild(this.scoreText);
 
         }
-        
-        private _playBackgroundSound(): void{
-            this._bgSound = createjs.Sound.play("gameBgMusic", {volume: 0.03});
-            this._bgSound.on("complete",this._playBackgroundSound,this);
+
+        private _playBackgroundSound(): void {
+            this._bgSound = createjs.Sound.play("gameBgMusic", { volume: 0.03 });
+            this._bgSound.on("complete", this._playBackgroundSound, this);
         }
 
         // PLAY Scene updates here
         public update(): void {
             this._backGround.update();
             this._fire.update();
-            
+            this._boss.update();
+
             this._stalactite.update();
             this._playerCollision.check(this._stalactite);
-            
+
             this._stalagmite.update();
             this._playerCollision.check(this._stalagmite);
 
             this._player.update();
-            
+
             this._playerFireball.forEach(fireball => {
                 fireball.update();
                 this._playerCollision.check(fireball);
@@ -194,6 +199,7 @@ module scenes {
             this._livesText.text = gameController.LivesValue.toString();
             this._checkLives();
             this._changeGameLevel();
+            this._summonBoss();
 
         }
 
@@ -219,13 +225,22 @@ module scenes {
                 changeScene();
             }
         }
+        
+        //Add boss to scene
+        private _summonBoss(): void {
+
+            //if (this._backGround.backgroundResetCount = 1) {
+                this._enemyContainer.addChild(this._boss);
+                console.log("Boss");
+            //}
+        }
 
         //EVENT HANDLERS ++++++++++++++++++++
         
-        private _playerFire(event: createjs.MouseEvent){
+        private _playerFire(event: createjs.MouseEvent) {
             for (var count: number = 0; count < this._playerFireballCount; count++) {
-                
-                if (this._playerFireball[count].isAvailable){
+
+                if (this._playerFireball[count].isAvailable) {
                     this._playerFireball[count].reset();
                     break;
                 }

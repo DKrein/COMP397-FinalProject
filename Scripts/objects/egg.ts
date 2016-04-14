@@ -9,7 +9,7 @@ Revision:
     
 */
 
-module objects {
+module objects { 
     // ISLAND CLASS ++++++++++++++++++++++++++++++++++++
     export class Egg extends objects.GameObject {
         // PRIVATE INSTANCE VARIABLES +++++++++++++++++

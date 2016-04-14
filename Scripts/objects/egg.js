@@ -52,4 +52,5 @@ var objects;
     }(objects.GameObject));
     objects.Egg = Egg;
 })(objects || (objects = {}));
+
 //# sourceMappingURL=egg.js.map

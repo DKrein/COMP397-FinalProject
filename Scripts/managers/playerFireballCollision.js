@@ -25,13 +25,11 @@ var managers;
                     object.reset();
                     this._playerFireball.reset();
                     gameController.ScoreValue++;
-                    console.log("collides with dragonEnemy1");
                 }
                 if (object.name === "dragonEnemy2") {
                     object.reset();
                     this._playerFireball.reset();
                     gameController.ScoreValue++;
-                    console.log("Collides with dragonEnemy2");
                 }
             } //End MinimumDistance check
         };
@@ -39,4 +37,5 @@ var managers;
     }());
     managers.PlayerFireballCollision = PlayerFireballCollision;
 })(managers || (managers = {}));
+
 //# sourceMappingURL=playerFireballCollision.js.map

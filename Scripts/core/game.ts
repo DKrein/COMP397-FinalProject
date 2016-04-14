@@ -63,6 +63,7 @@ var assetData: objects.Asset[] = [
     { id: "dragonEnemy4", src: "../../Assets/images/dragonEnemy4.png" },
     { id: "stalactite", src: "../../Assets/images/stalactite.png" },
     { id: "stalagmite", src: "../../Assets/images/stalagmite.png" },
+    { id: "boss", src: "../../Assets/images/boss.png" },
     
     //Collectbles 
     { id: "fire", src: "../../Assets/images/fire.png" },

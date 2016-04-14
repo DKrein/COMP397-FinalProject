@@ -47,4 +47,5 @@ var objects;
     }(createjs.Bitmap));
     objects.Player = Player;
 })(objects || (objects = {}));
+
 //# sourceMappingURL=player.js.map
