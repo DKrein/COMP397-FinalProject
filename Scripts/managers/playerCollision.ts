@@ -72,6 +72,13 @@ module managers {
                     gameController.LivesValue-= 2;
                     createjs.Sound.play("collect", {volume: 0.01});
                 }
+                
+                // check if player collided with enemyFireball
+                if(object.name === "enemyFireball") {
+                    object.reset(); 
+                    gameController.LivesValue--;
+                    createjs.Sound.play("collect", {volume: 0.01});
+                }
             }
         }
     }

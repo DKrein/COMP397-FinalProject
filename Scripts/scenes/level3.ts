@@ -249,9 +249,6 @@ module scenes {
                 this._playerFireballCollision.CheckPlayerFire(this._boss);
                 this._playerFireballCollision1.CheckPlayerFire(this._boss);
                 this._playerFireballCollision2.CheckPlayerFire(this._boss);
-                // this._enemyFireballCollision.CheckEnemyFire(this._player);
-                // this._enemyFireballCollision1.CheckEnemyFire(this._player);
-                // this._enemyFireballCollision2.CheckEnemyFire(this._player);
                 this._playerCollision.check(this._enemyFireball[0]);
                 this._playerCollision.check(this._enemyFireball[1]);
                 this._playerCollision.check(this._enemyFireball[2]);
