@@ -11,10 +11,12 @@ var managers;
 (function (managers) {
     //GameController Class
     var DragonGameController = (function () {
+        // private _fireValue: number;
         function DragonGameController() {
             this._livesValue = 10;
             this._scoreValue = 0;
             this._bossValue = 10;
+            // this._fireValue = 0;
         }
         Object.defineProperty(DragonGameController.prototype, "LivesValue", {
             //GETTER AND SETTER for livesValuse and ScoreValue
