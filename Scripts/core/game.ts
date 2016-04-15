@@ -32,6 +32,7 @@ var end: scenes.End;
 var level1: scenes.Level1;
 var level2: scenes.Level2;
 var level3: scenes.Level3;
+var victory: scenes.Victory;
 
 //GameController
 var gameController: managers.DragonGameController;
@@ -52,6 +53,7 @@ var assetData: objects.Asset[] = [
     { id: "level1Background", src: "../../Assets/images/level1Background.png" },
     { id: "level2Background", src: "../../Assets/images/level2Background.png" },
     { id: "level3Background", src: "../../Assets/images/level3Background.png" },
+    { id: "victorybackground", src: "../../Assets/images/victorybackground.png" },
     
     //player
     { id: "playerBaby", src: "../../Assets/images/playerBaby.png" },
@@ -77,15 +79,16 @@ var assetData: objects.Asset[] = [
     
     //collision musics
     { id: "hit", src: "../../Assets/audio/hit.mp3" },
-    { id: "collect", src: "../../Assets/audio/collect.mp3" },    
+    { id: "collect", src: "../../Assets/audio/collect.mp3" },
     { id: "dragonHit", src: "../../Assets/audio/dragonHit.mp3" },
     { id: "shotFireball", src: "../../Assets/audio/shotFireball.mp3" },
-    { id: "rockHit", src: "../../Assets/audio/rockHit.mp3" },    
+    { id: "rockHit", src: "../../Assets/audio/rockHit.mp3" },
     { id: "eggHit", src: "../../Assets/audio/eggHit.mp3" },    
     
     //background musics
     { id: "gameOverBgMusic", src: "../../Assets/audio/gameover.mp3" },
     { id: "menuBgMusic", src: "../../Assets/audio/opening.mp3" },
+    { id: "victorymusic", src: "../../Assets/audio/victory.mp3" },
     { id: "gameBgMusic", src: "../../Assets/audio/background.mp3" }
 ];
 
@@ -181,7 +184,7 @@ function changeScene(): void {
             currentScene = level2;
             console.log("Starting LEVEL2 Scene");
             break;
-         case config.Scene.LEVEL3:
+        case config.Scene.LEVEL3:
             // show the LEVEL3 scene
             stage.removeAllChildren();
             level3 = new scenes.Level3();
@@ -194,6 +197,13 @@ function changeScene(): void {
             end = new scenes.End();
             currentScene = end;
             console.log("Starting END Scene");
+            break;
+        case config.Scene.VICTORY:
+            // show the END scene
+            stage.removeAllChildren();
+            victory = new scenes.Victory();
+            currentScene = victory;
+            console.log("Starting VICTORY Scene");
             break;
 
     }

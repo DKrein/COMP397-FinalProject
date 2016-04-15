@@ -207,7 +207,7 @@ var scenes;
                 this._collectableContainer.removeAllChildren();
                 stage.removeChild(this._enemyContainer, this._collectableContainer);
                 //Should be level 3
-                scene = config.Scene.END;
+                scene = config.Scene.VICTORY;
                 changeScene();
             }
         };
