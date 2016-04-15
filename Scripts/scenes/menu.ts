@@ -15,7 +15,7 @@ module scenes {
     export class Menu extends objects.Scene {
         //PRIVATE INSTANCE VARIABLES ++++++++++++
         private _backgroundImage: createjs.Bitmap;
-        
+        private keyboardControls: objects.KeyboardControls;
         private _startButton: objects.Button;
         private _instructionButton: objects.Button;
         private _exitButton: objects.Button;
@@ -23,7 +23,7 @@ module scenes {
         
         // CONSTRUCTOR ++++++++++++++++++++++
         constructor() {
-            super();     
+            super();
         }
         
         // PUBLIC METHODS +++++++++++++++++++++
@@ -31,7 +31,6 @@ module scenes {
         // Start Method
         public start(): void {
             createjs.Sound.stop();
-            
             //Add Background Image
             this._backgroundImage = new createjs.Bitmap(assets.getResult("menuBackground"));
             this.addChild(this._backgroundImage);
@@ -51,7 +50,7 @@ module scenes {
                 config.Screen.CENTER_Y + 100, true);
             this.addChild(this._instructionButton);
             
-             // add the ExitButton to the MENU scene
+            // add the ExitButton to the MENU scene
             this._exitButton = new objects.Button(
                 "ExitButton",
                 config.Screen.CENTER_X,
@@ -73,19 +72,21 @@ module scenes {
             gameController.ScoreValue = 0;
             
             //this._playBackgroundSound();
+            // Instantiate Game Controls
+            this.keyboardControls = new objects.KeyboardControls();
             
             // add this scene to the global stage container
             stage.addChild(this);
         }
-        
-        private _playBackgroundSound(): void{
-            this._bgSound = createjs.Sound.play("menuBgMusic", {volume: 0.03});
-            this._bgSound.on("complete",this._playBackgroundSound,this);
+
+        private _playBackgroundSound(): void {
+            this._bgSound = createjs.Sound.play("menuBgMusic", { volume: 0.03 });
+            this._bgSound.on("complete", this._playBackgroundSound, this);
         }
 
         // INTRO Scene updates here
         public update(): void {
-
+            this.checkControls();
         }
         
         
@@ -105,11 +106,21 @@ module scenes {
             changeScene();
         }
         
-         // ExitButton click event handler
+        // ExitButton click event handler
         private _exitButtonClick(event: createjs.MouseEvent) {
             // Switch to the EXIT Scene
             window.close();
         }
 
+        private checkControls(): void {
+                if (this.keyboardControls.changeToLevel2) {
+                    scene = config.Scene.LEVEL2;
+                    changeScene();
+                }
+                if (this.keyboardControls.changeToLevel3) {
+                    scene = config.Scene.LEVEL3;
+                    changeScene();
+                }
+        }
     }
 }
