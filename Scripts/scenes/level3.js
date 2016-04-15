@@ -203,7 +203,7 @@ var scenes;
             }
         };
         Level3.prototype._enemyFire = function () {
-            if (gameController.BossValue != 0) {
+            if (gameController.LivesValue != 0) {
                 for (var count = 0; count < this._enemyFireballCount; count++) {
                     if (this._enemyFireball[count].isAvailable) {
                         this._enemyFireball[count].PositionFireBall();
