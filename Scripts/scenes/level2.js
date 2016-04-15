@@ -37,11 +37,15 @@ var scenes;
             // Set _fireballCount Count
             this._dragonEnemy1Count = 1;
             this._dragonEnemy2Count = 1;
+            this._dragonEnemy3Count = 1;
             this._playerFireballCount = 3;
+            this._enemyFireballCount = 1;
             // Instantiate _fireball array
             this._dragonEnemy1 = new Array();
             this._dragonEnemy2 = new Array();
+            this._dragonEnemy3 = new Array();
             this._playerFireball = new Array();
+            this._enemyFireball = new Array();
             this._playerFireballCollision = new Array();
             // added _fire to the scene
             this._fire = new objects.Fire();
@@ -64,10 +68,18 @@ var scenes;
                 this._dragonEnemy2[count] = new objects.DragonEnemy2();
                 this._enemyContainer.addChild(this._dragonEnemy2[count]);
             }
+            for (var count = 0; count < this._dragonEnemy3Count; count++) {
+                this._dragonEnemy3[count] = new objects.DragonEnemy3();
+                this._enemyContainer.addChild(this._dragonEnemy3[count]);
+            }
             for (var count = 0; count < this._playerFireballCount; count++) {
                 this._playerFireball[count] = new objects.PlayerFireball(this._player);
                 this.addChild(this._playerFireball[count]);
                 this._playerFireballCollision[count] = new managers.PlayerFireballCollision(this._playerFireball[count]);
+            }
+            for (var count = 0; count < this._enemyFireballCount; count++) {
+                this._enemyFireball[count] = new objects.EnemyFireball(this._dragonEnemy3[count]);
+                this.addChild(this._enemyFireball[count]);
             }
             this._playerCollision = new managers.PlayerCollision(this._player);
             // add this scene to the global stage container
@@ -106,6 +118,9 @@ var scenes;
             this._playerFireball.forEach(function (fireball) {
                 fireball.update();
             });
+            this._enemyFireball.forEach(function (fireball) {
+                fireball.update();
+            });
             var countDrag = 0;
             this._dragonEnemy1.forEach(function (dragon) {
                 dragon.update();
@@ -120,6 +135,15 @@ var scenes;
                 _this._playerCollision.check(dragon);
                 countDrag++;
             });
+            countDrag = 0;
+            this._dragonEnemy3.forEach(function (dragon) {
+                dragon.update();
+                _this._playerFireballCollision[countDrag].check(dragon);
+                _this._playerCollision.check(dragon);
+                countDrag++;
+            });
+            this._enemyFire();
+            this._playerCollision.check(this._enemyFireball[0]);
             this._playerCollision.check(this._fire);
             this.scoreText.text = gameController.ScoreValue.toString();
             this._livesText.text = gameController.LivesValue.toString();
@@ -141,7 +165,7 @@ var scenes;
                 this._collectableContainer.removeAllChildren();
                 stage.removeChild(this._enemyContainer, this._collectableContainer);
                 //Should be level 3
-                scene = config.Scene.LEVEL1;
+                scene = config.Scene.LEVEL3;
                 changeScene();
             }
         };
@@ -152,6 +176,16 @@ var scenes;
                     this._playerFireball[count].PositionFireBall();
                     createjs.Sound.play("shotFireball", { volume: 0.02 });
                     break;
+                }
+            }
+        };
+        Level2.prototype._enemyFire = function () {
+            if (gameController.LivesValue != 0) {
+                for (var count = 0; count < this._enemyFireballCount; count++) {
+                    if (this._enemyFireball[count].isAvailable) {
+                        this._enemyFireball[count].PositionFireBall();
+                        break;
+                    }
                 }
             }
         };

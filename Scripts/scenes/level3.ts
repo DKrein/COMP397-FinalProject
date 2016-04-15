@@ -33,9 +33,13 @@ module scenes {
         private _dragonEnemy1Count: number;
         private _dragonEnemy2: objects.DragonEnemy2[];
         private _dragonEnemy2Count: number;
+        private _dragonEnemy3: objects.DragonEnemy3[];
+        private _dragonEnemy3Count: number;
         private _boss: objects.Boss;
         private _playerFireball: objects.PlayerFireball[];
         private _playerFireballCount: number;
+        private _bossFireball: objects.BossFireball[];
+        private _bossFireballCount: number;
         private _enemyFireball: objects.EnemyFireball[];
         private _enemyFireballCount: number;
         private _playerFireballCollision: managers.PlayerFireballCollision[];
@@ -49,9 +53,8 @@ module scenes {
 
 
         private _enemyFireballCollision: managers.EnemyFireballCollision;
-        private _enemyFireballCollision1: managers.EnemyFireballCollision;
-        private _enemyFireballCollision2: managers.EnemyFireballCollision;
 
+        private _bossFireballCollision: managers.BossFireballCollision;
 
         private _livesWord: objects.Label;
         private _livesText: objects.Label;
@@ -80,13 +83,16 @@ module scenes {
             // Set _fireballCount Count
             this._dragonEnemy1Count = 1;
             this._dragonEnemy2Count = 1;
+            this._dragonEnemy3Count = 1;
             this._playerFireballCount = 3;
+            this._bossFireballCount = 1;
             this._enemyFireballCount = 1;
 
             // Instantiate _fireball array
             this._dragonEnemy1 = new Array<objects.DragonEnemy1>();
             this._dragonEnemy2 = new Array<objects.DragonEnemy2>();
             this._playerFireball = new Array<objects.PlayerFireball>();
+            this._bossFireball = new Array<objects.BossFireball>();
             this._enemyFireball = new Array<objects.EnemyFireball>(); 
             this._playerFireballCollision = new Array<managers.PlayerFireballCollision>();            
 
@@ -126,22 +132,26 @@ module scenes {
                 this.addChild(this._playerFireball[count]);
             }
 
-            for (var count: number = 0; count < this._enemyFireballCount; count++) {
-                this._enemyFireball[count] = new objects.EnemyFireball(this._boss);
-                this.addChild(this._enemyFireball[count]);
+            for (var count: number = 0; count < this._bossFireballCount; count++) {
+                this._bossFireball[count] = new objects.BossFireball(this._boss);
+                this.addChild(this._bossFireball[count]);
             }
             
+            for (var count: number = 0; count < this._enemyFireballCount; count++) {
+                this._enemyFireball[count] = new objects.EnemyFireball(this._dragonEnemy3[count]);
+                this.addChild(this._enemyFireball[count]);
+            }
 
             // added collision manager to the scene
             this._playerCollision = new managers.PlayerCollision(this._player);
-            
+
             for (var count: number = 0; count < this._playerFireballCount; count++) {
                 this._playerFireball[count] = new objects.PlayerFireball(this._player);
                 this.addChild(this._playerFireball[count]);
                 this._playerFireballCollision[count] = new managers.PlayerFireballCollision(this._playerFireball[count]);
             }
 
-            this._enemyFireballCollision = new managers.EnemyFireballCollision(this._enemyFireball[0]);
+            this._bossFireballCollision = new managers.BossFireballCollision(this._bossFireball[0]);
             // this._enemyFireballCollision1 = new managers.EnemyFireballCollision(this._enemyFireball[1]);
             // this._enemyFireballCollision2 = new managers.EnemyFireballCollision(this._enemyFireball[2]);
 
@@ -227,10 +237,14 @@ module scenes {
                 fireball.update();
             });
 
-            this._enemyFireball.forEach(fireball => {
+            this._bossFireball.forEach(fireball => {
                 fireball.update();
             });
             
+            this._enemyFireball.forEach(fireball => {
+                fireball.update();
+            });
+
             var countDrag = 0;
             //this._enemyFire();
             this._dragonEnemy1.forEach(dragon => {
@@ -239,8 +253,8 @@ module scenes {
                 this._playerCollision.check(dragon);
                 countDrag++;
             });
-            
-            countDrag=0;
+
+            countDrag = 0;
             this._dragonEnemy2.forEach(dragon => {
                 dragon.update();
                 this._playerFireballCollision[countDrag].check(dragon);
@@ -248,14 +262,25 @@ module scenes {
                 countDrag++;
             });
             
+            countDrag=0;
+            this._dragonEnemy3.forEach(dragon => {
+                dragon.update();
+                this._playerFireballCollision[countDrag].check(dragon);
+                this._playerCollision.check(dragon);
+                countDrag++;
+            });
+
+            this._bossFire();
             this._enemyFire();
-            this._boss.update();    
-            
+            this._boss.update();
+
             this._playerFireballCollision.forEach(playerFireballCollision => {
                 playerFireballCollision.check(this._boss);
-            });       
+            });
             
             this._playerCollision.check(this._enemyFireball[0]);
+
+            this._playerCollision.check(this._bossFireball[0]);
             // this._playerCollision.check(this._enemyFireball[1]);
             // this._playerCollision.check(this._enemyFireball[2]);
             this._playerCollision.check(this._boss);
@@ -316,9 +341,21 @@ module scenes {
             }
         }
 
+        private _bossFire(): void {
+
+            if (gameController.LivesValue != 0) {
+                for (var count: number = 0; count < this._bossFireballCount; count++) {
+                    if (this._bossFireball[count].isAvailable) {
+                        this._bossFireball[count].PositionFireBall();
+                        break;
+                    }
+                }
+            }
+        }
+        
         private _enemyFire(): void {
 
-            if (gameController.BossValue != 0) {
+            if (gameController.LivesValue != 0) {
                 for (var count: number = 0; count < this._enemyFireballCount; count++) {
                     if (this._enemyFireball[count].isAvailable) {
                         this._enemyFireball[count].PositionFireBall();
@@ -327,6 +364,8 @@ module scenes {
                 }
             }
         }
+        
+        
 
     }
 }

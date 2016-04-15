@@ -16,13 +16,13 @@ var __extends = (this && this.__extends) || function (d, b) {
 var objects;
 (function (objects) {
     // playerFireball CLASS ++++++++++++++++++++++++++++++++++++
-    var EnemyFireball = (function (_super) {
-        __extends(EnemyFireball, _super);
+    var BossFireball = (function (_super) {
+        __extends(BossFireball, _super);
         // CONSTRUCTOR METHOD +++++++++++++++++++++++++
-        function EnemyFireball(dragon) {
+        function BossFireball(boss) {
             _super.call(this, "enemyFireball");
             this.isAvailable = true;
-            this._dragon = dragon;
+            this._boss = boss;
             this._speed.x = 10;
             this.x = this._rightBounds + 100;
             this.name = "enemyFireball";
@@ -30,32 +30,32 @@ var objects;
         // PRIVATE METHODS ++++++++++++++++++++++++++++++
         // PROTECTED METHODS ++++++++++++++++++++++++++++
         // reset the playerFireball offscreen
-        EnemyFireball.prototype._reset = function (value) {
+        BossFireball.prototype._reset = function (value) {
             this.isAvailable = true;
             this.x = this._leftBounds;
             this.y = this._bottomBounds + 100;
         };
-        EnemyFireball.prototype._checkBounds = function (value) {
+        BossFireball.prototype._checkBounds = function (value) {
             // check to see if the top of the fireball 
             // is outside the viewport         
-            if (this._dragon.x >= value) {
+            if (this.x >= value) {
                 this._reset(this._leftBounds - 100);
             }
         };
         // PUBLIC METHODS ++++++++++++++++++++++++++++++
-        EnemyFireball.prototype.update = function () {
+        BossFireball.prototype.update = function () {
             // scroll the fireball left the screen
             this.x += this._speed.x;
             this._checkBounds(this._rightBounds);
         };
-        EnemyFireball.prototype.PositionFireBall = function () {
+        BossFireball.prototype.PositionFireBall = function () {
             this.isAvailable = false;
-            this.y = this._dragon.y + 30;
-            this.x = this._dragon.x + 80;
+            this.y = this._boss.y + 30;
+            this.x = this._boss.x + 80;
         };
-        return EnemyFireball;
+        return BossFireball;
     }(objects.GameObject));
-    objects.EnemyFireball = EnemyFireball;
+    objects.BossFireball = BossFireball;
 })(objects || (objects = {}));
 
-//# sourceMappingURL=enemyFireball.js.map
+//# sourceMappingURL=bossFireball.js.map

@@ -57,7 +57,7 @@ module managers {
                 } 
                 
                 // check if it's a fireball hit
-                if(object.name === "dragonEnemy1" || object.name === "dragonEnemy2") {
+                if(object.name === "dragonEnemy1" || object.name === "dragonEnemy2" || object.name === "dragonEnemy3") {
                     object.reset();
                     gameController.LivesValue--;
                     createjs.Sound.play("collect", {volume: 0.01});

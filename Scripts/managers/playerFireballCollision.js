@@ -29,6 +29,10 @@ var managers;
                     object.reset();
                     this._playerFireball.reset();
                 }
+                if (object.name === "dragonEnemy3") {
+                    object.reset();
+                    this._playerFireball.reset();
+                }
                 if (object.name === "boss") {
                     //object.reset();
                     this._playerFireball.reset();

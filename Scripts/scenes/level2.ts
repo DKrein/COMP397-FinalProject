@@ -29,8 +29,12 @@ module scenes {
         private _dragonEnemy1Count: number;
         private _dragonEnemy2: objects.DragonEnemy2[];
         private _dragonEnemy2Count: number;
+        private _dragonEnemy3: objects.DragonEnemy3[];
+        private _dragonEnemy3Count: number;
         private _playerFireball: objects.PlayerFireball[];
         private _playerFireballCount: number;
+        private _enemyFireball: objects.EnemyFireball[];
+        private _enemyFireballCount: number;
         private _playerFireballCollision: managers.PlayerFireballCollision[];
 
         private _stalactite: objects.Stalactites;
@@ -39,6 +43,8 @@ module scenes {
         private _playerCollision: managers.PlayerCollision;
         private _enemyContainer: createjs.Container;
         private _collectableContainer: createjs.Container;
+        
+        private _enemyFireballCollision: managers.EnemyFireballCollision;
 
         private _livesText: objects.Label;
         private _livesWord: objects.Label;
@@ -67,13 +73,18 @@ module scenes {
             // Set _fireballCount Count
             this._dragonEnemy1Count = 1;
             this._dragonEnemy2Count = 1;
+            this._dragonEnemy3Count = 1;
             this._playerFireballCount = 3;
+            this._enemyFireballCount = 1;
 
             // Instantiate _fireball array
             this._dragonEnemy1 = new Array<objects.DragonEnemy1>();
             this._dragonEnemy2 = new Array<objects.DragonEnemy2>();
+            this._dragonEnemy3 = new Array<objects.DragonEnemy3>();
             this._playerFireball = new Array<objects.PlayerFireball>();
+            this._enemyFireball = new Array<objects.EnemyFireball>(); 
             this._playerFireballCollision = new Array<managers.PlayerFireballCollision>();
+            
 
             // added _fire to the scene
             this._fire = new objects.Fire();
@@ -101,11 +112,21 @@ module scenes {
                 this._dragonEnemy2[count] = new objects.DragonEnemy2();
                 this._enemyContainer.addChild(this._dragonEnemy2[count]);
             }
+            
+            for (var count: number = 0; count < this._dragonEnemy3Count; count++) {
+                this._dragonEnemy3[count] = new objects.DragonEnemy3();
+                this._enemyContainer.addChild(this._dragonEnemy3[count]);
+            }
 
             for (var count: number = 0; count < this._playerFireballCount; count++) {
                 this._playerFireball[count] = new objects.PlayerFireball(this._player);
                 this.addChild(this._playerFireball[count]);
                 this._playerFireballCollision[count] = new managers.PlayerFireballCollision(this._playerFireball[count]);
+            }
+            
+            for (var count: number = 0; count < this._enemyFireballCount; count++) {
+                this._enemyFireball[count] = new objects.EnemyFireball(this._dragonEnemy3[count]);
+                this.addChild(this._enemyFireball[count]);
             }
 
             this._playerCollision = new managers.PlayerCollision(this._player);
@@ -172,6 +193,9 @@ module scenes {
             this._playerFireball.forEach(fireball => {
                 fireball.update();
             });
+            this._enemyFireball.forEach(fireball => {
+                fireball.update();
+            });
             
             var countDrag = 0;
             this._dragonEnemy1.forEach(dragon => {
@@ -188,6 +212,17 @@ module scenes {
                 this._playerCollision.check(dragon);
                 countDrag++;
             });
+            
+            countDrag=0;
+            this._dragonEnemy3.forEach(dragon => {
+                dragon.update();
+                this._playerFireballCollision[countDrag].check(dragon);
+                this._playerCollision.check(dragon);
+                countDrag++;
+            });
+            
+            this._enemyFire();
+            this._playerCollision.check(this._enemyFireball[0]);
 
             this._playerCollision.check(this._fire);
             this.scoreText.text = gameController.ScoreValue.toString();
@@ -215,7 +250,7 @@ module scenes {
                 stage.removeChild(this._enemyContainer, this._collectableContainer);
 
                 //Should be level 3
-                scene = config.Scene.LEVEL1;
+                scene = config.Scene.LEVEL3;
                 changeScene();
             }
         }
@@ -229,6 +264,18 @@ module scenes {
                     this._playerFireball[count].PositionFireBall();
                     createjs.Sound.play("shotFireball", {volume: 0.02});
                     break;
+                }
+            }
+        }
+        
+        private _enemyFire(): void {
+
+            if (gameController.LivesValue != 0) {
+                for (var count: number = 0; count < this._enemyFireballCount; count++) {
+                    if (this._enemyFireball[count].isAvailable) {
+                        this._enemyFireball[count].PositionFireBall();
+                        break;
+                    }
                 }
             }
         }
