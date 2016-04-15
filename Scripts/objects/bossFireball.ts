@@ -11,23 +11,23 @@ Revision:
 
 module objects {
     // playerFireball CLASS ++++++++++++++++++++++++++++++++++++
-    export class EnemyFireball extends objects.GameObject {
+    export class BossFireball extends objects.GameObject {
 
         public isAvailable: boolean;
 
         // PRIVATE INSTANCE VARIABLES +++++++++++++++++
-        private _dragon: objects.dragonEnemy3;
+        private _boss: objects.Boss;
 
         // CONSTRUCTOR METHOD +++++++++++++++++++++++++
-        constructor(dragon: objects.dragonEnemy3) {
+        constructor(boss: objects.Boss) {
             super("enemyFireball");
             this.isAvailable = true;
 
-            this._dragon = dragon;
+            this._boss = boss;
             this._speed.x = 10;
             this.x = this._rightBounds + 100;
             this.name = "enemyFireball";
-        } 
+        }
 
         // PRIVATE METHODS ++++++++++++++++++++++++++++++
 
@@ -43,7 +43,7 @@ module objects {
         protected _checkBounds(value: number): void {
             // check to see if the top of the fireball 
             // is outside the viewport         
-            if (this._dragon.x >= value) {
+            if (this.x >= value) {
                 this._reset(this._leftBounds - 100);
             }
         }
@@ -57,8 +57,8 @@ module objects {
 
         public PositionFireBall(): void {
             this.isAvailable=false;
-            this.y = this._dragon.y + 30;
-            this.x = this._dragon.x + 80;
+            this.y = this._boss.y + 30;
+            this.x = this._boss.x + 80;
         }
       
     }

@@ -7,6 +7,7 @@ File description: Manages the Menu scene in the game
 Revision:
 1. Added instruction button to the scene
 2. Added exit button to the scene
+3. Reseting lives and score whenever starting a game
 */
 
 // MENU SCENE
@@ -66,6 +67,10 @@ module scenes {
             // ExitButton event listener
             this._exitButton.on("click", this._exitButtonClick, this);
             
+            //reset the gamecontroller
+            gameController.BossValue = 10;
+            gameController.LivesValue = 10;
+            gameController.ScoreValue = 0;
             
             //this._playBackgroundSound();
             
@@ -89,7 +94,7 @@ module scenes {
         // StartButton click event handler
         private _startButtonClick(event: createjs.MouseEvent) {
             // Switch to the Play Scene
-            scene = config.Scene.LEVEL3;
+            scene = config.Scene.LEVEL2;
             changeScene();
         }
         

@@ -7,7 +7,7 @@ var managers;
         PlayerFireballCollision.prototype.distance = function (startPoint, endPoint) {
             return Math.sqrt(Math.pow((endPoint.x - startPoint.x), 2) + Math.pow(endPoint.y - startPoint.y, 2));
         };
-        PlayerFireballCollision.prototype.CheckPlayerFire = function (object) {
+        PlayerFireballCollision.prototype.check = function (object) {
             var startPoint = new createjs.Point();
             var endPoint = new createjs.Point();
             var playerHalfWidth = this._playerFireball.width * 0.5;
@@ -24,12 +24,14 @@ var managers;
                 if (object.name === "dragonEnemy1") {
                     object.reset();
                     this._playerFireball.reset();
-                    gameController.ScoreValue++;
                 }
                 if (object.name === "dragonEnemy2") {
                     object.reset();
                     this._playerFireball.reset();
-                    gameController.ScoreValue++;
+                }
+                if (object.name === "dragonEnemy3") {
+                    object.reset();
+                    this._playerFireball.reset();
                 }
                 if (object.name === "boss") {
                     //object.reset();

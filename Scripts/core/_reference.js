@@ -11,6 +11,7 @@
 /// <reference path="../objects/egg.ts"/>
 /// <reference path="../objects/dragonEnemy1.ts"/>
 /// <reference path="../objects/dragonEnemy2.ts" />
+/// <reference path="../objects/dragonEnemy2.ts" />
 /// <reference path="../objects/boss.ts" />
 /// <reference path="../objects/playerFireball.ts" />
 /// <reference path="../objects/enemyFireball.ts" />

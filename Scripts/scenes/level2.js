@@ -10,6 +10,7 @@ Revision:
 3. Added live checker to transition to gameover
 4. Renamed the class sky for background, added sounds in the right place
 5. fixed some names
+6. changed 3 playerFireballColision variables for an array
 */
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -36,14 +37,18 @@ var scenes;
             // Set _fireballCount Count
             this._dragonEnemy1Count = 1;
             this._dragonEnemy2Count = 1;
+            this._dragonEnemy3Count = 1;
             this._playerFireballCount = 3;
+            this._enemyFireballCount = 1;
             // Instantiate _fireball array
             this._dragonEnemy1 = new Array();
             this._dragonEnemy2 = new Array();
+            this._dragonEnemy3 = new Array();
             this._playerFireball = new Array();
+            this._enemyFireball = new Array();
+            this._playerFireballCollision = new Array();
             // added _fire to the scene
             this._fire = new objects.Fire();
-            //this.addChild(this._fire);
             this._collectableContainer.addChild(this._fire);
             //added stalactites to the scene
             this._stalactite = new objects.Stalactites();
@@ -63,13 +68,19 @@ var scenes;
                 this._dragonEnemy2[count] = new objects.DragonEnemy2();
                 this._enemyContainer.addChild(this._dragonEnemy2[count]);
             }
+            for (var count = 0; count < this._dragonEnemy3Count; count++) {
+                this._dragonEnemy3[count] = new objects.DragonEnemy3();
+                this._enemyContainer.addChild(this._dragonEnemy3[count]);
+            }
             for (var count = 0; count < this._playerFireballCount; count++) {
                 this._playerFireball[count] = new objects.PlayerFireball(this._player);
                 this.addChild(this._playerFireball[count]);
+                this._playerFireballCollision[count] = new managers.PlayerFireballCollision(this._playerFireball[count]);
             }
-            this._playerFireballCollision = new managers.PlayerFireballCollision(this._playerFireball[0]);
-            this._playerFireballCollision1 = new managers.PlayerFireballCollision(this._playerFireball[1]);
-            this._playerFireballCollision2 = new managers.PlayerFireballCollision(this._playerFireball[2]);
+            for (var count = 0; count < this._enemyFireballCount; count++) {
+                this._enemyFireball[count] = new objects.EnemyFireball(this._dragonEnemy3[count]);
+                this.addChild(this._enemyFireball[count]);
+            }
             this._playerCollision = new managers.PlayerCollision(this._player);
             // add this scene to the global stage container
             stage.addChild(this, this._enemyContainer, this._collectableContainer);
@@ -77,22 +88,18 @@ var scenes;
             this._backGround.on("click", this._playerFireClickHandler, this);
             //Add _scoreText to the scene
             this._livesWord = new objects.Label("LIVES: ", "bold 25px Britannic Bold", "#0434C4", 15, 15, false);
-            //this._livesText.textAlign = "right";
             this.addChild(this._livesWord);
             //Add _livesText to the scene
             this._livesText = new objects.Label("LIVES: " +
                 gameController.LivesValue.toString(), "bold 25px Britannic Bold", "#0434C4", 100, 15, false);
-            //this._livesText.textAlign = "right";
             this.addChild(this._livesText);
             //Add _scoreText to the scene
             this.scoreWord = new objects.Label("SCORE: ", "bold 25px Britannic Bold", "#0434C4", 500, 15, false);
-            //this._livesText.textAlign = "right";
             this.addChild(this.scoreWord);
             this.scoreText = new objects.Label("SCORE: " +
                 gameController.ScoreValue.toString(), "bold 25px Britannic Bold", "#0434C4", 600, 15, false);
-            //this._livesText.textAlign = "right";
-            //this._playBackgroundSound();
             this.addChild(this.scoreText);
+            //this._playBackgroundSound();
         };
         Level2.prototype._playBackgroundSound = function () {
             this._bgSound = createjs.Sound.play("gameBgMusic", { volume: 0.03 });
@@ -111,20 +118,32 @@ var scenes;
             this._playerFireball.forEach(function (fireball) {
                 fireball.update();
             });
+            this._enemyFireball.forEach(function (fireball) {
+                fireball.update();
+            });
+            var countDrag = 0;
             this._dragonEnemy1.forEach(function (dragon) {
                 dragon.update();
-                _this._playerFireballCollision.CheckPlayerFire(dragon);
-                _this._playerFireballCollision1.CheckPlayerFire(dragon);
-                _this._playerFireballCollision2.CheckPlayerFire(dragon);
+                _this._playerFireballCollision[countDrag].check(dragon);
                 _this._playerCollision.check(dragon);
+                countDrag++;
             });
+            countDrag = 0;
             this._dragonEnemy2.forEach(function (dragon) {
                 dragon.update();
-                _this._playerFireballCollision.CheckPlayerFire(dragon);
-                _this._playerFireballCollision1.CheckPlayerFire(dragon);
-                _this._playerFireballCollision2.CheckPlayerFire(dragon);
+                _this._playerFireballCollision[countDrag].check(dragon);
                 _this._playerCollision.check(dragon);
+                countDrag++;
             });
+            countDrag = 0;
+            this._dragonEnemy3.forEach(function (dragon) {
+                dragon.update();
+                _this._playerFireballCollision[countDrag].check(dragon);
+                _this._playerCollision.check(dragon);
+                countDrag++;
+            });
+            this._enemyFire();
+            this._playerCollision.check(this._enemyFireball[0]);
             this._playerCollision.check(this._fire);
             this.scoreText.text = gameController.ScoreValue.toString();
             this._livesText.text = gameController.LivesValue.toString();
@@ -146,7 +165,7 @@ var scenes;
                 this._collectableContainer.removeAllChildren();
                 stage.removeChild(this._enemyContainer, this._collectableContainer);
                 //Should be level 3
-                scene = config.Scene.LEVEL1;
+                scene = config.Scene.LEVEL3;
                 changeScene();
             }
         };
@@ -155,7 +174,18 @@ var scenes;
             for (var count = 0; count < this._playerFireballCount; count++) {
                 if (this._playerFireball[count].isAvailable) {
                     this._playerFireball[count].PositionFireBall();
+                    createjs.Sound.play("shotFireball", { volume: 0.02 });
                     break;
+                }
+            }
+        };
+        Level2.prototype._enemyFire = function () {
+            if (gameController.LivesValue != 0) {
+                for (var count = 0; count < this._enemyFireballCount; count++) {
+                    if (this._enemyFireball[count].isAvailable) {
+                        this._enemyFireball[count].PositionFireBall();
+                        break;
+                    }
                 }
             }
         };
