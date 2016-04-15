@@ -11,6 +11,8 @@ Revision:
 4. Renamed the class sky for background, added sounds in the right place
 5. fixed some names
 6. changed 3 playerFireballColision variables for an array
+7. added fire breathing dragon enemy and enemy fireball array
+8. added eggs to the scene
 */
 
 // LEVEL2 SCENE
@@ -23,7 +25,9 @@ module scenes {
 
         //PRIVATE INSTANCE VARIABLES ++++++++++++
         private _backGround: objects.BackgroundScroll;
-        private _fire: objects.Fire;
+        //private _fire: objects.Fire;
+        private _eggs: objects.Egg[];
+        private _eggCount: number;
 
         private _dragonEnemy1: objects.DragonEnemy1[];
         private _dragonEnemy1Count: number;
@@ -76,6 +80,7 @@ module scenes {
             this._dragonEnemy3Count = 1;
             this._playerFireballCount = 3;
             this._enemyFireballCount = 1;
+            this._eggCount = 3;
 
             // Instantiate _fireball array
             this._dragonEnemy1 = new Array<objects.DragonEnemy1>();
@@ -84,11 +89,11 @@ module scenes {
             this._playerFireball = new Array<objects.PlayerFireball>();
             this._enemyFireball = new Array<objects.EnemyFireball>(); 
             this._playerFireballCollision = new Array<managers.PlayerFireballCollision>();
+            this._eggs = new Array<objects.Egg>();
             
-
-            // added _fire to the scene
-            this._fire = new objects.Fire();
-            this._collectableContainer.addChild(this._fire);
+            // // added _fire to the scene
+            // this._fire = new objects.Fire();
+            // this._collectableContainer.addChild(this._fire);
 
             //added stalactites to the scene
             this._stalactite = new objects.Stalactites();
@@ -127,6 +132,12 @@ module scenes {
             for (var count: number = 0; count < this._enemyFireballCount; count++) {
                 this._enemyFireball[count] = new objects.EnemyFireball(this._dragonEnemy3[count]);
                 this.addChild(this._enemyFireball[count]);
+            }
+            
+            //added _eggs to the _collectableContainer
+            for (var egg: number = 0; egg < this._eggCount; egg++) {
+                this._eggs[egg] = new objects.Egg();
+                this._collectableContainer.addChild(this._eggs[egg]);
             }
 
             this._playerCollision = new managers.PlayerCollision(this._player);
@@ -180,7 +191,7 @@ module scenes {
         // PLAY Scene updates here
         public update(): void {
             this._backGround.update();
-            this._fire.update();
+            //this._fire.update();
 
             this._stalactite.update();
             this._playerCollision.check(this._stalactite);
@@ -195,6 +206,11 @@ module scenes {
             });
             this._enemyFireball.forEach(fireball => {
                 fireball.update();
+            });
+            
+            this._eggs.forEach(egg => {
+                egg.update();
+                this._playerCollision.check(egg);
             });
             
             var countDrag = 0;
@@ -224,7 +240,7 @@ module scenes {
             this._enemyFire();
             this._playerCollision.check(this._enemyFireball[0]);
 
-            this._playerCollision.check(this._fire);
+            //this._playerCollision.check(this._fire);
             this.scoreText.text = gameController.ScoreValue.toString();
             this._livesText.text = gameController.LivesValue.toString();
             this._checkLives();

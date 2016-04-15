@@ -1,7 +1,7 @@
 /*
 Author: Christine Cho, Douglas Krein, Francis Ofougwuka
 Last Modified by: Christine Cho
-Last Modified: 04/15/2016
+Last Modified: 03/28/2016
 File description: Manages the Level3 scene
 
 Revision:
@@ -215,12 +215,12 @@ var scenes;
         };
         //Add boss to scene
         Level3.prototype._summonBoss = function () {
-            if (this._backGround.backgroundResetCount > 1) {
-                this._enemyContainer.addChild(this._boss);
-                this.addChild(this.bossWord);
-                this.addChild(this.bossText);
-                console.log("Boss");
-            }
+            //if (this._backGround.backgroundResetCount > 1) {
+            this._enemyContainer.addChild(this._boss);
+            this.addChild(this.bossWord);
+            this.addChild(this.bossText);
+            console.log("Boss");
+            //}
         };
         //EVENT HANDLERS ++++++++++++++++++++
         Level3.prototype._playerFire = function (event) {

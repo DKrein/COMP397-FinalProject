@@ -1,7 +1,7 @@
 /*
 Author: Christine Cho, Douglas Krein, Francis Ofougwuka
 Last Modified by: Christine Cho
-Last Modified: 04/15/2016
+Last Modified: 03/28/2016
 File description: Manages the Level3 scene
 
 Revision:
@@ -328,13 +328,13 @@ module scenes {
         //Add boss to scene
         private _summonBoss(): void {
 
-            if (this._backGround.backgroundResetCount > 1) {
+            //if (this._backGround.backgroundResetCount > 1) {
             this._enemyContainer.addChild(this._boss);
             this.addChild(this.bossWord);
             this.addChild(this.bossText);
 
             console.log("Boss");
-            }
+            //}
         }
 
         //EVENT HANDLERS ++++++++++++++++++++

@@ -11,6 +11,8 @@ Revision:
 4. Renamed the class sky for background, added sounds in the right place
 5. fixed some names
 6. changed 3 playerFireballColision variables for an array
+7. added fire breathing dragon enemy and enemy fireball array
+8. added eggs to the scene
 */
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -40,6 +42,7 @@ var scenes;
             this._dragonEnemy3Count = 1;
             this._playerFireballCount = 3;
             this._enemyFireballCount = 1;
+            this._eggCount = 3;
             // Instantiate _fireball array
             this._dragonEnemy1 = new Array();
             this._dragonEnemy2 = new Array();
@@ -47,9 +50,10 @@ var scenes;
             this._playerFireball = new Array();
             this._enemyFireball = new Array();
             this._playerFireballCollision = new Array();
-            // added _fire to the scene
-            this._fire = new objects.Fire();
-            this._collectableContainer.addChild(this._fire);
+            this._eggs = new Array();
+            // // added _fire to the scene
+            // this._fire = new objects.Fire();
+            // this._collectableContainer.addChild(this._fire);
             //added stalactites to the scene
             this._stalactite = new objects.Stalactites();
             this._enemyContainer.addChild(this._stalactite);
@@ -81,6 +85,11 @@ var scenes;
                 this._enemyFireball[count] = new objects.EnemyFireball(this._dragonEnemy3[count]);
                 this.addChild(this._enemyFireball[count]);
             }
+            //added _eggs to the _collectableContainer
+            for (var egg = 0; egg < this._eggCount; egg++) {
+                this._eggs[egg] = new objects.Egg();
+                this._collectableContainer.addChild(this._eggs[egg]);
+            }
             this._playerCollision = new managers.PlayerCollision(this._player);
             // add this scene to the global stage container
             stage.addChild(this, this._enemyContainer, this._collectableContainer);
@@ -109,7 +118,7 @@ var scenes;
         Level2.prototype.update = function () {
             var _this = this;
             this._backGround.update();
-            this._fire.update();
+            //this._fire.update();
             this._stalactite.update();
             this._playerCollision.check(this._stalactite);
             this._stalagmite.update();
@@ -120,6 +129,10 @@ var scenes;
             });
             this._enemyFireball.forEach(function (fireball) {
                 fireball.update();
+            });
+            this._eggs.forEach(function (egg) {
+                egg.update();
+                _this._playerCollision.check(egg);
             });
             var countDrag = 0;
             this._dragonEnemy1.forEach(function (dragon) {
@@ -144,7 +157,7 @@ var scenes;
             });
             this._enemyFire();
             this._playerCollision.check(this._enemyFireball[0]);
-            this._playerCollision.check(this._fire);
+            //this._playerCollision.check(this._fire);
             this.scoreText.text = gameController.ScoreValue.toString();
             this._livesText.text = gameController.LivesValue.toString();
             this._checkLives();
