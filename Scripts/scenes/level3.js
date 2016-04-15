@@ -1,7 +1,7 @@
 /*
 Author: Christine Cho, Douglas Krein, Francis Ofougwuka
 Last Modified by: Christine Cho
-Last Modified: 03/28/2016
+Last Modified: 04/15/2016
 File description: Manages the Level3 scene
 
 Revision:
@@ -11,7 +11,9 @@ Revision:
 4. Renamed the class sky for background, added sounds in the right place
 5. fixed some names
 6. Added boss and boss label
-6. changed 3 playerFireballColision variables for an array
+7. changed 3 playerFireballColision variables for an array
+8. Fixed boss movement and fireballs
+9. Added fire breathing dragon enemy
 */
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -45,6 +47,7 @@ var scenes;
             // Instantiate _fireball array
             this._dragonEnemy1 = new Array();
             this._dragonEnemy2 = new Array();
+            this._dragonEnemy3 = new Array();
             this._playerFireball = new Array();
             this._bossFireball = new Array();
             this._enemyFireball = new Array();
@@ -73,6 +76,10 @@ var scenes;
                 this._dragonEnemy2[count] = new objects.DragonEnemy2();
                 this._enemyContainer.addChild(this._dragonEnemy2[count]);
             }
+            for (var count = 0; count < this._dragonEnemy3Count; count++) {
+                this._dragonEnemy3[count] = new objects.DragonEnemy3();
+                this._enemyContainer.addChild(this._dragonEnemy3[count]);
+            }
             for (var count = 0; count < this._playerFireballCount; count++) {
                 this._playerFireball[count] = new objects.PlayerFireball(this._player);
                 this.addChild(this._playerFireball[count]);
@@ -92,7 +99,7 @@ var scenes;
                 this.addChild(this._playerFireball[count]);
                 this._playerFireballCollision[count] = new managers.PlayerFireballCollision(this._playerFireball[count]);
             }
-            this._bossFireballCollision = new managers.BossFireballCollision(this._bossFireball[0]);
+            //this._bossFireballCollision = new managers.BossFireballCollision(this._bossFireball[0]);
             // this._enemyFireballCollision1 = new managers.EnemyFireballCollision(this._enemyFireball[1]);
             // this._enemyFireballCollision2 = new managers.EnemyFireballCollision(this._enemyFireball[2]);
             // add this scene to the global stage container
@@ -208,12 +215,12 @@ var scenes;
         };
         //Add boss to scene
         Level3.prototype._summonBoss = function () {
-            //if (this._backGround.backgroundResetCount > 1) {
-            this._enemyContainer.addChild(this._boss);
-            this.addChild(this.bossWord);
-            this.addChild(this.bossText);
-            console.log("Boss");
-            //}
+            if (this._backGround.backgroundResetCount > 1) {
+                this._enemyContainer.addChild(this._boss);
+                this.addChild(this.bossWord);
+                this.addChild(this.bossText);
+                console.log("Boss");
+            }
         };
         //EVENT HANDLERS ++++++++++++++++++++
         Level3.prototype._playerFire = function (event) {

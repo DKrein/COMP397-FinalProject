@@ -50,6 +50,8 @@ var scenes;
             gameController.LivesValue = 10;
             gameController.ScoreValue = 0;
             //this._playBackgroundSound();
+            // Instantiate Game Controls
+            this.keyboardControls = new objects.KeyboardControls();
             // add this scene to the global stage container
             stage.addChild(this);
         };
@@ -59,6 +61,7 @@ var scenes;
         };
         // INTRO Scene updates here
         Menu.prototype.update = function () {
+            this.checkControls();
         };
         //EVENT HANDLERS ++++++++++++++++++++
         // StartButton click event handler
@@ -77,6 +80,16 @@ var scenes;
         Menu.prototype._exitButtonClick = function (event) {
             // Switch to the EXIT Scene
             window.close();
+        };
+        Menu.prototype.checkControls = function () {
+            if (this.keyboardControls.changeToLevel2) {
+                scene = config.Scene.LEVEL2;
+                changeScene();
+            }
+            if (this.keyboardControls.changeToLevel3) {
+                scene = config.Scene.LEVEL3;
+                changeScene();
+            }
         };
         return Menu;
     }(objects.Scene));

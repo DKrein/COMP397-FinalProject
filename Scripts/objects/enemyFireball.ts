@@ -16,10 +16,10 @@ module objects {
         public isAvailable: boolean;
 
         // PRIVATE INSTANCE VARIABLES +++++++++++++++++
-        private _dragon: objects.dragonEnemy3;
+        private _dragon: objects.DragonEnemy3;
 
         // CONSTRUCTOR METHOD +++++++++++++++++++++++++
-        constructor(dragon: objects.dragonEnemy3) {
+        constructor(dragon: objects.DragonEnemy3) {
             super("enemyFireball");
             this.isAvailable = true;
 
@@ -59,7 +59,7 @@ module objects {
             this.isAvailable=false;
             this.y = this._dragon.y + 30;
             this.x = this._dragon.x + 80;
-        }
+            }
       
     }
 }
