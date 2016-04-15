@@ -86,7 +86,7 @@ module scenes {
             this._dragonEnemy1Count = 1;
             this._dragonEnemy2Count = 1;
             this._dragonEnemy3Count = 1;
-            this._playerFireballCount = 3;
+            this._playerFireballCount = 1;
             this._bossFireballCount = 1;
             this._enemyFireballCount = 1;
 
@@ -100,7 +100,7 @@ module scenes {
             this._playerFireballCollision = new Array<managers.PlayerFireballCollision>();            
 
             // added _fire to the scene
-            this._fire = new objects.Fire();
+            //this._fire = new objects.Fire();
             //this.addChild(this._fire);
             this._collectableContainer.addChild(this._fire);
             
@@ -159,9 +159,9 @@ module scenes {
                 this._playerFireballCollision[count] = new managers.PlayerFireballCollision(this._playerFireball[count]);
             }
 
-            //this._bossFireballCollision = new managers.BossFireballCollision(this._bossFireball[0]);
-            // this._enemyFireballCollision1 = new managers.EnemyFireballCollision(this._enemyFireball[1]);
-            // this._enemyFireballCollision2 = new managers.EnemyFireballCollision(this._enemyFireball[2]);
+            // added _fire to the scene
+            this._fire = new objects.Fire();
+            this._collectableContainer.addChild(this._fire);
 
             // add this scene to the global stage container
             stage.addChild(this, this._enemyContainer, this._collectableContainer);
@@ -289,8 +289,6 @@ module scenes {
             this._playerCollision.check(this._enemyFireball[0]);
 
             this._playerCollision.check(this._bossFireball[0]);
-            // this._playerCollision.check(this._enemyFireball[1]);
-            // this._playerCollision.check(this._enemyFireball[2]);
             this._playerCollision.check(this._boss);
 
             this._playerCollision.check(this._fire);
