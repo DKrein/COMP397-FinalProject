@@ -55,6 +55,7 @@ var assetData: objects.Asset[] = [
     { id: "level2Background", src: "../../Assets/images/level2Background.png" },
     { id: "level3Background", src: "../../Assets/images/level3Background.png" },
     { id: "victorybackground", src: "../../Assets/images/victorybackground.png" },
+    { id: "ScoreOverlay", src: "../../Assets/images/ScoreOverlay.png" },
     
     //player
     { id: "playerBaby", src: "../../Assets/images/playerBaby.png" },

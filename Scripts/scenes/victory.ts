@@ -30,6 +30,8 @@ module scenes {
         
         // Start Method
         public start(): void {
+            createjs.Sound.stop();
+            
             //Add Gameover Image
             this._victoryImage = new createjs.Bitmap(assets.getResult("victorybackground"));
             this.addChild(this._victoryImage);
@@ -37,7 +39,7 @@ module scenes {
             //add the final score label
             //Add _scoreText to the scene
             this.scoreWord = new objects.Label("HIGHSCORE: " + gameController.ScoreValue,
-                "bold 25px Britannic Bold",
+                "bold 25px Finger Paint",
                 "#00FF00",
                 config.Screen.CENTER_X,
                 config.Screen.CENTER_Y + 30, true);
@@ -64,7 +66,7 @@ module scenes {
         }
         
         private _playBackgroundSound(): void{
-            this._bgSound = createjs.Sound.play("victorymusic", {volume: 0.03});
+            this._bgSound = createjs.Sound.play("victorymusic", {volume: 0.001});
             this._bgSound.on("complete",this._playBackgroundSound,this);
         }
 

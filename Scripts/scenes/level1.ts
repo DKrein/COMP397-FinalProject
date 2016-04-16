@@ -39,6 +39,7 @@ module scenes {
         private _livesWord: objects.Label;
         private _livesText: objects.Label;
         private _bgSound: any;
+        private _scoreOverlay: createjs.Bitmap;
 
         // CONSTRUCTOR ++++++++++++++++++++++
         constructor() {
@@ -95,53 +96,59 @@ module scenes {
             }
 
             // added collision manager to the scene
-            this._playerCollision = new managers.PlayerCollision(this._player); 
-
+            this._playerCollision = new managers.PlayerCollision(this._player);
             
+            // add this, _enemyContainer, _collectableContainer to the global stage container
+            stage.addChild(this, this._enemyContainer, this._collectableContainer);
+                         
+            //stage.setChildIndex( displayObject, stage.getNumChildren()-1);
+            this._scoreOverlay = new createjs.Bitmap(assets.getResult("ScoreOverlay"));
+            this._scoreOverlay.x = config.Screen.WIDTH/2 - (this._scoreOverlay.getBounds().width/2);
+            this._scoreOverlay.y = 10;
+            this.addChild(this._scoreOverlay);            
 
             //Add _scoreText to the scene
             this._livesWord = new objects.Label("LIVES: ",
-                "bold 25px Britannic Bold",
+                "bold 25px Finger Paint",
                 "#0434C4",
-                15, 15, false);
+                15, 25, false);
             //this._livesText.textAlign = "right";
             this.addChild(this._livesWord);
 
             //Add _livesText to the scene
             this._livesText = new objects.Label("LIVES: " +
                 gameController.LivesValue.toString(),
-                "bold 25px Britannic Bold",
+                "bold 25px Finger Paint",
                 "#0434C4",
-                100, 15, false);
+                100, 25, false);
             //this._livesText.textAlign = "right";
             this.addChild(this._livesText);
 
             //Add _scoreText to the scene
             this.scoreWord = new objects.Label("SCORE: ",
-                "bold 25px Britannic Bold",
+                "bold 25px Finger Paint",
                 "#0434C4",
-                500, 15, false);
+                870, 25, false);
             //this._livesText.textAlign = "right";
             this.addChild(this.scoreWord);
 
             this.scoreText = new objects.Label("SCORE: " +
                 gameController.ScoreValue.toString(),
-                "bold 25px Britannic Bold",
+                "bold 25px Finger Paint",
                 "#0434C4",
-                600, 15, false);
+                970, 25, false);
                 
-            //this._playBackgroundSound();
-            
-            //this._livesText.textAlign = "right";
             this.addChild(this.scoreText);
             
-            // add this, _enemyContainer, _collectableContainer to the global stage container
-            stage.addChild(this, this._enemyContainer, this._collectableContainer);
+            this._playBackgroundSound();
+            
+            
+            
 
         }
         
         private _playBackgroundSound(): void{
-            this._bgSound = createjs.Sound.play("gameBgMusic", {volume: 0.03});
+            this._bgSound = createjs.Sound.play("gameBgMusic", {volume: 0.002});
             this._bgSound.on("complete",this._playBackgroundSound,this);
         }
 
@@ -201,6 +208,8 @@ module scenes {
         }
         
         private checkControls(): void {
+            //reset music from previous screen
+              
             if (keyboardControls.changeToLevel1) {
                 scene = config.Scene.LEVEL1;
                 changeScene();

@@ -32,6 +32,7 @@ var scenes;
         // PUBLIC METHODS +++++++++++++++++++++
         // Start Method
         Level3.prototype.start = function () {
+            createjs.Sound.stop();
             this._enemyContainer = new createjs.Container;
             this._collectableContainer = new createjs.Container;
             // added _sky to the scene
@@ -107,30 +108,34 @@ var scenes;
             // add stage click Listener
             this._backGround.on("click", this._playerFire, this);
             //this._backGround.on("click", this._enemyFire, this);
+            this._scoreOverlay = new createjs.Bitmap(assets.getResult("ScoreOverlay"));
+            this._scoreOverlay.x = config.Screen.WIDTH / 2 - (this._scoreOverlay.getBounds().width / 2);
+            this._scoreOverlay.y = 10;
+            this.addChild(this._scoreOverlay);
             //Add _scoreText to the scene
-            this._livesWord = new objects.Label("LIVES: ", "bold 25px Britannic Bold", "#0434C4", 15, 15, false);
+            this._livesWord = new objects.Label("LIVES: ", "bold 25px Finger Paint", "#0434C4", 15, 25, false);
             //this._livesText.textAlign = "right";
             this.addChild(this._livesWord);
             //Add _livesText to the scene
             this._livesText = new objects.Label("LIVES: " +
-                gameController.LivesValue.toString(), "bold 25px Britannic Bold", "#0434C4", 100, 15, false);
+                gameController.LivesValue.toString(), "bold 25px Finger Paint", "#0434C4", 100, 25, false);
             //this._livesText.textAlign = "right";
             this.addChild(this._livesText);
             //Add _scoreText to the scene
-            this.scoreWord = new objects.Label("SCORE: ", "bold 25px Britannic Bold", "#0434C4", 900, 15, false);
+            this.scoreWord = new objects.Label("SCORE: ", "bold 25px Finger Paint", "#0434C4", 870, 25, false);
             //this._livesText.textAlign = "right";
             this.addChild(this.scoreWord);
             this.scoreText = new objects.Label("SCORE: " +
-                gameController.ScoreValue.toString(), "bold 25px Britannic Bold", "#0434C4", 1000, 15, false);
+                gameController.ScoreValue.toString(), "bold 25px Finger Paint", "#0434C4", 970, 25, false);
             //this._livesText.textAlign = "right";
-            //this._playBackgroundSound();
             this.addChild(this.scoreText);
-            this.bossWord = new objects.Label("BOSS: ", "bold 40px Britannic Bold", "#FF0000", 490, 15, false);
+            this.bossWord = new objects.Label("BOSS: ", "bold 40px Finger Paint", "#FF0000", 460, 12, false);
             //this._livesText.textAlign = "right";
-            this.bossText = new objects.Label(gameController.BossValue.toString(), "bold 40px Britannic Bold", "#FF0000", 525, 55, false);
+            this.bossText = new objects.Label(gameController.BossValue.toString(), "bold 40px Finger Paint", "#FF0000", 610, 12, false);
+            this._playBackgroundSound();
         };
         Level3.prototype._playBackgroundSound = function () {
-            this._bgSound = createjs.Sound.play("gameBgMusic", { volume: 0.03 });
+            this._bgSound = createjs.Sound.play("gameBgMusic", { volume: 0.002 });
             this._bgSound.on("complete", this._playBackgroundSound, this);
         };
         // PLAY Scene updates here
@@ -240,6 +245,7 @@ var scenes;
             for (var count = 0; count < this._playerFireballCount; count++) {
                 console.log("CLICKER CLICK");
                 if (this._playerFireball[count].isAvailable) {
+                    createjs.Sound.play("shotFireball", { volume: 0.02 });
                     this._playerFireball[count].PositionFireBall();
                     break;
                 }
@@ -249,7 +255,6 @@ var scenes;
             if (gameController.LivesValue != 0) {
                 for (var count = 0; count < this._bossFireballCount; count++) {
                     if (this._bossFireball[count].isAvailable) {
-                        createjs.Sound.play("shotFireball", { volume: 0.02 });
                         this._bossFireball[count].PositionFireBall();
                         break;
                     }

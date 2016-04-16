@@ -24,12 +24,13 @@ var scenes;
         // PUBLIC METHODS ++++++++++++++++++++
         // Start Method
         Victory.prototype.start = function () {
+            createjs.Sound.stop();
             //Add Gameover Image
             this._victoryImage = new createjs.Bitmap(assets.getResult("victorybackground"));
             this.addChild(this._victoryImage);
             //add the final score label
             //Add _scoreText to the scene
-            this.scoreWord = new objects.Label("HIGHSCORE: " + gameController.ScoreValue, "bold 25px Britannic Bold", "#00FF00", config.Screen.CENTER_X, config.Screen.CENTER_Y + 30, true);
+            this.scoreWord = new objects.Label("HIGHSCORE: " + gameController.ScoreValue, "bold 25px Finger Paint", "#00FF00", config.Screen.CENTER_X, config.Screen.CENTER_Y + 30, true);
             //this._livesText.textAlign = "right";
             this.addChild(this.scoreWord);
             level3.scoreText.text;
@@ -43,7 +44,7 @@ var scenes;
             stage.addChild(this);
         };
         Victory.prototype._playBackgroundSound = function () {
-            this._bgSound = createjs.Sound.play("victorymusic", { volume: 0.03 });
+            this._bgSound = createjs.Sound.play("victorymusic", { volume: 0.001 });
             this._bgSound.on("complete", this._playBackgroundSound, this);
         };
         // PLAY Scene updates here

@@ -30,6 +30,7 @@ module scenes {
         // Start Method
         public start(): void {
             createjs.Sound.stop();
+            
             //Add Background Image
             this._backgroundImage = new createjs.Bitmap(assets.getResult("menuBackground"));
             this.addChild(this._backgroundImage);
@@ -91,7 +92,7 @@ module scenes {
         // StartButton click event handler
         private _startButtonClick(event: createjs.MouseEvent) {
             // Switch to the Play Scene
-            scene = config.Scene.LEVEL3;
+            scene = config.Scene.LEVEL1;
             changeScene();
         }
         

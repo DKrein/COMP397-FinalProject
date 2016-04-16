@@ -24,6 +24,7 @@ var scenes;
         // PUBLIC METHODS +++++++++++++++++++++
         // Start Method
         Instruction.prototype.start = function () {
+            createjs.Sound.stop();
             //Add Background Image
             this._instructionImage = new createjs.Bitmap(assets.getResult("instructionBackground"));
             this.addChild(this._instructionImage);

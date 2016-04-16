@@ -31,6 +31,7 @@ var scenes;
         // PUBLIC METHODS +++++++++++++++++++++
         // Start Method
         Level2.prototype.start = function () {
+            createjs.Sound.stop();
             this._enemyContainer = new createjs.Container;
             this._collectableContainer = new createjs.Container;
             // added _sky to the scene
@@ -95,23 +96,27 @@ var scenes;
             stage.addChild(this, this._enemyContainer, this._collectableContainer);
             // add stage click Listener
             this._backGround.on("click", this._playerFireClickHandler, this);
+            this._scoreOverlay = new createjs.Bitmap(assets.getResult("ScoreOverlay"));
+            this._scoreOverlay.x = config.Screen.WIDTH / 2 - (this._scoreOverlay.getBounds().width / 2);
+            this._scoreOverlay.y = 10;
+            this.addChild(this._scoreOverlay);
             //Add _scoreText to the scene
-            this._livesWord = new objects.Label("LIVES: ", "bold 25px Britannic Bold", "#0434C4", 15, 15, false);
+            this._livesWord = new objects.Label("LIVES: ", "bold 25px Finger Paint", "#0434C4", 15, 25, false);
             this.addChild(this._livesWord);
             //Add _livesText to the scene
             this._livesText = new objects.Label("LIVES: " +
-                gameController.LivesValue.toString(), "bold 25px Britannic Bold", "#0434C4", 100, 15, false);
+                gameController.LivesValue.toString(), "bold 25px Finger Paint", "#0434C4", 100, 25, false);
             this.addChild(this._livesText);
             //Add _scoreText to the scene
-            this.scoreWord = new objects.Label("SCORE: ", "bold 25px Britannic Bold", "#0434C4", 500, 15, false);
+            this.scoreWord = new objects.Label("SCORE: ", "bold 25px Finger Paint", "#0434C4", 870, 25, false);
             this.addChild(this.scoreWord);
             this.scoreText = new objects.Label("SCORE: " +
-                gameController.ScoreValue.toString(), "bold 25px Britannic Bold", "#0434C4", 600, 15, false);
+                gameController.ScoreValue.toString(), "bold 25px Finger Paint", "#0434C4", 970, 25, false);
             this.addChild(this.scoreText);
-            //this._playBackgroundSound();
+            this._playBackgroundSound();
         };
         Level2.prototype._playBackgroundSound = function () {
-            this._bgSound = createjs.Sound.play("gameBgMusic", { volume: 0.03 });
+            this._bgSound = createjs.Sound.play("gameBgMusic", { volume: 0.002 });
             this._bgSound.on("complete", this._playBackgroundSound, this);
         };
         // PLAY Scene updates here

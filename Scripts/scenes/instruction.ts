@@ -26,6 +26,7 @@ module scenes {
         
         // Start Method
         public start(): void {
+            createjs.Sound.stop();
             
             //Add Background Image
             this._instructionImage = new createjs.Bitmap(assets.getResult("instructionBackground"));

@@ -64,7 +64,7 @@ var scenes;
         // StartButton click event handler
         Menu.prototype._startButtonClick = function (event) {
             // Switch to the Play Scene
-            scene = config.Scene.LEVEL3;
+            scene = config.Scene.LEVEL1;
             changeScene();
         };
         // StartButton click event handler

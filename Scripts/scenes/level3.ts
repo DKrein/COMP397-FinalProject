@@ -62,6 +62,7 @@ module scenes {
         private _livesText: objects.Label;
 
         private _bgSound: any;
+        private _scoreOverlay: createjs.Bitmap;
 
         // CONSTRUCTOR ++++++++++++++++++++++
         constructor() {
@@ -73,8 +74,8 @@ module scenes {
 
         // Start Method
         public start(): void {
-
-
+            createjs.Sound.stop();
+            
             this._enemyContainer = new createjs.Container;
             this._collectableContainer = new createjs.Container;
             
@@ -170,60 +171,63 @@ module scenes {
             this._backGround.on("click", this._playerFire, this);
             //this._backGround.on("click", this._enemyFire, this);
 
+            this._scoreOverlay = new createjs.Bitmap(assets.getResult("ScoreOverlay"));
+            this._scoreOverlay.x = config.Screen.WIDTH/2 - (this._scoreOverlay.getBounds().width/2);
+            this._scoreOverlay.y = 10;
+            this.addChild(this._scoreOverlay); 
+            
             //Add _scoreText to the scene
             this._livesWord = new objects.Label("LIVES: ",
-                "bold 25px Britannic Bold",
+                "bold 25px Finger Paint",
                 "#0434C4",
-                15, 15, false);
+                15, 25, false);
             //this._livesText.textAlign = "right";
             this.addChild(this._livesWord);
-
+            
             //Add _livesText to the scene
             this._livesText = new objects.Label("LIVES: " +
                 gameController.LivesValue.toString(),
-                "bold 25px Britannic Bold",
+                "bold 25px Finger Paint",
                 "#0434C4",
-                100, 15, false);
+                100, 25, false);
             //this._livesText.textAlign = "right";
             this.addChild(this._livesText);
 
             //Add _scoreText to the scene
             this.scoreWord = new objects.Label("SCORE: ",
-                "bold 25px Britannic Bold",
+                "bold 25px Finger Paint",
                 "#0434C4",
-                900, 15, false);
+                870, 25, false);
             //this._livesText.textAlign = "right";
             this.addChild(this.scoreWord);
 
             this.scoreText = new objects.Label("SCORE: " +
                 gameController.ScoreValue.toString(),
-                "bold 25px Britannic Bold",
+                "bold 25px Finger Paint",
                 "#0434C4",
-                1000, 15, false);
+                970, 25, false);
             //this._livesText.textAlign = "right";
-            
-            
-            //this._playBackgroundSound();
-            
             
             this.addChild(this.scoreText);
 
             this.bossWord = new objects.Label("BOSS: ",
-                "bold 40px Britannic Bold",
+                "bold 40px Finger Paint",
                 "#FF0000",
-                490, 15, false);
+                460,12, false);
             //this._livesText.textAlign = "right";
 
             this.bossText = new objects.Label(
                 gameController.BossValue.toString(),
-                "bold 40px Britannic Bold",
+                "bold 40px Finger Paint",
                 "#FF0000",
-                525, 55, false);
+                610, 12, false);
+                
+            this._playBackgroundSound();
 
         }
 
         private _playBackgroundSound(): void {
-            this._bgSound = createjs.Sound.play("gameBgMusic", { volume: 0.03 });
+            this._bgSound = createjs.Sound.play("gameBgMusic", { volume: 0.002});
             this._bgSound.on("complete", this._playBackgroundSound, this);
         }
 
@@ -359,6 +363,7 @@ module scenes {
             for (var count: number = 0; count < this._playerFireballCount; count++) {
                 console.log("CLICKER CLICK");
                 if (this._playerFireball[count].isAvailable) {
+                    createjs.Sound.play("shotFireball", {volume: 0.02});
                     this._playerFireball[count].PositionFireBall();
                     break;
                 }
@@ -370,7 +375,6 @@ module scenes {
             if (gameController.LivesValue != 0) {
                 for (var count: number = 0; count < this._bossFireballCount; count++) {
                     if (this._bossFireball[count].isAvailable) {
-                        createjs.Sound.play("shotFireball", {volume: 0.02});
                         this._bossFireball[count].PositionFireBall();
                         break;
                     }
