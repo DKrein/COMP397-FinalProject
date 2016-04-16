@@ -28,6 +28,7 @@ var end;
 var level1;
 var level2;
 var level3;
+var victory;
 //GameController
 var gameController;
 var assetData = [
@@ -45,6 +46,7 @@ var assetData = [
     { id: "level1Background", src: "../../Assets/images/level1Background.png" },
     { id: "level2Background", src: "../../Assets/images/level2Background.png" },
     { id: "level3Background", src: "../../Assets/images/level3Background.png" },
+    { id: "victorybackground", src: "../../Assets/images/victorybackground.png" },
     //player
     { id: "playerBaby", src: "../../Assets/images/playerBaby.png" },
     { id: "player", src: "../../Assets/images/player.png" },
@@ -74,6 +76,7 @@ var assetData = [
     //background musics
     { id: "gameOverBgMusic", src: "../../Assets/audio/gameover.mp3" },
     { id: "menuBgMusic", src: "../../Assets/audio/opening.mp3" },
+    { id: "victorymusic", src: "../../Assets/audio/victory.mp3" },
     { id: "gameBgMusic", src: "../../Assets/audio/background.mp3" }
 ];
 function preload() {
@@ -166,6 +169,13 @@ function changeScene() {
             end = new scenes.End();
             currentScene = end;
             console.log("Starting END Scene");
+            break;
+        case config.Scene.VICTORY:
+            // show the END scene
+            stage.removeAllChildren();
+            victory = new scenes.Victory();
+            currentScene = victory;
+            console.log("Starting VICTORY Scene");
             break;
     }
 }

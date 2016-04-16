@@ -8,6 +8,7 @@
         public static LEVEL1: number = 3;        
         public static LEVEL2: number = 4;
         public static LEVEL3: number = 5;
+        public static VICTORY: number = 6;
     }
     
     

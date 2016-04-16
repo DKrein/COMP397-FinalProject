@@ -15,12 +15,14 @@ module managers {
         private _livesValue: number;
         private _scoreValue: number;
         private _bossValue: number;
+        // private _fireValue: number;
         
         constructor() {
 
             this._livesValue = 10;
             this._scoreValue = 0;
             this._bossValue = 10;
+            // this._fireValue = 0;
         }
 
         //GETTER AND SETTER for livesValuse and ScoreValue
@@ -44,6 +46,13 @@ module managers {
         set BossValue(value : number) {
             this._bossValue = value;
         }
+        
+        // get FireValue(): number {
+        //     return this._fireValue;
+        // }
+        // set FireValue(value : number) {
+        //     this._fireValue = value;
+        // }
 
 
     }

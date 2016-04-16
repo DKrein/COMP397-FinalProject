@@ -57,6 +57,7 @@ module managers {
                 if( object.name === "fire") {
                     console.log("fire collected!");
                     object.reset();
+                    
                     //DO SOMETHING HERE IN THE FUTURE
                 } 
                 
