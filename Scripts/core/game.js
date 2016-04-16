@@ -29,6 +29,7 @@ var level1;
 var level2;
 var level3;
 var victory;
+var keyboardControls;
 //GameController
 var gameController;
 var assetData = [
@@ -100,6 +101,8 @@ function init() {
     setupStats();
     // Intialize DragonGameController
     gameController = new managers.DragonGameController();
+    // Instantiate Game Controls
+    keyboardControls = new objects.KeyboardControls();
     // set initial scene
     scene = config.Scene.MENU;
     changeScene();

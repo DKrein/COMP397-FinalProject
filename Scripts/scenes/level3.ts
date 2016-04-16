@@ -229,6 +229,9 @@ module scenes {
 
         // PLAY Scene updates here
         public update(): void {
+            
+            this.checkControls();
+            
             this._backGround.update();
             this._fire.update();
             this._boss.update();
@@ -334,6 +337,21 @@ module scenes {
             console.log("Boss");
             //}
         }
+        
+        private checkControls(): void {
+            if (keyboardControls.changeToLevel1) {
+                scene = config.Scene.LEVEL1;
+                changeScene();
+            }
+            if (keyboardControls.changeToLevel2) {
+                scene = config.Scene.LEVEL2;
+                changeScene();
+            }
+            if (keyboardControls.changeToLevel3) {
+                scene = config.Scene.LEVEL3;
+                changeScene();
+            }
+        }
 
         //EVENT HANDLERS ++++++++++++++++++++
         
@@ -352,6 +370,7 @@ module scenes {
             if (gameController.LivesValue != 0) {
                 for (var count: number = 0; count < this._bossFireballCount; count++) {
                     if (this._bossFireball[count].isAvailable) {
+                        createjs.Sound.play("shotFireball", {volume: 0.02});
                         this._bossFireball[count].PositionFireBall();
                         break;
                     }

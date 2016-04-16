@@ -11,6 +11,9 @@ var objects;
         // PUBLIC METHODS
         KeyboardControls.prototype.onKeyDown = function (event) {
             switch (event.keyCode) {
+                case 49:
+                    this.changeToLevel1 = true;
+                    break;
                 case 50:
                     this.changeToLevel2 = true;
                     break;
@@ -21,6 +24,9 @@ var objects;
         };
         KeyboardControls.prototype.onKeyUp = function (event) {
             switch (event.keyCode) {
+                case 49:
+                    this.changeToLevel1 = false;
+                    break;
                 case 50:
                     this.changeToLevel2 = false;
                     break;

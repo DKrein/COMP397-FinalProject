@@ -33,6 +33,7 @@ var level1: scenes.Level1;
 var level2: scenes.Level2;
 var level3: scenes.Level3;
 var victory: scenes.Victory;
+var keyboardControls: objects.KeyboardControls;
 
 //GameController
 var gameController: managers.DragonGameController;
@@ -120,6 +121,9 @@ function init(): void {
     
     // Intialize DragonGameController
     gameController = new managers.DragonGameController();
+    
+    // Instantiate Game Controls
+    keyboardControls = new objects.KeyboardControls();
 
     // set initial scene
     scene = config.Scene.MENU;

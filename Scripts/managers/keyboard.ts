@@ -2,6 +2,7 @@ module objects {
     // KeyboardControls Class +++++++++++++++
     export class KeyboardControls {
         // PUBLIC INSTANCE VARIABLES ++++++++++++
+        public changeToLevel1: boolean;
         public changeToLevel2: boolean;
         public changeToLevel3: boolean;
         public enabled: boolean;
@@ -17,6 +18,9 @@ module objects {
         
         public onKeyDown(event: KeyboardEvent): void {
             switch (event.keyCode) {
+                case 49: /* Number 1 */
+                    this.changeToLevel1 = true;
+                    break;
                 case 50: /* Number 2 */
                     this.changeToLevel2 = true;
                     break;
@@ -28,6 +32,9 @@ module objects {
 
         public onKeyUp(event: KeyboardEvent): void {
             switch (event.keyCode) {
+                case 49: /* Number 1 */
+                    this.changeToLevel1 = false;
+                    break;
                 case 50: /* Number 2 */
                     this.changeToLevel2 = false;
                     break;

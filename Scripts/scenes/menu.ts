@@ -15,7 +15,6 @@ module scenes {
     export class Menu extends objects.Scene {
         //PRIVATE INSTANCE VARIABLES ++++++++++++
         private _backgroundImage: createjs.Bitmap;
-        private keyboardControls: objects.KeyboardControls;
         private _startButton: objects.Button;
         private _instructionButton: objects.Button;
         private _exitButton: objects.Button;
@@ -72,8 +71,6 @@ module scenes {
             gameController.ScoreValue = 0;
             
             //this._playBackgroundSound();
-            // Instantiate Game Controls
-            this.keyboardControls = new objects.KeyboardControls();
             
             // add this scene to the global stage container
             stage.addChild(this);
@@ -86,7 +83,6 @@ module scenes {
 
         // INTRO Scene updates here
         public update(): void {
-            this.checkControls();
         }
         
         
@@ -95,7 +91,7 @@ module scenes {
         // StartButton click event handler
         private _startButtonClick(event: createjs.MouseEvent) {
             // Switch to the Play Scene
-            scene = config.Scene.LEVEL2;
+            scene = config.Scene.LEVEL3;
             changeScene();
         }
         
@@ -112,15 +108,5 @@ module scenes {
             window.close();
         }
 
-        private checkControls(): void {
-                if (this.keyboardControls.changeToLevel2) {
-                    scene = config.Scene.LEVEL2;
-                    changeScene();
-                }
-                if (this.keyboardControls.changeToLevel3) {
-                    scene = config.Scene.LEVEL3;
-                    changeScene();
-                }
-        }
     }
 }

@@ -190,6 +190,9 @@ module scenes {
 
         // PLAY Scene updates here
         public update(): void {
+            
+            this.checkControls();
+            
             this._backGround.update();
             //this._fire.update();
 
@@ -266,6 +269,21 @@ module scenes {
                 stage.removeChild(this._enemyContainer, this._collectableContainer);
 
                 //Should be level 3
+                scene = config.Scene.LEVEL3;
+                changeScene();
+            }
+        }
+        
+        private checkControls(): void {
+            if (keyboardControls.changeToLevel1) {
+                scene = config.Scene.LEVEL1;
+                changeScene();
+            }
+            if (keyboardControls.changeToLevel2) {
+                scene = config.Scene.LEVEL2;
+                changeScene();
+            }
+            if (keyboardControls.changeToLevel3) {
                 scene = config.Scene.LEVEL3;
                 changeScene();
             }

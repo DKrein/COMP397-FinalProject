@@ -117,6 +117,7 @@ var scenes;
         // PLAY Scene updates here
         Level2.prototype.update = function () {
             var _this = this;
+            this.checkControls();
             this._backGround.update();
             //this._fire.update();
             this._stalactite.update();
@@ -178,6 +179,20 @@ var scenes;
                 this._collectableContainer.removeAllChildren();
                 stage.removeChild(this._enemyContainer, this._collectableContainer);
                 //Should be level 3
+                scene = config.Scene.LEVEL3;
+                changeScene();
+            }
+        };
+        Level2.prototype.checkControls = function () {
+            if (keyboardControls.changeToLevel1) {
+                scene = config.Scene.LEVEL1;
+                changeScene();
+            }
+            if (keyboardControls.changeToLevel2) {
+                scene = config.Scene.LEVEL2;
+                changeScene();
+            }
+            if (keyboardControls.changeToLevel3) {
                 scene = config.Scene.LEVEL3;
                 changeScene();
             }

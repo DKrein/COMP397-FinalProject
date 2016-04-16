@@ -90,6 +90,7 @@ var scenes;
         // PLAY Scene updates here
         Level1.prototype.update = function () {
             var _this = this;
+            this.checkControls();
             this._backGround.update();
             this._player.update();
             this._dragonEnemy1.forEach(function (dragon) {
@@ -124,6 +125,20 @@ var scenes;
                 this._collectableContainer.removeAllChildren();
                 stage.removeChild(this._enemyContainer, this._collectableContainer);
                 scene = config.Scene.LEVEL2;
+                changeScene();
+            }
+        };
+        Level1.prototype.checkControls = function () {
+            if (keyboardControls.changeToLevel1) {
+                scene = config.Scene.LEVEL1;
+                changeScene();
+            }
+            if (keyboardControls.changeToLevel2) {
+                scene = config.Scene.LEVEL2;
+                changeScene();
+            }
+            if (keyboardControls.changeToLevel3) {
+                scene = config.Scene.LEVEL3;
                 changeScene();
             }
         };
