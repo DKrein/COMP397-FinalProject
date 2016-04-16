@@ -29,7 +29,6 @@ module scenes {
 
         //PRIVATE INSTANCE VARIABLES ++++++++++++
         private _backGround: objects.BackgroundScroll;
-        private _fire: objects.Fire;
 
         private _dragonEnemy1: objects.DragonEnemy1[];
         private _dragonEnemy1Count: number;
@@ -99,11 +98,6 @@ module scenes {
             this._bossFireball = new Array<objects.BossFireball>();
             this._enemyFireball = new Array<objects.EnemyFireball>(); 
             this._playerFireballCollision = new Array<managers.PlayerFireballCollision>();            
-
-            // added _fire to the scene
-            //this._fire = new objects.Fire();
-            //this.addChild(this._fire);
-            this._collectableContainer.addChild(this._fire);
             
             //added stalactites to the scene
             this._stalactite = new objects.Stalactites();
@@ -159,11 +153,7 @@ module scenes {
                 this.addChild(this._playerFireball[count]);
                 this._playerFireballCollision[count] = new managers.PlayerFireballCollision(this._playerFireball[count]);
             }
-
-            // added _fire to the scene
-            this._fire = new objects.Fire();
-            this._collectableContainer.addChild(this._fire);
-
+                       
             // add this scene to the global stage container
             stage.addChild(this, this._enemyContainer, this._collectableContainer);
             
@@ -237,7 +227,6 @@ module scenes {
             this.checkControls();
             
             this._backGround.update();
-            this._fire.update();
             this._boss.update();
 
             this._stalactite.update();
@@ -298,7 +287,6 @@ module scenes {
             this._playerCollision.check(this._bossFireball[0]);
             this._playerCollision.check(this._boss);
 
-            this._playerCollision.check(this._fire);
             this.scoreText.text = gameController.ScoreValue.toString();
             this._livesText.text = gameController.LivesValue.toString();
             this.bossText.text = gameController.BossValue.toString();
