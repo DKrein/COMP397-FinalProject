@@ -77,6 +77,7 @@ var assetData = [
     { id: "shotFireball", src: "../../Assets/audio/shotFireball.mp3" },
     { id: "rockHit", src: "../../Assets/audio/rockHit.mp3" },
     { id: "eggHit", src: "../../Assets/audio/eggHit.mp3" },
+    { id: "startGame", src: "../../Assets/audio/dragonroar.mp3" },
     //background musics
     { id: "gameOverBgMusic", src: "../../Assets/audio/gameover.mp3" },
     { id: "menuBgMusic", src: "../../Assets/audio/opening.mp3" },

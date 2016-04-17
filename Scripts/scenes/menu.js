@@ -31,13 +31,13 @@ var scenes;
             this._backgroundImage = new createjs.Bitmap(assets.getResult("menuBackground"));
             this.addChild(this._backgroundImage);
             // add the StartButton to the MENU scene
-            this._startButton = new objects.Button("StartButton", config.Screen.CENTER_X, config.Screen.CENTER_Y + 35, true);
+            this._startButton = new objects.Button("StartButton", config.Screen.CENTER_X - 75, config.Screen.CENTER_Y - 25, true);
             this.addChild(this._startButton);
             // add the InstructionButton to the MENU scene
-            this._instructionButton = new objects.Button("InstructionButton", config.Screen.CENTER_X, config.Screen.CENTER_Y + 100, true);
+            this._instructionButton = new objects.Button("InstructionButton", config.Screen.CENTER_X - 75, config.Screen.CENTER_Y + 100, true);
             this.addChild(this._instructionButton);
             // add the ExitButton to the MENU scene
-            this._exitButton = new objects.Button("ExitButton", config.Screen.CENTER_X, config.Screen.CENTER_Y + 165, true);
+            this._exitButton = new objects.Button("ExitButton", config.Screen.CENTER_X + 20, config.Screen.CENTER_Y + 165, true);
             this.addChild(this._exitButton);
             // StartButton event listener
             this._startButton.on("click", this._startButtonClick, this);
@@ -65,12 +65,19 @@ var scenes;
         //EVENT HANDLERS ++++++++++++++++++++
         // StartButton click event handler
         Menu.prototype._startButtonClick = function (event) {
+<<<<<<< HEAD
             //FadeOut 
             this._fadeOut(500, function () {
                 // Switch to the Play Scene
                 scene = config.Scene.LEVEL1;
                 changeScene();
             });
+=======
+            // Switch to the Play Scene
+            scene = config.Scene.LEVEL1;
+            changeScene();
+            createjs.Sound.play("startGame", { volume: 0.10 });
+>>>>>>> 97d3938db561f7c2166faae84246e1c01de653ec
         };
         // StartButton click event handler
         Menu.prototype._instructionButtonClick = function (event) {

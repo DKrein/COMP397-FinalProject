@@ -87,7 +87,8 @@ var assetData: objects.Asset[] = [
     { id: "dragonHit", src: "../../Assets/audio/dragonHit.mp3" },
     { id: "shotFireball", src: "../../Assets/audio/shotFireball.mp3" },
     { id: "rockHit", src: "../../Assets/audio/rockHit.mp3" },
-    { id: "eggHit", src: "../../Assets/audio/eggHit.mp3" },    
+    { id: "eggHit", src: "../../Assets/audio/eggHit.mp3" },  
+    { id: "startGame", src: "../../Assets/audio/dragonroar.mp3" },  
     
     //background musics
     { id: "gameOverBgMusic", src: "../../Assets/audio/gameover.mp3" },

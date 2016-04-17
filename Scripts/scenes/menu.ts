@@ -19,6 +19,7 @@ module scenes {
         private _instructionButton: objects.Button;
         private _exitButton: objects.Button;
         private _bgSound: any;
+        private _startSound: any;
         
         // CONSTRUCTOR ++++++++++++++++++++++
         constructor() {
@@ -39,21 +40,21 @@ module scenes {
             // add the StartButton to the MENU scene
             this._startButton = new objects.Button(
                 "StartButton",
-                config.Screen.CENTER_X,
-                config.Screen.CENTER_Y + 35, true);
+                config.Screen.CENTER_X  - 75,
+                config.Screen.CENTER_Y  - 25, true);
             this.addChild(this._startButton);
             
             // add the InstructionButton to the MENU scene
             this._instructionButton = new objects.Button(
                 "InstructionButton",
-                config.Screen.CENTER_X,
+                config.Screen.CENTER_X - 75,
                 config.Screen.CENTER_Y + 100, true);
             this.addChild(this._instructionButton);
             
             // add the ExitButton to the MENU scene
             this._exitButton = new objects.Button(
                 "ExitButton",
-                config.Screen.CENTER_X,
+                config.Screen.CENTER_X + 20,
                 config.Screen.CENTER_Y + 165, true);
             this.addChild(this._exitButton);
             
@@ -86,6 +87,7 @@ module scenes {
             this._bgSound = createjs.Sound.play("menuBgMusic", { volume: 0.03 });
             this._bgSound.on("complete", this._playBackgroundSound, this);
         }
+       
 
         // INTRO Scene updates here
         public update(): void {
@@ -96,12 +98,15 @@ module scenes {
         
         // StartButton click event handler
         private _startButtonClick(event: createjs.MouseEvent) {
+
             //FadeOut 
             this._fadeOut(500, () => {
                 // Switch to the Play Scene
                 scene = config.Scene.LEVEL1;
                 changeScene();
+                createjs.Sound.play("startGame", {volume: 0.10});
             });
+
         }
         
         // StartButton click event handler
