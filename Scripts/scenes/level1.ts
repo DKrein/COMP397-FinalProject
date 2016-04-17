@@ -142,8 +142,11 @@ module scenes {
             
             this._playBackgroundSound();
             
-            
-            
+            // Setup Background
+            this._setupBackground("WhiteBackground");
+           
+            // FadeIn
+            this._fadeIn(500);            
 
         }
         
@@ -188,8 +191,10 @@ module scenes {
         //PRIVATE METHODS
         private _checkLives(): void {
             if (gameController.LivesValue <= 0) {
-                scene = config.Scene.END;
-                changeScene();
+                this._fadeOut(500, () => {
+                    scene = config.Scene.END;
+                    changeScene();
+                });
             }
         }
 
@@ -201,26 +206,31 @@ module scenes {
                 this._enemyContainer.removeAllChildren();
                 this._collectableContainer.removeAllChildren();
                 stage.removeChild(this._enemyContainer, this._collectableContainer);
-
-                scene = config.Scene.LEVEL2;
-                changeScene();
+                this._fadeOut(500, () => {
+                    scene = config.Scene.LEVEL2;
+                    changeScene();
+                });
             }
         }
         
         private checkControls(): void {
-            //reset music from previous screen
-              
             if (keyboardControls.changeToLevel1) {
-                scene = config.Scene.LEVEL1;
-                changeScene();
+                this._fadeOut(500, () => {
+                    scene = config.Scene.LEVEL1;
+                    changeScene();
+                });
             }
             if (keyboardControls.changeToLevel2) {
-                scene = config.Scene.LEVEL2;
-                changeScene();
+                this._fadeOut(500, () => {
+                    scene = config.Scene.LEVEL2;
+                    changeScene();
+                });
             }
             if (keyboardControls.changeToLevel3) {
-                scene = config.Scene.LEVEL3;
-                changeScene();
+                this._fadeOut(500, () => {
+                    scene = config.Scene.LEVEL3;
+                    changeScene();
+                });
             }
         }
 

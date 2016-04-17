@@ -33,6 +33,10 @@ var scenes;
             this.addChild(this._backButton);
             // StartButton event listener
             this._backButton.on("click", this._backButtonClick, this);
+            // Setup Background
+            this._setupBackground("WhiteBackground");
+            // FadeIn
+            this._fadeIn(500);
             // add this scene to the global stage container
             stage.addChild(this);
         };
@@ -42,9 +46,11 @@ var scenes;
         //EVENT HANDLERS ++++++++++++++++++++
         // StartButton click event handler
         Instruction.prototype._backButtonClick = function (event) {
-            // Switch to the Play Scene
-            scene = config.Scene.MENU;
-            changeScene();
+            this._fadeOut(500, function () {
+                // Switch to the Play Scene
+                scene = config.Scene.MENU;
+                changeScene();
+            });
         };
         return Instruction;
     }(objects.Scene));

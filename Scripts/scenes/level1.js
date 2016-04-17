@@ -86,6 +86,10 @@ var scenes;
                 gameController.ScoreValue.toString(), "bold 25px Finger Paint", "#0434C4", 970, 25, false);
             this.addChild(this.scoreText);
             this._playBackgroundSound();
+            // Setup Background
+            this._setupBackground("WhiteBackground");
+            // FadeIn
+            this._fadeIn(500);
         };
         Level1.prototype._playBackgroundSound = function () {
             this._bgSound = createjs.Sound.play("gameBgMusic", { volume: 0.002 });
@@ -117,8 +121,10 @@ var scenes;
         //PRIVATE METHODS
         Level1.prototype._checkLives = function () {
             if (gameController.LivesValue <= 0) {
-                scene = config.Scene.END;
-                changeScene();
+                this._fadeOut(500, function () {
+                    scene = config.Scene.END;
+                    changeScene();
+                });
             }
         };
         // Move to Level 2
@@ -128,23 +134,30 @@ var scenes;
                 this._enemyContainer.removeAllChildren();
                 this._collectableContainer.removeAllChildren();
                 stage.removeChild(this._enemyContainer, this._collectableContainer);
-                scene = config.Scene.LEVEL2;
-                changeScene();
+                this._fadeOut(500, function () {
+                    scene = config.Scene.LEVEL2;
+                    changeScene();
+                });
             }
         };
         Level1.prototype.checkControls = function () {
-            //reset music from previous screen
             if (keyboardControls.changeToLevel1) {
-                scene = config.Scene.LEVEL1;
-                changeScene();
+                this._fadeOut(500, function () {
+                    scene = config.Scene.LEVEL1;
+                    changeScene();
+                });
             }
             if (keyboardControls.changeToLevel2) {
-                scene = config.Scene.LEVEL2;
-                changeScene();
+                this._fadeOut(500, function () {
+                    scene = config.Scene.LEVEL2;
+                    changeScene();
+                });
             }
             if (keyboardControls.changeToLevel3) {
-                scene = config.Scene.LEVEL3;
-                changeScene();
+                this._fadeOut(500, function () {
+                    scene = config.Scene.LEVEL3;
+                    changeScene();
+                });
             }
         };
         return Level1;

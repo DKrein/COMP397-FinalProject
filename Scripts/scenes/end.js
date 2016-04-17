@@ -40,6 +40,10 @@ var scenes;
             // START_OVER Button event listener
             this._restartButton.on("click", this._restartButtonClick, this);
             this._playBackgroundSound();
+            // Setup Background
+            this._setupBackground("WhiteBackground");
+            // FadeIn
+            this._fadeIn(500);
             // add this scene to the global stage container
             stage.addChild(this);
         };
@@ -53,11 +57,11 @@ var scenes;
         //EVENT HANDLERS ++++++++++++++++++++
         // START_OVER Button click event handler
         End.prototype._restartButtonClick = function (event) {
-            gameController.LivesValue = 10;
-            gameController.ScoreValue = 0;
-            // Switch to the INTRO Scene
-            scene = config.Scene.MENU;
-            changeScene();
+            this._fadeOut(500, function () {
+                // Switch to the INTRO Scene
+                scene = config.Scene.MENU;
+                changeScene();
+            });
         };
         return End;
     }(objects.Scene));

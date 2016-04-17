@@ -42,6 +42,12 @@ module scenes {
             
             // StartButton event listener
             this._backButton.on("click", this._backButtonClick, this);
+            
+            // Setup Background
+            this._setupBackground("WhiteBackground");
+           
+            // FadeIn
+            this._fadeIn(500);
                       
             // add this scene to the global stage container
             stage.addChild(this);
@@ -57,9 +63,11 @@ module scenes {
         
         // StartButton click event handler
         private _backButtonClick(event: createjs.MouseEvent) {
-            // Switch to the Play Scene
-            scene = config.Scene.MENU;
-            changeScene();
+            this._fadeOut(500, () => {
+                // Switch to the Play Scene
+                scene = config.Scene.MENU;
+                changeScene();
+            });
         }
 
     }
