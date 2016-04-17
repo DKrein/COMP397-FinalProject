@@ -65,19 +65,13 @@ var scenes;
         //EVENT HANDLERS ++++++++++++++++++++
         // StartButton click event handler
         Menu.prototype._startButtonClick = function (event) {
-<<<<<<< HEAD
             //FadeOut 
             this._fadeOut(500, function () {
                 // Switch to the Play Scene
                 scene = config.Scene.LEVEL1;
                 changeScene();
+                createjs.Sound.play("startGame", { volume: 0.10 });
             });
-=======
-            // Switch to the Play Scene
-            scene = config.Scene.LEVEL1;
-            changeScene();
-            createjs.Sound.play("startGame", { volume: 0.10 });
->>>>>>> 97d3938db561f7c2166faae84246e1c01de653ec
         };
         // StartButton click event handler
         Menu.prototype._instructionButtonClick = function (event) {
