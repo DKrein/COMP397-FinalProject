@@ -67,9 +67,7 @@ module scenes {
             this._exitButton.on("click", this._exitButtonClick, this);
             
             //reset the gamecontroller
-            gameController.BossValue = 10;
-            gameController.LivesValue = 10;
-            gameController.ScoreValue = 0;
+            gameController.reset();
             
             //this._playBackgroundSound();
             

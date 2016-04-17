@@ -9,6 +9,7 @@
  */
 module managers {
     //GameController Class
+    //Why the hell the controller with game stuff is called dragon? -.-
     export class DragonGameController {
 
         //PRIVATE INSTANCE VARIABLE
@@ -19,9 +20,7 @@ module managers {
         
         constructor() {
 
-            this._livesValue = 10;
-            this._scoreValue = 0;
-            this._bossValue = 10;
+            this.reset();
             // this._fireValue = 0;
         }
 
@@ -45,6 +44,12 @@ module managers {
         }
         set BossValue(value : number) {
             this._bossValue = value;
+        }
+        
+        public reset(): void {
+            this._livesValue = 10;
+            this._scoreValue = 0;
+            this._bossValue = 10;
         }
         
         // get FireValue(): number {

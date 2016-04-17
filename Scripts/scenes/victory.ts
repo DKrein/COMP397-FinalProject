@@ -39,8 +39,8 @@ module scenes {
             //add the final score label
             //Add _scoreText to the scene
             this.scoreWord = new objects.Label("HIGHSCORE: " + gameController.ScoreValue,
-                "bold 25px Finger Paint",
-                "#00FF00",
+                "bold 38px Finger Paint",
+                "#0B7A1D",
                 config.Screen.CENTER_X,
                 config.Screen.CENTER_Y + 30, true);
             //this._livesText.textAlign = "right";

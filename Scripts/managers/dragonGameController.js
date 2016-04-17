@@ -10,12 +10,11 @@
 var managers;
 (function (managers) {
     //GameController Class
+    //Why the hell the controller with game stuff is called dragon? -.-
     var DragonGameController = (function () {
         // private _fireValue: number;
         function DragonGameController() {
-            this._livesValue = 10;
-            this._scoreValue = 0;
-            this._bossValue = 10;
+            this.reset();
             // this._fireValue = 0;
         }
         Object.defineProperty(DragonGameController.prototype, "LivesValue", {
@@ -49,6 +48,11 @@ var managers;
             enumerable: true,
             configurable: true
         });
+        DragonGameController.prototype.reset = function () {
+            this._livesValue = 10;
+            this._scoreValue = 0;
+            this._bossValue = 2;
+        };
         return DragonGameController;
     }());
     managers.DragonGameController = DragonGameController;
