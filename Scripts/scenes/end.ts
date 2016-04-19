@@ -46,7 +46,7 @@ module scenes {
             //this._livesText.textAlign = "right";
             this.addChild(this.scoreWord);
 
-            level3.scoreText.text;
+            //level3.scoreText.text;
             
             
             // add the _restartButton to the MENU scene
