@@ -72,6 +72,13 @@ module scenes {
             
             //this._playBackgroundSound();
             
+            
+            // Setup Background
+            this._setupBackground("WhiteBackground");
+           
+            // FadeIn
+            this._fadeIn(500);
+            
             // add this scene to the global stage container
             stage.addChild(this);
         }
@@ -91,17 +98,25 @@ module scenes {
         
         // StartButton click event handler
         private _startButtonClick(event: createjs.MouseEvent) {
-            // Switch to the Play Scene
-            scene = config.Scene.LEVEL1;
-            changeScene();
-            createjs.Sound.play("startGame", {volume: 0.10});
+
+            //FadeOut 
+            this._fadeOut(500, () => {
+                // Switch to the Play Scene
+                scene = config.Scene.LEVEL1;
+                changeScene();
+                createjs.Sound.play("startGame", {volume: 0.10});
+            });
+
         }
         
         // StartButton click event handler
         private _instructionButtonClick(event: createjs.MouseEvent) {
-            // Switch to the INSTRUCTION Scene
-            scene = config.Scene.INSTRUCTION;
-            changeScene();
+            //FadeOut 
+            this._fadeOut(500, () => {
+                // Switch to the INSTRUCTION Scene
+                scene = config.Scene.INSTRUCTION;
+                changeScene();    
+            });
         }
         
         // ExitButton click event handler

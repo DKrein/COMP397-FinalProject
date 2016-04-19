@@ -61,6 +61,12 @@ module scenes {
 
             this._playBackgroundSound();
             
+            // Setup Background
+            this._setupBackground("WhiteBackground");
+           
+            // FadeIn
+            this._fadeIn(500);
+            
             // add this scene to the global stage container
             stage.addChild(this);
         }
@@ -80,12 +86,11 @@ module scenes {
         
         // START_OVER Button click event handler
         private _restartButtonClick(event: createjs.MouseEvent) {
-            
-            gameController.LivesValue =10;
-            gameController.ScoreValue =0;
-            // Switch to the INTRO Scene
-            scene = config.Scene.MENU;
-            changeScene();
+            this._fadeOut(500, () => {
+                // Switch to the INTRO Scene
+                scene = config.Scene.MENU;
+                changeScene();
+            });
         }
     }
 }

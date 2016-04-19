@@ -48,6 +48,10 @@ var scenes;
             //reset the gamecontroller
             gameController.reset();
             //this._playBackgroundSound();
+            // Setup Background
+            this._setupBackground("WhiteBackground");
+            // FadeIn
+            this._fadeIn(500);
             // add this scene to the global stage container
             stage.addChild(this);
         };
@@ -61,16 +65,22 @@ var scenes;
         //EVENT HANDLERS ++++++++++++++++++++
         // StartButton click event handler
         Menu.prototype._startButtonClick = function (event) {
-            // Switch to the Play Scene
-            scene = config.Scene.LEVEL1;
-            changeScene();
-            createjs.Sound.play("startGame", { volume: 0.10 });
+            //FadeOut 
+            this._fadeOut(500, function () {
+                // Switch to the Play Scene
+                scene = config.Scene.LEVEL1;
+                changeScene();
+                createjs.Sound.play("startGame", { volume: 0.10 });
+            });
         };
         // StartButton click event handler
         Menu.prototype._instructionButtonClick = function (event) {
-            // Switch to the INSTRUCTION Scene
-            scene = config.Scene.INSTRUCTION;
-            changeScene();
+            //FadeOut 
+            this._fadeOut(500, function () {
+                // Switch to the INSTRUCTION Scene
+                scene = config.Scene.INSTRUCTION;
+                changeScene();
+            });
         };
         // ExitButton click event handler
         Menu.prototype._exitButtonClick = function (event) {

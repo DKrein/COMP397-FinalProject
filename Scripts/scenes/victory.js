@@ -40,6 +40,10 @@ var scenes;
             // START_OVER Button event listener
             this._restartButton.on("click", this._restartButtonClick, this);
             this._playBackgroundSound();
+            // Setup Background
+            this._setupBackground("WhiteBackground");
+            // FadeIn
+            this._fadeIn(500);
             // add this scene to the global stage container
             stage.addChild(this);
         };
