@@ -38,6 +38,7 @@ module scenes {
 
         private _livesWord: objects.Label;
         private _livesText: objects.Label;
+        private _levelText: objects.Label;
         private _bgSound: any;
         private _scoreOverlay: createjs.Bitmap;
 
@@ -140,6 +141,14 @@ module scenes {
                 
             this.addChild(this.scoreText);
             
+            //Add _levelText to the scene
+            this._levelText = new objects.Label("LEVEL 1",
+                "bold 25px Finger Paint",
+                "#0434C4",
+                config.Screen.WIDTH/2 + 20, 40, true);
+                
+            this.addChild(this._levelText);
+            
             this._playBackgroundSound();
             
             // Setup Background
@@ -182,6 +191,7 @@ module scenes {
 
             this.scoreText.text = gameController.ScoreValue.toString();
             this._livesText.text = gameController.LivesValue.toString();
+            this._levelText.text;
 
             this._checkLives();
             this._changeGameLevel();

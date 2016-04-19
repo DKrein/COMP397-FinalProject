@@ -122,9 +122,12 @@ var scenes;
                 gameController.ScoreValue.toString(), "bold 25px Finger Paint", "#0434C4", 970, 25, false);
             //this._livesText.textAlign = "right";
             this.addChild(this.scoreText);
-            this.bossWord = new objects.Label("BOSS: ", "bold 40px Finger Paint", "#FF0000", 460, 12, false);
+            this.bossWord = new objects.Label("BOSS: ", "bold 40px Finger Paint", "#FF0000", 460, 62, false);
             //this._livesText.textAlign = "right";
-            this.bossText = new objects.Label(gameController.BossValue.toString(), "bold 40px Finger Paint", "#FF0000", 610, 12, false);
+            this.bossText = new objects.Label(gameController.BossValue.toString(), "bold 40px Finger Paint", "#FF0000", 610, 62, false);
+            //Add _levelText to the scene
+            this._levelText = new objects.Label("LEVEL 3", "bold 25px Finger Paint", "#0434C4", config.Screen.WIDTH / 2 + 20, 40, true);
+            this.addChild(this._levelText);
             this._playBackgroundSound();
             // Setup Background
             this._setupBackground("WhiteBackground");
