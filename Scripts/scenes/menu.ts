@@ -91,6 +91,7 @@ module scenes {
 
         // INTRO Scene updates here
         public update(): void {
+            this.checkControls();
         }
         
         
@@ -123,6 +124,27 @@ module scenes {
         private _exitButtonClick(event: createjs.MouseEvent) {
             // Switch to the EXIT Scene
             window.close();
+        }
+        
+        private checkControls(): void {
+            if (keyboardControls.changeToLevel1) {
+                this._fadeOut(500, () => {
+                    scene = config.Scene.LEVEL1;
+                    changeScene();
+                });
+            }
+            if (keyboardControls.changeToLevel2) {
+                this._fadeOut(500, () => {
+                    scene = config.Scene.LEVEL2;
+                    changeScene();
+                });
+            }
+            if (keyboardControls.changeToLevel3) {
+                this._fadeOut(500, () => {
+                    scene = config.Scene.LEVEL3;
+                    changeScene();
+                });
+            }
         }
 
     }
