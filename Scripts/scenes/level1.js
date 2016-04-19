@@ -35,8 +35,8 @@ var scenes;
             this._backGround = new objects.BackgroundScroll("level1Background");
             this.addChild(this._backGround);
             // Set _fireballCount Count
-            this._dragonEnemy1Count = 1;
-            this._dragonEnemy2Count = 1;
+            this._dragonEnemy1Count = 2;
+            this._dragonEnemy2Count = 2;
             this._eggCount = 3;
             // Instantiate _fireball array
             this._dragonEnemy1 = new Array();
@@ -133,7 +133,7 @@ var scenes;
         };
         // Move to Level 2
         Level1.prototype._changeGameLevel = function () {
-            if (this._backGround.backgroundResetCount > 1) {
+            if (this._backGround.backgroundResetCount > 2) {
                 //Remove the enemy from
                 this._enemyContainer.removeAllChildren();
                 this._collectableContainer.removeAllChildren();

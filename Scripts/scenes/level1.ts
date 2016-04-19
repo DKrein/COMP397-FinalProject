@@ -63,16 +63,14 @@ module scenes {
             
 
             // Set _fireballCount Count
-            this._dragonEnemy1Count = 1;
-            this._dragonEnemy2Count = 1;
+            this._dragonEnemy1Count = 2;
+            this._dragonEnemy2Count = 2;
             this._eggCount = 3;
 
             // Instantiate _fireball array
             this._dragonEnemy1 = new Array<objects.DragonEnemy1>();
             this._dragonEnemy2 = new Array<objects.DragonEnemy2>();
             this._eggs = new Array<objects.Egg>();
-
-            
 
             // added player to the scene
             this._player = new objects.Player("playerBaby");
@@ -211,7 +209,7 @@ module scenes {
         // Move to Level 2
         private _changeGameLevel(): void {
 
-            if (this._backGround.backgroundResetCount > 1) {
+            if (this._backGround.backgroundResetCount > 2) {
                 //Remove the enemy from
                 this._enemyContainer.removeAllChildren();
                 this._collectableContainer.removeAllChildren();

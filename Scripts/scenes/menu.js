@@ -61,6 +61,7 @@ var scenes;
         };
         // INTRO Scene updates here
         Menu.prototype.update = function () {
+            this.checkControls();
         };
         //EVENT HANDLERS ++++++++++++++++++++
         // StartButton click event handler
@@ -86,6 +87,26 @@ var scenes;
         Menu.prototype._exitButtonClick = function (event) {
             // Switch to the EXIT Scene
             window.close();
+        };
+        Menu.prototype.checkControls = function () {
+            if (keyboardControls.changeToLevel1) {
+                this._fadeOut(500, function () {
+                    scene = config.Scene.LEVEL1;
+                    changeScene();
+                });
+            }
+            if (keyboardControls.changeToLevel2) {
+                this._fadeOut(500, function () {
+                    scene = config.Scene.LEVEL2;
+                    changeScene();
+                });
+            }
+            if (keyboardControls.changeToLevel3) {
+                this._fadeOut(500, function () {
+                    scene = config.Scene.LEVEL3;
+                    changeScene();
+                });
+            }
         };
         return Menu;
     }(objects.Scene));
