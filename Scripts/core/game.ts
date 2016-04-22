@@ -75,7 +75,6 @@ var assetData: objects.Asset[] = [
     { id: "enemyFireball", src: "../../Assets/images/enemyFireball.png" },
     
     //Collectbles 
-    { id: "fire", src: "../../Assets/images/fire.png" },
     { id: "egg1", src: "../../Assets/images/egg1.png" },
     { id: "egg2", src: "../../Assets/images/egg2.png" },
     { id: "egg3", src: "../../Assets/images/egg3.png" },

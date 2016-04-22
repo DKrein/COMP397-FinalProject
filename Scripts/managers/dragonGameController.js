@@ -51,7 +51,7 @@ var managers;
         DragonGameController.prototype.reset = function () {
             this._livesValue = 10;
             this._scoreValue = 0;
-            this._bossValue = 10;
+            this._bossValue = 5;
         };
         return DragonGameController;
     }());

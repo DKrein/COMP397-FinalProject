@@ -49,7 +49,7 @@ module managers {
         public reset(): void {
             this._livesValue = 10;
             this._scoreValue = 0;
-            this._bossValue = 10;
+            this._bossValue = 5;
         }
         
         // get FireValue(): number {
